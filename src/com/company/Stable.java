@@ -1,6 +1,15 @@
 package com.company;
 
 public class Stable extends IceTable {
+
+    /**
+	 * Stable osztály konstruktora
+	 * @param p a táblán található tárgy (lehet null)
+	 */
+    public Stable(Pickable p){
+        super(p);
+    }
+
     /**
 	 * Paraméterül kap egy karaktert, amit eltárol a characters listában.
 	 * @param c eltárolandó karakter

@@ -11,11 +11,20 @@ public abstract class IceTable {
 	private Pickable item;
 
 	/**
+	 * IceTable osztály konstruktora
+	 * @param p a táblán található tárgy (lehet null)
+	 */
+	public IceTable(Pickable p){
+
+	}
+
+	/**
 	 * Az adott irányból lekérdezi a jégtábla szomszédját.
 	 * @param d megadott irány
 	 * @return a szomszédos jégtábla
 	 */
 	public IceTable getNeighbor(Direction d) {
+		return null;
 	}
 
 	/**

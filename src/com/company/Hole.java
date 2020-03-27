@@ -3,6 +3,12 @@ package com.company;
 public class Hole extends IceTable {
 
 	/**
+	 * Hole osztály konstruktora
+	 */
+	 public Hole(){
+    }
+
+	/**
 	 * Paraméterül kap egy karaktert, amit eltárol a characterslistában,
 	 * és meghívja rajta a fallInWater() metódust.
 	 * Ezen kívül a karakter alatt beszakad a hó így a snowLayer értéke 0 lesz.
