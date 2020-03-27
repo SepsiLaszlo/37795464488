@@ -6,6 +6,7 @@ public class Hole extends IceTable {
 	 * Hole osztály konstruktora
 	 */
 	 public Hole(){
+	 	super(null);
     }
 
 	/**
