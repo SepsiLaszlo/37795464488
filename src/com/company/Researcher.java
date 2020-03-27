@@ -20,5 +20,5 @@ public class Researcher extends Character {
      * @return A jégtábla kapacitása.
      */
     @Override
-    public int useAbility(IceTable t) { return 0; }
+    public int useAbility(IceTable t) { return null; }
 }

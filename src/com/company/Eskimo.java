@@ -15,8 +15,8 @@ public class Eskimo extends Character {
     /**
      * A paraméterben kapott táblára épít egy iglut.
      * @param t A jégtábla.
-     * @return 0, nem használandó.
+     * @return null, nem használandó.
      */
     @Override
-    public int useAbility(IceTable t) {return 0;}
+    public int useAbility(IceTable t) {return null;}
 }
