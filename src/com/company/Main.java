@@ -3,9 +3,12 @@ package com.company;
 import java.util.List;
 
 public class Main {
+    static public String tab = "";
 
     public static void main(String[] args) {
-	// write your code here
-        System.out.print("Hello");
+        Stable iceTable = new Stable(null);
+        Eskimo e = new Eskimo(null ,iceTable);
+        iceTable.stepOn(e);
+        e.useAbility(iceTable);
     }
 }

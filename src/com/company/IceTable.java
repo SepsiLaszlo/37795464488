@@ -96,6 +96,8 @@ public abstract class IceTable {
      * Iglu hozzáadása a táblához.
      */
     public void addIglu() {
+        System.out.println(Main.tab + ">IceTable.addIglu()");
+        System.out.println(Main.tab + "<IceTable.addIglu()");
     }
 
     /**
