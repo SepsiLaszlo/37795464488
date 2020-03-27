@@ -38,7 +38,7 @@ public abstract class Character {
     /**
      * A szereplő által birtokolt tárgyak.
      */
-    private ArrayList<Useable> useables;
+    private ArrayList<Usable> useables;
 
     /**
      * A karakter osztály konstruktora.
@@ -49,16 +49,16 @@ public abstract class Character {
 
     /**
      * Az eltárolandó tárgyak által hívott függvény, amely
-     * felveszi useables listába az adott Useable-t.
+     * felveszi usebles listába az adott Useble-t.
      * @param u Az eltárolandó tárgy.
      */
-    public void addUseable(Useable u){}
+    public void addUseable(Usable u){}
 
     /**
-     * A useables listának az adott indexű Useable-jét használja.
+     * A usebles listának az adott indexű Useable-jét használja.
      * @param idx Az index.
      */
-    public void useUseable(int idx){}
+    public void useUseble(int idx){}
 
     /**
      * A testhő megváltozására használható metódus. A

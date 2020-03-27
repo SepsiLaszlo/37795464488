@@ -18,5 +18,5 @@ public class Eskimo extends Character {
      * @return null, nem használandó.
      */
     @Override
-    public int useAbility(IceTable t) {return null;}
+    public int useAbility(IceTable t) {return 0;}
 }
