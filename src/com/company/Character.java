@@ -14,7 +14,7 @@ public abstract class Character {
     /**
      * A szereplő testhőjének mértéke.
      */
-    private int bodyTemperature;
+    protected int bodyTemperature;
     /**
      * A szereplő visel-e búvárruhát.
      */
@@ -30,55 +30,99 @@ public abstract class Character {
     /**
      * A jelzőrakéta.
      */
-    private SignalRocket signalRocket;
+    private SignalRocket signalRocket = SignalRocket.getInstance();
     /**
      * A játék osztály.
      */
-    private Game game;
+    private Game game = Game.getInstance();
     /**
      * A szereplő által birtokolt tárgyak.
      */
-    private ArrayList<Usable> useables;
+    private ArrayList<Usable> usables = new ArrayList<Usable>();
 
     /**
      * A karakter osztály konstruktora.
-     * @param g A játék osztály.
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
-    public Character(Game g, IceTable i){}
+    public Character(IceTable i) {
+        iceTable = i;
+        usables.add(signalRocket);
+    }
 
     /**
      * Az eltárolandó tárgyak által hívott függvény, amely
      * felveszi usebles listába az adott Useble-t.
      * @param u Az eltárolandó tárgy.
      */
-    public void addUseable(Usable u){}
+    public void addUsable(Usable u){
+        System.out.println(Main.tab + ">Character.addUsable(Usable)");
+        Main.tab += "\t";
+
+        usables.add(u);
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Character.addUsable(Usable)");
+    }
 
     /**
      * A usebles listának az adott indexű Useable-jét használja.
      * @param idx Az index.
      */
-    public void useUseble(int idx){}
+    public void useUsable(int idx){
+        System.out.println(Main.tab + ">Character.useUsable(" + idx + ")");
+        Main.tab += "\t";
+
+        usables.get(idx).use(this, Direction.LEFT);
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Character.useUsable(" + idx + ")");
+    }
 
     /**
      * A testhő megváltozására használható metódus. A
      * paraméterben kapott számot adja testhőhöz.
      * @param diff A hozzáadandó testhő mértéke.
      */
-    public void changeHeat(int diff){}
+    public void changeHeat(int diff){
+        System.out.println(Main.tab + ">Character.changeHeat(" + diff + ")");
+        Main.tab += "\t";
+
+        bodyTemperature += diff;
+        if (bodyTemperature <= 0)
+            game.endGame(false);
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Character.changeHeat(" + diff + ")");
+    }
 
     /**
      * A búvárruha felvételekor meghívandó metódus. A diver értéket
      * állítja true-ra.
      */
-    public void makeDiver(){}
+    public void makeDiver(){
+        System.out.println(Main.tab + ">Character.makeDiver()");
+        Main.tab += "\t";
+
+        diver = true;
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Character.makeDiver()");
+    }
 
     /**
      * A paraméterként kapott alkatrészt hozzáadja a
      * SignalRocket-hoz.
-     * @param i Az alkatrész.
+     * @param s Az alkatrész.
      */
-    public void buildSignalRocket(Pickable i){}
+    public void buildSignalRocket(SignalRocketPart s){
+        System.out.println(Main.tab + ">Character.buildSignalRocket(SignalRocketPart)");
+        Main.tab += "\t";
+
+        signalRocket.build(s);
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Character.buildSignalRocket(SignalRocketPart)");
+    }
 
     /**
      * Absztrakt függvény a karakter speciális képességének
@@ -91,31 +135,79 @@ public abstract class Character {
      * A szereplő léptetése ‘d’ irányba.
      * @param d Az irány.
      */
-    public void move(Direction d){}
+    public void move(Direction d) {
+        System.out.println(Main.tab + ">Character.move(Direction)");
+        Main.tab += "\t";
+
+        IceTable i = iceTable.getNeighbour(d);
+        iceTable.stepOff(this);
+        i.stepOn(this);
+        iceTable = i;
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab  + "<Character.move(Direction)");
+    }
 
     /**
      * A szereplő beleesik a vízbe.
      */
-    public void fallInWater(){}
+    public void fallInWater(){
+        System.out.println(Main.tab + ">Character.fallInWater()");
+        Main.tab += "\t";
+
+        inWater = true;
+        if (!diver) {
+            game.nextPlayer();
+        }
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab  + "<Character.fallInWater()");
+    }
 
     /**
      * A szereplő meghal.
      */
-    public void die(){}
+    public void die(){
+        System.out.println(Main.tab + ">Character.die()");
+        Main.tab += "\t";
+
+        game.endGame(false);
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Character.die()");
+    }
 
     /**
      * A szereplő ás azon a jégtáblán, amelyen éppen áll.
      */
-    public void dig(){}
+    public void dig(){
+        System.out.println(Main.tab + ">Character.dig()");
+        Main.tab += "\t";
+
+        Pickable p = iceTable.extract(1);
+        if (p != null)
+            p.pickUp(this);
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Character.dig()");
+    }
 
     /**
      * Visszaadja a táblán, amin tartózkodik.
      * @return A jégtábla, amelyen áll.
      */
-    public IceTable getIceTable(){ return iceTable; }
+    public IceTable getIceTable() {
+        System.out.println(Main.tab + ">Character.getIceTable()");
+        System.out.println(Main.tab + "IceTable<Character.getIceTable()");
+        return iceTable;
+    }
 
     /**
      * A szereplő kijön a víből.
      */
-    public void comeOutOfWater(){}
+    public void comeOutOfWater() {
+        System.out.println(Main.tab + ">Character.comeOutOfWater()");
+        inWater = false;
+        System.out.println(Main.tab + "<Character.comeOutOfWater()");
+    }
 }

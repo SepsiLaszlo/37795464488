@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class IceTable {
-    private int capacity;
+    private int capacity = 1;
     private int snowLayer;
     private boolean iglu;
-    private HashMap<Direction, IceTable> neighbours = new HashMap<Direction, IceTable>();
-    private ArrayList<Character> characters;
+    private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
+    protected ArrayList<Character> characters=new ArrayList<Character>();
     private Pickable item;
 
     /**
@@ -16,7 +16,7 @@ public abstract class IceTable {
      * @param p a táblán található tárgy (lehet null)
      */
     public IceTable(Pickable p) {
-
+        item = p;
     }
 
     /**
@@ -24,8 +24,10 @@ public abstract class IceTable {
      * @param d megadott irány
      * @return a szomszédos jégtábla
      */
-    public IceTable getNeighbor(Direction d) {
-        return null;
+    public IceTable getNeighbour(Direction d) {
+        System.out.println(Main.tab + ">IceTable.getNeighbour(Direction)");
+        System.out.println(Main.tab + "<IceTable.getNeighbour(Direction)");
+        return neighbours.get(d);
     }
 
     /**
@@ -34,7 +36,7 @@ public abstract class IceTable {
      * @param n a szomszédos jégtábla
      */
     public void setNeighbour(IceTable n, Direction d) {
-
+            neighbours.put(d,n);
     }
 
 
@@ -49,6 +51,8 @@ public abstract class IceTable {
      * @param c eltávolítandó karakter
      */
     public void stepOff(Character c) {
+        System.out.println(Main.tab + ">IceTable.stepOff(Character)");
+        System.out.println(Main.tab + "<IceTable.stepOff(Character)");
     }
 
     /**
@@ -66,7 +70,9 @@ public abstract class IceTable {
      * @return eltárolt felvehető tárgy
      */
     public Pickable extract(int amount) {
-        return null;
+        System.out.println(Main.tab + ">IceTable.extract("+ amount +")");
+        System.out.println(Main.tab + "Pickable <IceTable.extract("+ amount +")");
+        return item;
     }
 
     /**
@@ -74,6 +80,8 @@ public abstract class IceTable {
      * @param amount mennyivel kell növelni a hóréteget
      */
     public void addSnow(int amount) {
+        System.out.println(Main.tab + ">IceTable.addSnow(1)");
+        System.out.println(Main.tab + "<IceTable.addSnow(1)");
     }
 
     /**
@@ -81,6 +89,9 @@ public abstract class IceTable {
      * @return karakterek száma
      */
     public int getCharactersNumber() {
+        System.out.println(Main.tab + ">IceTable.getCharactersNumber()");
+        System.out.println(Main.tab + "int <IceTable.getCharactersNumber()");
+
         return 0;
     }
 
@@ -89,7 +100,9 @@ public abstract class IceTable {
      * @return kapacitás
      */
     public int getCapacity() {
-        return 0;
+        System.out.println(Main.tab + ">IceTable.getCapacity()");
+        System.out.println(Main.tab + capacity + "<IceTable.getCapacity()");
+        return capacity;
     }
 
     /**
@@ -106,7 +119,10 @@ public abstract class IceTable {
      * @return szabadban lévő karakterek
      */
     public ArrayList<Character> getUnprotectedCharacters() {
-        return null;
+        System.out.println(Main.tab + ">IceTable.getUnprotectedCharacters()");
+        System.out.println(Main.tab + "Character[] <IceTable.getUnprotectedCharacters()");
+
+        return characters;
     }
 
 }
