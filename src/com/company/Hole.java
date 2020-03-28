@@ -23,7 +23,6 @@ public class Hole extends IceTable {
         characters.add(c);
         c.fallInWater();
 
-
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
         System.out.println(Main.tab + "<Hole.stepOn(Character)");
 	}
