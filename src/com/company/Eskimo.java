@@ -10,12 +10,15 @@ public class Eskimo extends Character {
      * @param g A játék osztály
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
-    public Eskimo(Game g, IceTable i) { super(g, i); }
+    public Eskimo(Game g, IceTable i) {
+        super(g, i);
+        bodyTemperature = 5;
+    }
 
     /**
      * A paraméterben kapott táblára épít egy iglut.
      * @param t A jégtábla.
-     * @return null, nem használandó.
+     * @return 0, nem használandó.
      */
     @Override
     public int useAbility(IceTable t) {
