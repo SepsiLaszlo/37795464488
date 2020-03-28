@@ -98,7 +98,7 @@ public class Menu {
                 iceTable.stepOn(e);
                 iceTable.addSnow(2);
                 System.out.println("main----------------------");
-                e.die();
+                e.dig();
                 break;
             }
             case 8: {
@@ -142,7 +142,7 @@ public class Menu {
                 SignalRocket sr = new SignalRocket(null);
                 Stable s = new Stable(srp);
                 Researcher r = new Researcher(null, s);
-                r.addUseable(sr);
+                r.addUsable(sr);
                 s.stepOn(r);
                 System.out.println("main----------------------");
                 r.dig();
@@ -154,9 +154,9 @@ public class Menu {
                 Spade s = new Spade();
                 Eskimo e = new Eskimo(null, st);
                 st.stepOn(e);
-                e.addUseable(s);
+                e.addUsable(s);
                 System.out.println("main----------------------");
-                e.useUseble(0);
+                e.useUsable(0);
                 break;
             }
             case 14: {
@@ -169,9 +169,9 @@ public class Menu {
                 Rope r = new Rope();
                 Eskimo e2 = new Eskimo(null, s);
                 s.stepOn(e2);
-                e2.addUseable(r);
+                e2.addUsable(r);
                 System.out.println("main----------------------");
-                e2.useUseble(0);
+                e2.useUsable(0);
                 break;
             }
             case 15: {
@@ -180,9 +180,9 @@ public class Menu {
                 Eskimo e = new Eskimo(g, s);
                 s.stepOn(e);
                 SignalRocket sr = new SignalRocket(g);
-                e.addUseable(sr);
+                e.addUsable(sr);
                 System.out.println("main----------------------");
-                e.useUseble(0);
+                e.useUsable(0);
                 break;
             }
             case 16: {

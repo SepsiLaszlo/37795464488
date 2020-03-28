@@ -38,7 +38,7 @@ public abstract class Character {
     /**
      * A szereplő által birtokolt tárgyak.
      */
-    private ArrayList<Usable> usables;
+    private ArrayList<Usable> usables=new ArrayList<Usable>();
 
     /**
      * A karakter osztály konstruktora.
@@ -46,7 +46,7 @@ public abstract class Character {
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
     public Character(Game g, IceTable i) {
-        game = g;
+        game = Game.getInstance();
         iceTable = i;
     }
 
@@ -140,13 +140,13 @@ public abstract class Character {
         System.out.println(Main.tab + ">Character.move(Direction)");
         Main.tab += "\t";
 
-        IceTable i = iceTable.getNeighbor(d);
+        IceTable i = iceTable.getNeighbour(d);
         iceTable.stepOff(this);
         i.stepOn(this);
         iceTable = i;
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.move(Direction)");
+        System.out.println(Main.tab  + "<Character.move(Direction)");
     }
 
     /**
@@ -162,7 +162,7 @@ public abstract class Character {
         }
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.fallInWater()");
+        System.out.println(Main.tab  + "<Character.fallInWater()");
     }
 
     /**
@@ -175,7 +175,7 @@ public abstract class Character {
         game.endGame(false);
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.die()");
+        System.out.println(Main.tab + "<Character.die()");
     }
 
     /**
@@ -190,7 +190,7 @@ public abstract class Character {
             p.pickUp(this);
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.dig()");
+        System.out.println(Main.tab + "<Character.dig()");
     }
 
     /**
@@ -199,7 +199,7 @@ public abstract class Character {
      */
     public IceTable getIceTable() {
         System.out.println(Main.tab + ">Character.fallInWater()");
-        System.out.println(Main.tab + 0 + "<Character.fallInWater()");
+        System.out.println(Main.tab + "IceTable<Character.fallInWater()");
         return iceTable;
     }
 
@@ -209,6 +209,6 @@ public abstract class Character {
     public void comeOutOfWater() {
         System.out.println(Main.tab + ">Character.comeOutOfWater()");
         inWater = false;
-        System.out.println(Main.tab + 0 + "<Character.comeOutOfWater()");
+        System.out.println(Main.tab + "<Character.comeOutOfWater()");
     }
 }

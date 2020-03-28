@@ -7,8 +7,8 @@ public abstract class IceTable {
     private int capacity;
     private int snowLayer;
     private boolean iglu;
-    private HashMap<IceTable,Direction> neighbours = new HashMap<IceTable,Direction>();
-    protected ArrayList<Character> characters;
+    private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
+    protected ArrayList<Character> characters=new ArrayList<Character>();
     private Pickable item;
 
     /**
@@ -27,7 +27,7 @@ public abstract class IceTable {
     public IceTable getNeighbour(Direction d) {
         System.out.println(Main.tab + ">IceTable.getNeighbour(Direction)");
         System.out.println(Main.tab + "<IceTable.getNeighbour(Direction)");
-        return null;
+        return neighbours.get(d);
     }
 
     /**
@@ -36,7 +36,7 @@ public abstract class IceTable {
      * @param n a szomszédos jégtábla
      */
     public void setNeighbour(IceTable n, Direction d) {
-            neighbours.put(n,d);
+            neighbours.put(d,n);
     }
 
 
@@ -122,7 +122,7 @@ public abstract class IceTable {
         System.out.println(Main.tab + ">IceTable.getUnprotectedCharacters()");
         System.out.println(Main.tab + "Character[] <IceTable.getUnprotectedCharacters()");
 
-        return null;
+        return characters;
     }
 
 }
