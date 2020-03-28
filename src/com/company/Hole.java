@@ -17,17 +17,36 @@ public class Hole extends IceTable {
 	 */
     @Override
 	public void stepOn(Character c) {
+    	System.out.println(Main.tab + ">Hole.stepOn(Character)");
+        Main.tab += "\t";
+
+        c.fallInWater();
+
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Hole.stepOn(Character)");
 	}
 
 	/**
 	 * A kötél hívja meg, amikor vízben lévő játékosokat akarunk kimenteni.
-	 * Minden karaktert a characters listából áthelyez
+	 * 	Minden karaktert a characters listából áthelyez
 	 * a paraméterben kapott IceTable-re (stepOn(c) függvénnyel).
 	 * Ezután törli a characters lista tartalmát.
 	 * @param t
 	 */
 	@Override
 	public void removeCharacters(IceTable t) {
+		System.out.println(Main.tab + ">removeCharacters(IceTable)");
+        Main.tab += "\t";
+
+        for (Character c : this.characters){
+        	stepOff(c);
+        	c.comeOutOfWater();
+        	stepOn(c);
+		}
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<removeCharacters(IceTable)");
 	}
 
 	/**
@@ -37,6 +56,13 @@ public class Hole extends IceTable {
 	 */
 	@Override
 	public void stepOff(Character c) {
+		System.out.println(Main.tab + ">Hole.stepOff(Character)");
+        Main.tab += "\t";
+
+        c.comeOutOfWater();
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Hole.stepOff(Character)");
 	}
 
 }
