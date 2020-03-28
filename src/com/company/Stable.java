@@ -17,6 +17,7 @@ public class Stable extends IceTable {
     @Override
     public void stepOn(Character c) {
         System.out.println(Main.tab + ">Stable.stepOn(Character)");
+        characters.add(c);
         System.out.println(Main.tab + "<Stable.stepOn(Character)");
     }
 

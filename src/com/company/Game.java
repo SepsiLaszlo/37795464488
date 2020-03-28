@@ -31,8 +31,6 @@ public class Game {
      */
     public void startGame(int eskimos, int researchers) {
         System.out.println(Main.tab + ">Game.startGame(int,int)");
-        Main.tab += "\t";
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
         System.out.println(Main.tab + "<Game.startGame(int,int)");
     }
 
@@ -43,10 +41,8 @@ public class Game {
      * @param win Győzelem állapota
      */
     public void endGame(boolean win) {
-        System.out.println(Main.tab + ">Game.endGame(boolean)");
-        Main.tab += "\t";
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Game.endGame(boolean)");
+        System.out.println(Main.tab + ">Game.endGame("+ win +")");
+        System.out.println(Main.tab + "<Game.endGame("+ win +")");
     }
 
     /**
@@ -54,8 +50,6 @@ public class Game {
      */
     public void nextPlayer() {
         System.out.println(Main.tab + ">Game.nextPlayer()");
-        Main.tab += "\t";
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
         System.out.println(Main.tab + "<Game.nextPlayer()");
     }
 
@@ -64,8 +58,6 @@ public class Game {
      */
     public int getTotalCharactersNumber() {
         System.out.println(Main.tab + ">Game.getTotalCharactersNumber()");
-        Main.tab += "\t";
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
         System.out.println(Main.tab + characters.size() + "<Game.getTotalCharactersNumber()");
 
         return characters.size();
@@ -76,8 +68,6 @@ public class Game {
      */
     public void runGame() {
         System.out.println(Main.tab + ">Game.runGame()");
-        Main.tab += "\t";
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
         System.out.println(Main.tab + "<Game.runGame()");
     }
 

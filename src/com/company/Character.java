@@ -30,24 +30,23 @@ public abstract class Character {
     /**
      * A jelzőrakéta.
      */
-    private SignalRocket signalRocket;
+    private SignalRocket signalRocket = SignalRocket.getInstance();
     /**
      * A játék osztály.
      */
-    private Game game;
+    private Game game = Game.getInstance();
     /**
      * A szereplő által birtokolt tárgyak.
      */
-    private ArrayList<Usable> usables=new ArrayList<Usable>();
+    private ArrayList<Usable> usables = new ArrayList<Usable>();
 
     /**
      * A karakter osztály konstruktora.
-     * @param g A játék osztály.
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
-    public Character(Game g, IceTable i) {
-        game = Game.getInstance();
+    public Character(IceTable i) {
         iceTable = i;
+        usables.add(signalRocket);
     }
 
     /**
@@ -62,7 +61,7 @@ public abstract class Character {
         usables.add(u);
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.addUsable(Usable)");
+        System.out.println(Main.tab + "<Character.addUsable(Usable)");
     }
 
     /**
@@ -73,10 +72,10 @@ public abstract class Character {
         System.out.println(Main.tab + ">Character.useUsable(" + idx + ")");
         Main.tab += "\t";
 
-        usables.get(idx).use(this, null);
+        usables.get(idx).use(this, Direction.LEFT);
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.useUsable(" + idx + ")");
+        System.out.println(Main.tab + "<Character.useUsable(" + idx + ")");
     }
 
     /**
@@ -93,7 +92,7 @@ public abstract class Character {
             game.endGame(false);
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.changeHeat(" + diff + ")");
+        System.out.println(Main.tab + "<Character.changeHeat(" + diff + ")");
     }
 
     /**
@@ -107,7 +106,7 @@ public abstract class Character {
         diver = true;
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.makeDiver()");
+        System.out.println(Main.tab + "<Character.makeDiver()");
     }
 
     /**
@@ -122,7 +121,7 @@ public abstract class Character {
         signalRocket.build(s);
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Character.buildSignalRocket(SignalRocketPart)");
+        System.out.println(Main.tab + "<Character.buildSignalRocket(SignalRocketPart)");
     }
 
     /**
@@ -156,8 +155,8 @@ public abstract class Character {
         System.out.println(Main.tab + ">Character.fallInWater()");
         Main.tab += "\t";
 
+        inWater = true;
         if (!diver) {
-            inWater = true;
             game.nextPlayer();
         }
 
@@ -198,8 +197,8 @@ public abstract class Character {
      * @return A jégtábla, amelyen áll.
      */
     public IceTable getIceTable() {
-        System.out.println(Main.tab + ">Character.fallInWater()");
-        System.out.println(Main.tab + "IceTable<Character.fallInWater()");
+        System.out.println(Main.tab + ">Character.getIceTable()");
+        System.out.println(Main.tab + "IceTable<Character.getIceTable()");
         return iceTable;
     }
 

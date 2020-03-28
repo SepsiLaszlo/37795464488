@@ -11,6 +11,15 @@ public class Rope implements Usable, Pickable {
      */
     @Override
     public void use(Character c, Direction d) {
+        System.out.println(Main.tab + ">Rope.use(Character, Direction)");
+        Main.tab += "\t";
+
+        IceTable i = c.getIceTable();
+        IceTable left = i.getNeighbour(d);
+        left.removeCharacters(i);
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Rope.use(Character, Direction)");
     }
 
     /**
@@ -20,5 +29,12 @@ public class Rope implements Usable, Pickable {
      */
     @Override
     public void pickUp(Character c) {
+        System.out.println(Main.tab + ">Rope.pickUp(Character)");
+        Main.tab += "\t";
+
+        c.addUsable(this);
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<Rope.pickUp(Character)");
     }
 }

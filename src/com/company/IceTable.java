@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class IceTable {
-    private int capacity;
+    private int capacity = 1;
     private int snowLayer;
     private boolean iglu;
     private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
@@ -16,7 +16,7 @@ public abstract class IceTable {
      * @param p a táblán található tárgy (lehet null)
      */
     public IceTable(Pickable p) {
-        item=p;
+        item = p;
     }
 
     /**
@@ -70,9 +70,9 @@ public abstract class IceTable {
      * @return eltárolt felvehető tárgy
      */
     public Pickable extract(int amount) {
-        System.out.println(Main.tab + ">IceTable.extract(1)");
-        System.out.println(Main.tab + "Pickable <IceTable.extract(1)");
-        return null;
+        System.out.println(Main.tab + ">IceTable.extract("+ amount +")");
+        System.out.println(Main.tab + "Pickable <IceTable.extract("+ amount +")");
+        return item;
     }
 
     /**
@@ -101,8 +101,8 @@ public abstract class IceTable {
      */
     public int getCapacity() {
         System.out.println(Main.tab + ">IceTable.getCapacity()");
-        System.out.println(Main.tab + "int <IceTable.getCapacity()");
-        return 0;
+        System.out.println(Main.tab + capacity + "<IceTable.getCapacity()");
+        return capacity;
     }
 
     /**

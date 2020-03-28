@@ -7,11 +7,10 @@ package com.company;
 public class Eskimo extends Character {
     /**
      * Az eszkimó osztály konstruktora. Meghívja a Character ősosztály konstruktorát.
-     * @param g A játék osztály
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
-    public Eskimo(Game g, IceTable i) {
-        super(g, i);
+    public Eskimo(IceTable i) {
+        super(i);
         bodyTemperature = 5;
     }
 

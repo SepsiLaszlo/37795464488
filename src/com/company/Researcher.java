@@ -7,11 +7,10 @@ package com.company;
 public class Researcher extends Character {
     /**
      * A Researcher osztály konstruktora. Meghívja a Character ősosztály konstruktorát.
-     * @param g A játék osztály.
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
-    public Researcher(Game g, IceTable i) {
-        super(g, i);
+    public Researcher(IceTable i) {
+        super(i);
         bodyTemperature = 4;
     }
 
@@ -30,7 +29,7 @@ public class Researcher extends Character {
         int c = t.getCapacity();
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Researcher.useAbility(IceTable)");
+        System.out.println(Main.tab + c + "<Researcher.useAbility(IceTable)");
         return c;
     }
 }
