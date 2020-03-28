@@ -33,7 +33,7 @@ public abstract class IceTable {
      * @param d megadott irány
      * @param n a szomszédos jégtábla
      */
-    public void setNeighbour(Direction d, IceTable n) {
+    public void setNeighbour(IceTable n, Direction d) {
 
     }
 
@@ -96,6 +96,8 @@ public abstract class IceTable {
      * Iglu hozzáadása a táblához.
      */
     public void addIglu() {
+        System.out.println(Main.tab + ">IceTable.addIglu()");
+        System.out.println(Main.tab + "<IceTable.addIglu()");
     }
 
     /**

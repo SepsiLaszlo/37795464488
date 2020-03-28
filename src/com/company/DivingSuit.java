@@ -9,6 +9,12 @@ public class DivingSuit implements Pickable {
      * @param c - A karakter, aki felveszi a tárgyat.
      */
     public void pickUp(Character c) {
+        System.out.println(Main.tab + ">DivingSuit.pickUp(Character)");
+        Main.tab += "\t";
 
+        c.makeDiver();
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + "<DivingSuit.pickUp(Character)");
     }
 }

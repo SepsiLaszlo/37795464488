@@ -18,5 +18,14 @@ public class Eskimo extends Character {
      * @return null, nem használandó.
      */
     @Override
-    public int useAbility(IceTable t) {return 0;}
+    public int useAbility(IceTable t) {
+        System.out.println(Main.tab + ">Eskimo.useAbility(IceTable)");
+        Main.tab += "\t";
+
+        t.addIglu();
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + 0 + "<Eskimo.useAbility(IceTable)");
+        return 0;
+    }
 }
