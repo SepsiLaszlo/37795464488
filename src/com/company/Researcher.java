@@ -10,7 +10,10 @@ public class Researcher extends Character {
      * @param g A játék osztály.
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
-    public Researcher(Game g, IceTable i) { super(g, i); }
+    public Researcher(Game g, IceTable i) {
+        super(g, i);
+        bodyTemperature = 4;
+    }
 
     /**
      * A sarkkutató speciális képességéhez tartozó függvény.

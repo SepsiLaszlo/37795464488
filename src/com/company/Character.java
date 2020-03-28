@@ -14,7 +14,7 @@ public abstract class Character {
     /**
      * A szereplő testhőjének mértéke.
      */
-    private int bodyTemperature;
+    protected int bodyTemperature;
     /**
      * A szereplő visel-e búvárruhát.
      */
@@ -45,7 +45,10 @@ public abstract class Character {
      * @param g A játék osztály.
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
-    public Character(Game g, IceTable i){}
+    public Character(Game g, IceTable i) {
+        game = g;
+        iceTable = i;
+    }
 
     /**
      * Az eltárolandó tárgyak által hívott függvény, amely
@@ -133,13 +136,14 @@ public abstract class Character {
      * A szereplő léptetése ‘d’ irányba.
      * @param d Az irány.
      */
-    public void move(Direction d){
+    public void move(Direction d) {
         System.out.println(Main.tab + ">Character.move(Direction)");
         Main.tab += "\t";
 
         IceTable i = iceTable.getNeighbor(d);
         iceTable.stepOff(this);
         i.stepOn(this);
+        iceTable = i;
 
         Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
         System.out.println(Main.tab + 0 + "<Character.move(Direction)");
