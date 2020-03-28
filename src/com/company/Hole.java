@@ -29,7 +29,7 @@ public class Hole extends IceTable {
 
 	/**
 	 * A kötél hívja meg, amikor vízben lévő játékosokat akarunk kimenteni.
-	 * Minden karaktert a characters listából áthelyez
+	 * 	Minden karaktert a characters listából áthelyez
 	 * a paraméterben kapott IceTable-re (stepOn(c) függvénnyel).
 	 * Ezután törli a characters lista tartalmát.
 	 * @param t
