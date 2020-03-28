@@ -20,5 +20,14 @@ public class Researcher extends Character {
      * @return A jégtábla kapacitása.
      */
     @Override
-    public int useAbility(IceTable t) { return 0; }
+    public int useAbility(IceTable t) {
+        System.out.println(Main.tab + ">Researcher.useAbility(IceTable)");
+        Main.tab += "\t";
+
+        int c = t.getCapacity();
+
+        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
+        System.out.println(Main.tab + 0 + "<Researcher.useAbility(IceTable)");
+        return c;
+    }
 }
