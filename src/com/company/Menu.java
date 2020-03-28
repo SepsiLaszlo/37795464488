@@ -46,7 +46,7 @@ public class Menu {
                 Unstable unstable = new Unstable(null);
                 stable.setNeighbour(unstable, Direction.LEFT);
                 unstable.setNeighbour(stable, Direction.RIGHT);
-                Game g = new Game();
+                Game g = Game.getInstance();
                 Eskimo e = new Eskimo(g, stable);
                 stable.stepOn(e);
                 System.out.println("main----------------------");
@@ -175,7 +175,7 @@ public class Menu {
                 break;
             }
             case 15: {
-                Game g = new Game();
+                Game g = Game.getInstance();
                 Stable s = new Stable(null);
                 Eskimo e = new Eskimo(g, s);
                 s.stepOn(e);
@@ -193,6 +193,7 @@ public class Menu {
                 s.stepOn(e);
                 System.out.println("main----------------------");
                 f.snowStorm();
+                break;
             }
             default: {
                 System.out.println("Hibás menüpont");
