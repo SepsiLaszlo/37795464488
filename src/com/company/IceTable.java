@@ -92,7 +92,7 @@ public abstract class IceTable {
         System.out.println(Main.tab + ">IceTable.getCharactersNumber()");
         System.out.println(Main.tab + "int <IceTable.getCharactersNumber()");
 
-        return 0;
+        return characters.size();
     }
 
     /**
