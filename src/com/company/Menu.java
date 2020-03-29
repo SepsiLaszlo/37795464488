@@ -13,7 +13,7 @@ public class Menu {
             "7. Dig",
             "8. Pick up Rope",
             "9. Pick up Spade",
-            "10. Pick up Diving suite",
+            "10. Pick up Diving suit",
             "11. Pick up Food",
             "12. Pick up SignalRocketPart",
             "13. Use Spade",
