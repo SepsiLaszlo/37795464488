@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * Az ásó osztálya.
+ */
 public class Spade implements Usable, Pickable {
     /**
      * A paraméterül kapott karaktertől lekéri, hogy melyik mezőn áll,

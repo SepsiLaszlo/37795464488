@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * A kötelet reprezentáló osztály. Ennek a segítségével lehet karaktereket a vízből kimenteni.
+ */
 public class Rope implements Usable, Pickable {
     /**
      * Lekéri a paraméterül kapott karakter mezőjét,

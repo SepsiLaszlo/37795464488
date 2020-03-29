@@ -1,5 +1,9 @@
 package com.company;
 
+/**
+ * A stabil jégtáblák reprezentálására. Ezekbe Pickable-ek lehetnek befagyva, állhat rajta
+ * szereplő és boríthatja hó.
+ */
 public class Stable extends IceTable {
 
     /**

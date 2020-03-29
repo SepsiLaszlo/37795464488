@@ -2,6 +2,9 @@ package com.company;
 
 import java.util.ArrayList;
 
+/**
+ * A jégmezőt reprezentáló osztály. Tartalmazza a jégtáblákat.
+ */
 public class IceField {
     private ArrayList<IceTable> iceTables = new ArrayList<IceTable>();
 

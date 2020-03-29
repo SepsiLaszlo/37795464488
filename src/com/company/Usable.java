@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * A használható tárgyakat reprezentáló interface.
+ */
 public interface Usable {
     /**
      * Az interface-t megvalósító osztályoknak egy közös tulajdonságuk van,
