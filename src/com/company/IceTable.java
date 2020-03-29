@@ -3,6 +3,10 @@ package com.company;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Absztrakt osztály a jégtáblák reprezentálására. Ezekbe Pickable-ek lehetnek befagyva, állhat
+ * rajta szereplő és boríthatja hó.
+ */
 public abstract class IceTable {
     private int capacity = 1;
     private int snowLayer;

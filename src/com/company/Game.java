@@ -2,6 +2,10 @@ package com.company;
 
 import java.util.ArrayList;
 
+/**
+ * Felelős azért, hogy a játékosok egymás után határozott sorrendben tudják elvégezni a köreiket
+ * és a hóvihar ütemezéséért.
+ */
 public class Game {
     private static Game instance = new Game();
     private IceField iceField;

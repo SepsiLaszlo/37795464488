@@ -3,6 +3,10 @@ package com.company;
 
 import java.util.Scanner;
 
+/**
+ *  Az instabil jégtáblák reprezentálására. Ezekbe Pickable-ek lehetnek befagyva, állhat rajta
+ * szereplő és boríthatja hó.
+ */
 public class Unstable extends IceTable {
 
     /**

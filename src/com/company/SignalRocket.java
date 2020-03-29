@@ -3,6 +3,11 @@ package com.company;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A jelzőrakéta tárolja az eddig megtalált részeit. Ha a játékosok az összes részét megtalálták,
+ *és egy táblán állnak, akkor elsütésével megnyerik a játékot, erről az osztály értesíti a Game-et.
+ * Singleton osztály.
+ */
 public class SignalRocket implements Usable {
     private static SignalRocket instance = new SignalRocket();
     private Game game = Game.getInstance();

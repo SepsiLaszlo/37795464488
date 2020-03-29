@@ -1,5 +1,7 @@
 package com.company;
-
+/**
+ * A jégtáblák közti lukakat reprezentáló osztály. Ebben nem lehetnek felvehető tárgyak.
+ */
 public class Hole extends IceTable {
 
 	/**
