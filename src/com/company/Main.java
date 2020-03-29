@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,8 +14,16 @@ public class Main {
         menu.writeOutMenu();
         while(menuItem != 0) {
             System.out.print("Menüpont száma: ");
-            menuItem = in.nextInt();
-            menu.chooseMenuItem(menuItem);
+            try {
+                menuItem = in.nextInt();
+            }
+            catch (InputMismatchException ime) {
+                in.nextLine();
+                menuItem = -1;
+            }
+            finally {
+                menu.chooseMenuItem(menuItem);
+            }
         }
         in.close();
     }

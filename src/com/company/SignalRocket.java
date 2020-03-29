@@ -45,6 +45,12 @@ public class SignalRocket implements Usable {
                 "Válasz: Y (Igen), N (Nem).");
         Scanner in = new Scanner(System.in);
         char answer = in.next().charAt(0);
+        while (answer != 'N' && answer != 'Y') {
+            System.out.println("Hibás válasz!\n" +
+                    "Mindenki egy jégtáblán van-e és megtalálták az összes alkatrészt?\n" +
+                    "Válasz: Y (Igen), N (Nem).");
+            answer = in.next().charAt(0);
+        }
         if(answer == 'Y') {
             game.endGame(true);
         }

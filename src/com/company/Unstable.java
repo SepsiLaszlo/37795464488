@@ -25,23 +25,26 @@ public class Unstable extends IceTable {
                 "Válasz: Y (Igen), N (Nem).");
         Scanner in = new Scanner(System.in);
         char answer = in.next().charAt(0);
+        while (answer != 'N' && answer != 'Y') {
+            System.out.println("Hibás válasz!\n" +
+                    "A jégtáblán lévő karakterek száma eléri ezzel már a tábla kapacitását?\n" +
+                    "Válasz: Y (Igen), N (Nem).");
+            answer = in.next().charAt(0);
+        }
         System.out.println(Main.tab + ">Unstable.stepOn(Character)");
+
         switch (answer) {
-            case 'Y': {
+            case 'Y':
                 Main.tab += "\t";
                 c.die();
                 Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
                 System.out.println(Main.tab + "<Unstable.stepOn(Character)");
-
                 break;
-            }
-            case 'N': {
+            case 'N':
                 System.out.println(Main.tab + "<Unstable.stepOn(Character)");
                 break;
-            }
-            default: {
-                System.out.println("Hibás válasz");
-            }
+            default:
+                break;
         }
     }
 
