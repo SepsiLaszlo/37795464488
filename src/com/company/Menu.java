@@ -30,7 +30,10 @@ public class Menu {
 
     public void chooseMenuItem(int menuItem) {
         System.out.println("init----------------------");
-        switch(menuItem) {
+        switch (menuItem) {
+            case 0:
+                System.out.println("Viszont látásra!");
+                break;
             case 1: {
                 Stable stable1 = new Stable(null);
                 Stable stable2 = new Stable(null);
