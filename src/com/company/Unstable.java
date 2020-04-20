@@ -1,8 +1,5 @@
 package com.company;
 
-
-import java.util.Scanner;
-
 /**
  *  Az instabil jégtáblák reprezentálására. Ezekbe Pickable-ek lehetnek befagyva, állhat rajta
  * szereplő és boríthatja hó.
@@ -11,7 +8,6 @@ public class Unstable extends IceTable {
 
     /**
      * Unstable osztály konstruktora
-     *
      * @param p a táblán található tárgy (lehet null)
      */
     public Unstable(Pickable p) {
@@ -19,47 +15,42 @@ public class Unstable extends IceTable {
     }
 
     /**
-     * Paraméterül kap egy karaktert, amit eltárol a characters listában.
-     *
-     * @param c eltárolandó karakter
+     * Paraméterül kap egy karaktert, amit eltárol a characters
+     * listában. Amennyiben a ezzel az új karakterrel már a tárolt karakterek száma
+     * meghaladja a tábla kapacitását, akkor az instabil jégtábla átfordul és a rajta lévő
+     * karakterek megfulladnak. Ezt úgy szimulálja, hogy a karaktereken meghívja a die()
+     * metódust. Viszont ha a tábla nem fordul át, akkor minden rajta álló karakteren
+     * meghívja az invadeOtherCharacters() függvényt.
+     * @param c táblára lépő karakter
      */
     @Override
     public void stepOn(Character c) {
-        System.out.println("A jégtáblán lévő karakterek száma eléri ezzel már a tábla kapacitását?\n" +
-                "Válasz: Y (Igen), N (Nem).");
-        Scanner in = new Scanner(System.in);
-        char answer = in.next().charAt(0);
-        while (answer != 'N' && answer != 'Y') {
-            System.out.println("Hibás válasz!\n" +
-                    "A jégtáblán lévő karakterek száma eléri ezzel már a tábla kapacitását?\n" +
-                    "Válasz: Y (Igen), N (Nem).");
-            answer = in.next().charAt(0);
+        if(capacity <= characters.size() + 1) {
+            c.die();
+            return;
         }
-        System.out.println(Main.tab + ">Unstable.stepOn(Character)");
-
-        switch (answer) {
-            case 'Y':
-                Main.tab += "\t";
-                c.die();
-                Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-                System.out.println(Main.tab + "<Unstable.stepOn(Character)");
-                break;
-            case 'N':
-                System.out.println(Main.tab + "<Unstable.stepOn(Character)");
-                break;
-            default:
-                break;
+        characters.add(c);
+        for (Character character: characters) {
+            character.invadeOtherCharacters();
         }
     }
 
     /**
      * Instabil esetben nem csinál semmit a metódus.
-     *
      * @param t jégtábla, amire kimentett karaktereket helyezi
      */
     @Override
     public void removeCharacters(IceTable t) {
     }
 
-
+    /**
+     * Visszaadja a saját adattagjait string formátumban. Az alábbi
+     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
+     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
+     * fentebb említett formában. Ez a metódus a tesztelést segíti.
+     * @return adattagok string formátumban
+     */
+    public String printStat() {
+        return null;
+    }
 }
