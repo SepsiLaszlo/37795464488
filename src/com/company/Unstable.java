@@ -51,6 +51,6 @@ public class Unstable extends IceTable {
      * @return adattagok string formátumban
      */
     public String printStat() {
-        return null;
+        return "Unstable\n" + super.printStat();
     }
 }

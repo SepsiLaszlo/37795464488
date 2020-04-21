@@ -62,6 +62,6 @@ public class Hole extends IceTable {
 	 * @return adattagok string formátumban
 	 */
 	public String printStat() {
-		return null;
+		return "Hole\n" + super.printStat();
 	}
 }

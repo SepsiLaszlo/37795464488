@@ -43,6 +43,6 @@ public class Stable extends IceTable {
      * @return adattagok string formátumban
      */
     public String printStat() {
-        return null;
+        return "Stable\n" + super.printStat();
     }
 }

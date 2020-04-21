@@ -164,6 +164,11 @@ public abstract class IceTable {
      * @return adattagok string formátumban
      */
     public String printStat() {
-        return null;
+        String output = String.format("capacity: %d\n" +
+                                    "snowLaxer: %d\n" +
+                                    "iglu: %b\n" +
+                                    "tent: %b\n" +
+                                    "Item: %s\n", capacity, snowLayer, iglu, tent, (item != null) ? item.printStat() : "-");
+        return output;
     }
 }
