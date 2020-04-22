@@ -34,4 +34,7 @@ public class Researcher extends Character {
      */
     @Override
     public void invadeOtherCharacters() { }
+     public String  toString(){
+        return  "Researcher\n"+super.toString();
+    }
 }

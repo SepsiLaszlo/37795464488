@@ -13,20 +13,25 @@ public class Main {
     static public String tab = "";
     private static InputStreamReader isr = new InputStreamReader(System.in);
     private static BufferedReader br = new BufferedReader(isr);
+    private static Scanner scanner = new Scanner(System.in);
+    private static IceField iceField = new IceField();
+    private static String output;
+
 
     public static void main(String[] args) throws IOException {
-//        int a =1;
-//        int b=3;
-//        int c=4;
-//        Direction a = new Direction(1);
-//        HashMap<Direction, IceTable> neighbours = new HashMap<Direction, IceTable>();
-//        IceTable it = neighbours.get(new Direction(1));
-//
-//        File f= new File("test.txt");
-        while (true) {
+
+//        Character c = new Eskimo(new Stable(new Spade()));
+//        System.out.println(c.toString());
+
+        Direction a = new Direction(1);
+        HashMap<Direction, IceTable> neighbours = new HashMap<Direction, IceTable>();
+        IceTable it = neighbours.get(new Direction(1));
+
+        Scanner s = new Scanner(System.in);
+        while (s.hasNextLine()) {
             String line;
-            line = br.readLine();
-//            System.out.println(line);
+            line = s.nextLine();
+            System.out.println("y:" + line);
 
             if (line.equals(""))
                 break;
@@ -34,6 +39,11 @@ public class Main {
             String[] arguments = parseInput(line);
             executeCommand(arguments);
         }
+//        System.out.print(output);
+
+
+
+        int asda = 2;
     }
 
     private static void executeCommand(String[] arguments) throws IOException {
@@ -66,25 +76,23 @@ public class Main {
                 break;
 
             case "load":
-                loadTestFromFiles(arguments[1]);
+                executeCommandsInFile(arguments[1]);
+                String[] t= arguments[1].split("\\.");
+                String expected= t[0]+"out.txt";
+                compareOutputToInput(output,expected);
                 break;
 
-
             case "icefield":
-                String line;
-                line = br.readLine();
-                while (!line.contains(";")) {
-                    parseNeighbours(line);
-                    line = br.readLine();
-                }
-                parseNeighbours(line.split(";")[0]);
-
+                readNeighbours(scanner);
+                break;
+            case "useability":
+                useAbility(arguments[1], arguments[2]);
                 break;
             case "move":
                 moveCharcter(arguments[1], arguments[2]);
                 break;
             case "useUsable":
-                characterUse(arguments[1], arguments[2]);
+                characterUse(arguments[1], Integer.parseInt(arguments[2]));
                 break;
             case "reset":
                 characters = new HashMap<>();
@@ -93,49 +101,56 @@ public class Main {
             case "stat":
                 stat(arguments[1]);
                 break;
+            case "setcapacity":
+                icetables.get(arguments[1]).setCapacity(Integer.parseInt(arguments[2]));
+                break;
+            case "snowstorm":
+                iceField.snowStorm();
+                break;
+
+
         }
     }
 
-    private static void stat(String argument) {
-        Character character = characters.get(argument);
-        IceTable it = icetables.get(argument);
-        if (character != null) {
-            System.out.println(character.toString());
-        } else if (it != null) {
-            System.out.println(it.toString());
-        } else {
-            //game, vagy ilyenek
+    private static void useAbility(String characterName, String tableName) {
+        Character character = characters.get(characterName);
+        if (character == null)
+            throw new IllegalArgumentException("Character not found");
+        IceTable iceTable = icetables.get(tableName);
+        if (iceTable == null)
+            throw new IllegalArgumentException("Icetable not found");
+        character.useAbility(iceTable);
+    }
+
+    private static void readNeighbours(Scanner s) throws IOException {
+        String line;
+        line = s.nextLine();
+        while (!line.contains(";")) {
+            parseNeighbours(line);
+            line = s.nextLine();
+        }
+        parseNeighbours(line.split(";")[0]);
+    }
+
+    private static void executeCommandsInFile(String fileName) throws IOException {
+        output = "";
+
+        File f = new File(fileName);
+        Scanner scanner = new Scanner(f);
+        while (scanner.hasNextLine()) {
+            String nextLine = scanner.nextLine();
+
+            if (nextLine.equals("")) break;
+            String[] arguments = parseInput(nextLine);
+            if (arguments[0].equals("icefield")) {
+                readNeighbours(scanner);
+            } else {
+                executeCommand(arguments);
+            }
+
         }
     }
 
-    private static void characterUse(String c, String useable) {
-        Character character = characters.get(c);
-        if (character == null)
-            throw new IllegalArgumentException("Character not found");
-//        character.useUsable(usable);
-    }
-
-    private static void moveCharcter(String c, String dir) {
-        Character character = characters.get(c);
-        if (character == null)
-            throw new IllegalArgumentException("Character not found");
-        character.move(new Direction(Integer.parseInt(dir.substring(1))));
-    }
-
-    private static void loadTestFromFiles(String fileName) throws FileNotFoundException {
-//        File f= new File(fileName);
-//        Scanner scanner = new Scanner(f);
-//        String lines="";
-//        while (scanner.hasNextLine()) {
-//            String nextLine = scanner.nextLine();
-//            System.out.println("x"+nextLine);
-//            if (nextLine.equals("")) break;
-//            lines =lines.concat(nextLine);
-//        }
-//        System.out.println(lines);
-////        InputStream fakeIn = new ByteArrayInputStream(lines.getBytes());
-////        System.setIn(fakeIn);
-    }
 
     private static void digWithCharacter(String argument) {
         Character character = characters.get(argument);
@@ -149,12 +164,12 @@ public class Main {
         if (icetables.get(baseTableName) == null)
             throw new IllegalArgumentException();
         IceTable baseTable = icetables.get(baseTableName);
-        String[] neigbours = line.split(":")[1].split(",");
+        String[] neigbours = line.split(":")[1].split(", ");
         for (String elment : neigbours) {
             String direction = elment.split(" ")[0];
             String neighbourName = elment.split(" ")[1];
             if (icetables.get(neighbourName) == null)
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Not found: " + neighbourName);
             IceTable neighbour = icetables.get(neighbourName);
             addNeighbour(baseTable, neighbour, direction);
         }
@@ -178,14 +193,17 @@ public class Main {
     }
 
     public static void buildIceTable(String name, char type, char item) throws IllegalArgumentException {
+        IceTable iceTable;
         if (type == 's')
-            icetables.put(name, new Stable(createPickableFromID(item)));
+            iceTable = new Stable(createPickableFromID(item));
         else if (type == 'u')
-            icetables.put(name, new Unstable(createPickableFromID(item)));
+            iceTable = new Unstable(createPickableFromID(item));
         else if (type == 'h')
-            icetables.put(name, new Stable(createPickableFromID(item)));
+            iceTable = new Stable(createPickableFromID(item));
         else
             throw new IllegalArgumentException("IceTable type not found");
+        icetables.put(name, iceTable);
+        iceField.addIceTable(iceTable);
     }
 
     public static Pickable createPickableFromID(char id) throws IllegalArgumentException {
@@ -228,8 +246,50 @@ public class Main {
     }
 
     private static String[] parseInput(String line) {
+
         String[] arguments = line.split(" ");
         return arguments;
+
+
+    }
+
+
+    private static void stat(String argument) {
+        String result = "";
+        switch (argument) {
+            case "signalRocket":
+                result = SignalRocket.getInstance().printStat();
+                break;
+            case "game":
+                result = Game.getInstance().toString();
+                break;
+            default:
+                Character character = characters.get(argument);
+                IceTable it = icetables.get(argument);
+                if (character != null) {
+                    result = character.toString();
+                } else if (it != null) {
+                    result = it.toString();
+                }
+                break;
+        }
+        System.out.println(result + "\n");
+        output = output.concat(result + "\n\n");
+
+    }
+
+    private static void characterUse(String c, int usable) {
+        Character character = characters.get(c);
+        if (character == null)
+            throw new IllegalArgumentException("Character not found");
+        character.useUsable(usable);
+    }
+
+    private static void moveCharcter(String c, String dir) {
+        Character character = characters.get(c);
+        if (character == null)
+            throw new IllegalArgumentException("Character not found");
+        character.move(new Direction(Integer.parseInt(dir.substring(1))));
     }
 
     public static String getCharacterNameFromObject(Character character) {
@@ -250,5 +310,23 @@ public class Main {
         return "";
     }
 
+    public static void compareOutputToInput(String output, String filename) throws FileNotFoundException {
+        File file = new File(filename);
+        Scanner scanner = new Scanner(file);
+        System.out.println("Testing: "+filename);
+        for (String actual : output.split("\n")) {
+            String expected = scanner.nextLine();
+            if (!expected.equals(actual)) {
+                System.out.println("Actual:");
+                System.out.println(actual);
+                System.out.println("=====================");
+                System.out.println("Expected:");
+                System.out.println(expected);
+
+                return;
+            }
+        }
+        System.out.println("MATCH");
+    }
 
 }

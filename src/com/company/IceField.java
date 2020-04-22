@@ -22,7 +22,7 @@ public class IceField {
      * így visszakapott karaktereken meghívja a changeHeat(-1). Nem determinisztikus
      * esetben véletlenszerű táblákra futtatja le a fentebb lévő műveleteket.
      */
-    public void snowStorm(boolean det) {
+    public void snowStorm() {
         for (IceTable t : iceTables) {
             Random random = new Random();
             if (random.nextBoolean() || det) {

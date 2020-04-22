@@ -98,4 +98,7 @@ public class PolarBear extends Character {
      */
     @Override
     public void pass() { }
+     public String  toString(){
+        return  "PolarBear\n"+super.toString();
+    }
 }

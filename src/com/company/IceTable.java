@@ -153,17 +153,17 @@ public abstract class IceTable {
     public String toString() {
         String characterNames = "";
         for(Character character : characters) {
-            characterNames.concat('\t' + character.getName() + '\n');
+            characterNames=characterNames.concat('\t' + character.getName() + '\n');
         }
         if (characters.size() == 0)
             characterNames = "\t-\n";
         String neighbourNames = "";
         for(HashMap.Entry<Direction, IceTable> entry : neighbours.entrySet()) {
             neighbourNames = neighbourNames
-                .concat('\t' + entry.getKey().toString() + ": " + entry.getValue().getName() + '\n');
+                .concat("\n\t" + entry.getKey().toString() + ": " + entry.getValue().getName() );
         }
         if (neighbours.size() == 0)
-            neighbourNames = "\t-\n";
+            neighbourNames = "\n\t-";
 
         return String.format(
                 "capacity: " + this.capacity + '\n' +
@@ -172,11 +172,15 @@ public abstract class IceTable {
                 "tent: " + this.tent + '\n' +
                 "Item: " + (this.item != null ? this.item.toString() : '-') + '\n' +
                 "Characters:\n" + characterNames +
-                "Neighbours:\n" + neighbourNames + '\n'
+                "Neighbours:" + neighbourNames
         );
     }
 
     public String getName() {
         return Main.getIceTableNameFromObject(this);
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity=capacity;
     }
 }
