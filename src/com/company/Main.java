@@ -15,27 +15,25 @@ public class Main {
     private static BufferedReader br = new BufferedReader(isr);
 
     public static void main(String[] args) throws IOException {
-        int a =1;
-        int b=3;
-        int c=4;
-
+//        int a =1;
+//        int b=3;
+//        int c=4;
 //        Direction a = new Direction(1);
 //        HashMap<Direction, IceTable> neighbours = new HashMap<Direction, IceTable>();
 //        IceTable it = neighbours.get(new Direction(1));
 //
 //        File f= new File("test.txt");
-//        while (true) {
-//            String line;
-//            line = br.readLine();
+        while (true) {
+            String line;
+            line = br.readLine();
 //            System.out.println(line);
-//
-//            if (line.equals(""))
-//                break;
-//
-//            String[] arguments = parseInput(line);
-//            executeCommand(arguments);
-//        }
-//        int asda = 2;
+
+            if (line.equals(""))
+                break;
+
+            String[] arguments = parseInput(line);
+            executeCommand(arguments);
+        }
     }
 
     private static void executeCommand(String[] arguments) throws IOException {
@@ -82,7 +80,46 @@ public class Main {
                 parseNeighbours(line.split(";")[0]);
 
                 break;
+            case "move":
+                moveCharcter(arguments[1], arguments[2]);
+                break;
+            case "useUsable":
+                characterUse(arguments[1], arguments[2]);
+                break;
+            case "reset":
+                characters = new HashMap<>();
+                icetables = new HashMap<>();
+                break;
+            case "stat":
+                stat(arguments[1]);
+                break;
         }
+    }
+
+    private static void stat(String argument) {
+        Character character = characters.get(argument);
+        IceTable it = icetables.get(argument);
+        if (character != null) {
+            System.out.println(character.toString());
+        } else if (it != null) {
+            System.out.println(it.toString());
+        } else {
+            //game, vagy ilyenek
+        }
+    }
+
+    private static void characterUse(String c, String useable) {
+        Character character = characters.get(c);
+        if (character == null)
+            throw new IllegalArgumentException("Character not found");
+//        character.useUsable(usable);
+    }
+
+    private static void moveCharcter(String c, String dir) {
+        Character character = characters.get(c);
+        if (character == null)
+            throw new IllegalArgumentException("Character not found");
+        character.move(new Direction(Integer.parseInt(dir.substring(1))));
     }
 
     private static void loadTestFromFiles(String fileName) throws FileNotFoundException {
@@ -191,11 +228,26 @@ public class Main {
     }
 
     private static String[] parseInput(String line) {
-
         String[] arguments = line.split(" ");
         return arguments;
+    }
 
+    public static String getCharacterNameFromObject(Character character) {
+        for (HashMap.Entry<String, Character> entry : characters.entrySet()) {
+            if (entry.getValue() == character) {
+                return entry.getKey();
+            }
+        }
+        return "";
+    }
 
+    public static String getIceTableNameFromObject(IceTable it) {
+        for (HashMap.Entry<String, IceTable> entry : icetables.entrySet()) {
+            if (entry.getValue() == it) {
+                return entry.getKey();
+            }
+        }
+        return "";
     }
 
 

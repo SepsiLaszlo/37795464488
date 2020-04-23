@@ -37,4 +37,9 @@ public class FragileSpade implements Usable,Pickable {
     public void pickUp(Character c) {
         c.addUsable(this);
     }
+
+    @Override
+    public String toString() {
+        return "Fragile Spade";
+    }
 }

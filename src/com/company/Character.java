@@ -192,4 +192,8 @@ public abstract class Character {
         game.nextPlayer();
         workUnit = initialWorkUnit;
     }
+
+    public String getName() {
+        return Main.getCharacterNameFromObject(this);
+    }
 }

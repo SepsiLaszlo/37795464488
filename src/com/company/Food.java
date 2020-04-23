@@ -11,4 +11,9 @@ public class Food implements Pickable {
     public void pickUp(Character c) {
         c.changeHeat(1);
     }
+
+    @Override
+    public String toString() {
+        return "Food";
+    }
 }

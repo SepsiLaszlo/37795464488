@@ -11,7 +11,6 @@ public class Direction {
 
     }
 
-
     public boolean equals(Object d){
         return ((Direction)d).getName()==this.name;
     }
@@ -31,4 +30,8 @@ public class Direction {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "d" + this.name;
+    }
 }
