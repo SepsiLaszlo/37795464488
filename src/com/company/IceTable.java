@@ -165,7 +165,7 @@ public abstract class IceTable {
      */
     public String printStat() {
         String output = String.format("capacity: %d\n" +
-                                    "snowLaxer: %d\n" +
+                                    "snowLayer: %d\n" +
                                     "iglu: %b\n" +
                                     "tent: %b\n" +
                                     "Item: %s\n", capacity, snowLayer, iglu, tent, (item != null) ? item.printStat() : "-");
