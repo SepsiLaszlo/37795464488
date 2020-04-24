@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+
 import java.util.Random;
 
 /**
@@ -58,7 +59,9 @@ public class PolarBear extends Character {
      */
     @Override
     public int useAbility(IceTable t) {
+
         ArrayList<Character> charactersToInvade = getIceTable().getInvadableCharacters();
+
         if (charactersToInvade != null)
             for (Character character : charactersToInvade)
                 character.die();

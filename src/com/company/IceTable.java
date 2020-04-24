@@ -15,6 +15,7 @@ public abstract class IceTable {
     private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
     protected ArrayList<Character> characters = new ArrayList<Character>();
     private Pickable item;
+    private boolean tent = false;
 
     /**
      * IceTable osztály konstruktora
@@ -146,6 +147,7 @@ public abstract class IceTable {
         }
         return characters;
     }
+
 
     /**
      * Beállítja a jégtábla kapacitását. A capacity tagváltozót
