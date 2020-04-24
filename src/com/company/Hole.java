@@ -61,7 +61,5 @@ public class Hole extends IceTable {
 	 * fentebb említett formában. Ez a metódus a tesztelést segíti.
 	 * @return adattagok string formátumban
 	 */
-	public String printStat() {
-		return "Hole\n" + super.printStat();
-	}
+
 }

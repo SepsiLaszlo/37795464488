@@ -163,12 +163,4 @@ public abstract class IceTable {
      * fentebb említett formában. Ez a metódus a tesztelést segíti.
      * @return adattagok string formátumban
      */
-    public String printStat() {
-        String output = String.format("capacity: %d\n" +
-                                    "snowLayer: %d\n" +
-                                    "iglu: %b\n" +
-                                    "tent: %b\n" +
-                                    "Item: %s\n", capacity, snowLayer, iglu, tent, (item != null) ? item.printStat() : "-");
-        return output;
-    }
 }
