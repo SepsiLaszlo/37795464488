@@ -8,11 +8,12 @@ import java.util.HashMap;
  * rajta szereplő és boríthatja hó.
  */
 public abstract class IceTable {
-    private int capacity = 1;
-    private int snowLayer;
-    private boolean iglu;
+    protected int capacity = 1;
+    private int snowLayer = 0;
+    private boolean iglu = false;
+    private boolean tent = false;
     private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
-    protected ArrayList<Character> characters=new ArrayList<Character>();
+    protected ArrayList<Character> characters = new ArrayList<Character>();
     private Pickable item;
     private boolean tent = false;
 
@@ -25,29 +26,26 @@ public abstract class IceTable {
     }
 
     /**
-     * Az adott irányból lekérdezi a jégtábla szomszédját.
+     * Visszaadja a paraméterül kapott irányban lévő szomszédját.
      * @param d megadott irány
      * @return a szomszédos jégtábla
      */
     public IceTable getNeighbour(Direction d) {
-        System.out.println(Main.tab + ">IceTable.getNeighbour(Direction)");
-        System.out.println(Main.tab + "<IceTable.getNeighbour(Direction)");
-        return neighbours.get(d);
+       return neighbours.get(d);
     }
 
     /**
-     * Az adott irányba beállítja, hogy a jégtábla szomszédját.
-     * @param d megadott irány
+     * Beállítja d irányba a paraméterben kapott IceTable-t szomszédnak.
      * @param n a szomszédos jégtábla
+     * @param d megadott irány
      */
     public void setNeighbour(IceTable n, Direction d) {
-            neighbours.put(d,n);
+        neighbours.put(d,n);
     }
 
-
     /**
-     * Paraméterül kap egy karaktert, amit eltárol a characters listában,
-     * @param c eltárolandó karakter
+     * Absztrakt metódus a jégtáblák fajtájuknak megfelelően definiálják.
+     * @param c táblára lépő karakter
      */
     public abstract void stepOn(Character c);
 
@@ -56,8 +54,7 @@ public abstract class IceTable {
      * @param c eltávolítandó karakter
      */
     public void stepOff(Character c) {
-        System.out.println(Main.tab + ">IceTable.stepOff(Character)");
-        System.out.println(Main.tab + "<IceTable.stepOff(Character)");
+        characters.remove(c);
     }
 
     /**
@@ -75,9 +72,14 @@ public abstract class IceTable {
      * @return eltárolt felvehető tárgy
      */
     public Pickable extract(int amount) {
-        System.out.println(Main.tab + ">IceTable.extract("+ amount +")");
-        System.out.println(Main.tab + "Pickable <IceTable.extract("+ amount +")");
-        return item;
+        snowLayer = Math.max(snowLayer - amount, 0);
+        if(snowLayer == 0) {
+            Pickable temp = item;
+            item = null;
+            return temp;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -85,8 +87,7 @@ public abstract class IceTable {
      * @param amount mennyivel kell növelni a hóréteget
      */
     public void addSnow(int amount) {
-        System.out.println(Main.tab + ">IceTable.addSnow(1)");
-        System.out.println(Main.tab + "<IceTable.addSnow(1)");
+        snowLayer += amount;
     }
 
     /**
@@ -94,9 +95,6 @@ public abstract class IceTable {
      * @return karakterek száma
      */
     public int getCharactersNumber() {
-        System.out.println(Main.tab + ">IceTable.getCharactersNumber()");
-        System.out.println(Main.tab + "int <IceTable.getCharactersNumber()");
-
         return characters.size();
     }
 
@@ -105,8 +103,6 @@ public abstract class IceTable {
      * @return kapacitás
      */
     public int getCapacity() {
-        System.out.println(Main.tab + ">IceTable.getCapacity()");
-        System.out.println(Main.tab + capacity + "<IceTable.getCapacity()");
         return capacity;
     }
 
@@ -114,24 +110,67 @@ public abstract class IceTable {
      * Iglu hozzáadása a táblához.
      */
     public void addIglu() {
-        System.out.println(Main.tab + ">IceTable.addIglu()");
-        System.out.println(Main.tab + "<IceTable.addIglu()");
+        iglu = true;
     }
 
     /**
-     * Visszaadja a táblán lévő összes Charactert, aki nincs igluban.
-     *
+     * Visszaadja a táblán lévő összes karaktereket,
+     * aki nincs igluban. Ha van iglu a táblán, akkor senkit (null), ha nincs akkor mindenkit,
+     * tehát magát a characters listát.
      * @return szabadban lévő karakterek
      */
     public ArrayList<Character> getUnprotectedCharacters() {
-        System.out.println(Main.tab + ">IceTable.getUnprotectedCharacters()");
-        System.out.println(Main.tab + "Character[] <IceTable.getUnprotectedCharacters()");
-
+        if(iglu || tent) {
+            return null;
+        }
         return characters;
     }
 
+    /**
+     * Sátor hozzáadása vagy levétele a tábláról. A tent tagváltozót
+     * beállítja a paraméterként megadott értékre.
+     * @param t beállítandó érték
+     */
     public void setTent(boolean t) {
         tent = t;
     }
 
+    /**
+     * Visszaadja a táblán lévő összes Charactert,
+     * aki nincs igluban. Ha van iglu a táblán, akkor senkit (null), ha nincs akkor mindenkit,
+     * tehát magát a characters listát.
+     * @return karakterek, akik nincsenek igluban
+     */
+    public ArrayList<Character> getInvadableCharacters() {
+        if(iglu) {
+            return null;
+        }
+        return characters;
+    }
+
+
+    /**
+     * Beállítja a jégtábla kapacitását. A capacity tagváltozót
+     * beállítja a paraméterben megadott értékre.
+     * @param capacity beéllítandó kapacitás érték
+     */
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    /**
+     * Visszaadja a saját adattagjait string formátumban. Az alábbi
+     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
+     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
+     * fentebb említett formában. Ez a metódus a tesztelést segíti.
+     * @return adattagok string formátumban
+     */
+    public String printStat() {
+        String output = String.format("capacity: %d\n" +
+                                    "snowLayer: %d\n" +
+                                    "iglu: %b\n" +
+                                    "tent: %b\n" +
+                                    "Item: %s\n", capacity, snowLayer, iglu, tent, (item != null) ? item.printStat() : "-");
+        return output;
+    }
 }

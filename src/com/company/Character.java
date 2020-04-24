@@ -10,7 +10,11 @@ public abstract class Character {
     /**
      * A hátralévő munkaegységek száma az adott körben.
      */
-    private int workUnit;
+    protected int workUnit;
+    /**
+     * Az elvéghezhető munkaegységek számának eredeti/kezdeti értéke.
+     */
+    protected int initialWorkUnit;
     /**
      * A szereplő testhőjének mértéke.
      */
@@ -18,7 +22,7 @@ public abstract class Character {
     /**
      * A szereplő visel-e búvárruhát.
      */
-    private boolean diver;
+    protected boolean diver;
     /**
      * A szereplő vízben van-e.
      */
@@ -55,13 +59,7 @@ public abstract class Character {
      * @param u Az eltárolandó tárgy.
      */
     public void addUsable(Usable u){
-        System.out.println(Main.tab + ">Character.addUsable(Usable)");
-        Main.tab += "\t";
-
         usables.add(u);
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Character.addUsable(Usable)");
     }
 
     /**
@@ -69,13 +67,7 @@ public abstract class Character {
      * @param idx Az index.
      */
     public void useUsable(int idx){
-        System.out.println(Main.tab + ">Character.useUsable(" + idx + ")");
-        Main.tab += "\t";
-
-        usables.get(idx).use(this, Direction.LEFT);
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Character.useUsable(" + idx + ")");
+        usables.get(idx).use(this, Direction.d1);
     }
 
     /**
@@ -84,15 +76,9 @@ public abstract class Character {
      * @param diff A hozzáadandó testhő mértéke.
      */
     public void changeHeat(int diff){
-        System.out.println(Main.tab + ">Character.changeHeat(" + diff + ")");
-        Main.tab += "\t";
-
         bodyTemperature += diff;
         if (bodyTemperature <= 0)
             game.endGame(false);
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Character.changeHeat(" + diff + ")");
     }
 
     /**
@@ -100,13 +86,7 @@ public abstract class Character {
      * állítja true-ra.
      */
     public void makeDiver(){
-        System.out.println(Main.tab + ">Character.makeDiver()");
-        Main.tab += "\t";
-
         diver = true;
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Character.makeDiver()");
     }
 
     /**
@@ -115,13 +95,7 @@ public abstract class Character {
      * @param s Az alkatrész.
      */
     public void buildSignalRocket(SignalRocketPart s){
-        System.out.println(Main.tab + ">Character.buildSignalRocket(SignalRocketPart)");
-        Main.tab += "\t";
-
         signalRocket.build(s);
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Character.buildSignalRocket(SignalRocketPart)");
     }
 
     /**
@@ -136,60 +110,46 @@ public abstract class Character {
      * @param d Az irány.
      */
     public void move(Direction d) {
-        System.out.println(Main.tab + ">Character.move(Direction)");
-        Main.tab += "\t";
-
         IceTable i = iceTable.getNeighbour(d);
         iceTable.stepOff(this);
         i.stepOn(this);
         iceTable = i;
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab  + "<Character.move(Direction)");
+        workUnit--;
+        if (workUnit == 0) {
+            game.nextPlayer();
+            workUnit = initialWorkUnit;
+        }
     }
 
     /**
      * A szereplő beleesik a vízbe.
      */
     public void fallInWater(){
-        System.out.println(Main.tab + ">Character.fallInWater()");
-        Main.tab += "\t";
-
         inWater = true;
         if (!diver) {
             game.nextPlayer();
         }
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab  + "<Character.fallInWater()");
     }
 
     /**
      * A szereplő meghal.
      */
     public void die(){
-        System.out.println(Main.tab + ">Character.die()");
-        Main.tab += "\t";
-
         game.endGame(false);
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Character.die()");
     }
 
     /**
      * A szereplő ás azon a jégtáblán, amelyen éppen áll.
      */
     public void dig(){
-        System.out.println(Main.tab + ">Character.dig()");
-        Main.tab += "\t";
-
         Pickable p = iceTable.extract(1);
         if (p != null)
             p.pickUp(this);
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Character.dig()");
+        workUnit--;
+        if (workUnit == 0) {
+            game.nextPlayer();
+            workUnit = initialWorkUnit;
+        }
     }
 
     /**
@@ -197,8 +157,6 @@ public abstract class Character {
      * @return A jégtábla, amelyen áll.
      */
     public IceTable getIceTable() {
-        System.out.println(Main.tab + ">Character.getIceTable()");
-        System.out.println(Main.tab + "IceTable<Character.getIceTable()");
         return iceTable;
     }
 
@@ -206,8 +164,32 @@ public abstract class Character {
      * A szereplő kijön a víből.
      */
     public void comeOutOfWater() {
-        System.out.println(Main.tab + ">Character.comeOutOfWater()");
         inWater = false;
-        System.out.println(Main.tab + "<Character.comeOutOfWater()");
+    }
+
+    /**
+     * A karakter elkap másik karaktereket a jégtáblán,
+     * amin áll. Ezt az absztrakt függvényt csak a PolarBear fogja nem üresen
+     * megvalósítani.
+     */
+    public abstract void invadeOtherCharacters();
+
+    /**
+     * A Game osztály hívja meg minden kör elején. Visszaadja az
+     * inWater tagváltozó értékét.
+     * @return A karakter vízben van-e.
+     */
+    public boolean getInWater() {
+        return inWater;
+    }
+
+    /**
+     * Ez a függvény hívandó akkor, ha a játékos még nem fejezte be a körét
+     * (tehát nem használta el a 4 munkaegységét). Meghívja a game tagváltozóján a
+     * nextPlayer() metódust, majd visszaállítja a workUnit-ját a kezdeti értékre.
+     */
+    public void pass() {
+        game.nextPlayer();
+        workUnit = initialWorkUnit;
     }
 }

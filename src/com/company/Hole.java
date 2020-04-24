@@ -9,62 +9,59 @@ public class Hole extends IceTable {
 	 */
 	 public Hole(){
 	 	super(null);
+	 	capacity = 0;
     }
 
 	/**
-	 * Paraméterül kap egy karaktert, amit eltárol a characterslistában,
-	 * és meghívja rajta a fallInWater() metódust.
-	 * Ezen kívül a karakter alatt beszakad a hó így a snowLayer értéke 0 lesz.
-	 * @param c eltárolandó karakter
+	 * A paraméterül kapott karakteren meghívja a
+	 * fallInWater() metódust és eltárolja a characters listában, majd minden rajta lévő
+	 * karakteren meghívja a invadeOtherCharacters() függvényt.
+	 * @param c táblára lépő karakter
 	 */
     @Override
 	public void stepOn(Character c) {
-    	System.out.println(Main.tab + ">Hole.stepOn(Character)");
-        Main.tab += "\t";
-
+		c.fallInWater();
         characters.add(c);
-        c.fallInWater();
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Hole.stepOn(Character)");
-	}
+		for (Character character: characters) {
+			character.invadeOtherCharacters();
+		}
+     }
 
 	/**
-	 * A kötél hívja meg, amikor vízben lévő játékosokat akarunk kimenteni.
-	 * 	Minden karaktert a characters listából áthelyez
-	 * a paraméterben kapott IceTable-re (stepOn(c) függvénnyel).
-	 * Ezután törli a characters lista tartalmát.
-	 * @param t
+	 * A kötél hívja meg, amikor vízben lévő
+	 * játékosokat akarunk kimenteni. A táblán lévő karakterek egy lokális változóban
+	 * elmentésre kerülnek, majd meghívjuk az osztály stepOff(Characters c) metódusát
+	 * minden rajta lévő karakterre. Ezután a paraméterként átadott IceTable-re ráléptetjük
+	 * (StepOn(Characters c)) a lokális változóban elmentett karaktereket.
+	 * @param t jégtábla, amire kimentett karaktereket helyezi
 	 */
 	@Override
 	public void removeCharacters(IceTable t) {
-		System.out.println(Main.tab + ">removeCharacters(IceTable)");
-        Main.tab += "\t";
-
-        for (Character c : this.characters){
+        for (Character c : characters){
         	stepOff(c);
-        	c.comeOutOfWater();
         	t.stepOn(c);
 		}
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<removeCharacters(IceTable)");
 	}
 
 	/**
-	 * Paraméterül kapott karakterre meghívja a karakter comeOutOfWater() metódusát
-	 * és eltávolítja a characters listából.
+	 * Paraméterül kapott karakterten meghívja a
+	 * comeOutOfWater() metódust, majd a karaktert eltávolítja a characters listából.
 	 * @param c eltávolítandó karakter
 	 */
 	@Override
 	public void stepOff(Character c) {
-		System.out.println(Main.tab + ">Hole.stepOff(Character)");
-        Main.tab += "\t";
-
         c.comeOutOfWater();
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<Hole.stepOff(Character)");
+        characters.remove(c);
 	}
 
+	/**
+	 * Visszaadja a saját adattagjait string formátumban. Az alábbi
+	 * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
+	 * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
+	 * fentebb említett formában. Ez a metódus a tesztelést segíti.
+	 * @return adattagok string formátumban
+	 */
+	public String printStat() {
+		return "Hole\n" + super.printStat();
+	}
 }
