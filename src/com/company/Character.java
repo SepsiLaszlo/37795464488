@@ -53,6 +53,7 @@ public abstract class Character {
         iceTable = i;
         i.stepOn(this);
         usables.add(signalRocket);
+        game.addCharacter(this);
     }
 
     /**
@@ -62,8 +63,6 @@ public abstract class Character {
      * @param u Az eltárolandó tárgy.
      */
     public void addUsable(Usable u) {
-        System.out.println(Main.tab + ">Character.addUsable(Usable)");
-        Main.tab += "\t";
 
         usables.add(u);
     }
@@ -74,7 +73,12 @@ public abstract class Character {
      * @param idx Az index.
      */
     public void useUsable(int idx){
-        usables.get(idx).use(this, Direction.d1);
+        usables.get(idx).use(this, new Direction(1));
+          workUnit--;
+        if (workUnit == 0) {
+            game.nextPlayer();
+            workUnit = initialWorkUnit;
+        }
     }
 
     /**

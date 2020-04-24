@@ -10,13 +10,12 @@ public class Main {
     private static HashMap<String, Character> characters = new HashMap<>();
     private static HashMap<String, IceTable> icetables = new HashMap<>();
 
-    static public String tab = "";
     private static InputStreamReader isr = new InputStreamReader(System.in);
     private static BufferedReader br = new BufferedReader(isr);
     private static Scanner scanner = new Scanner(System.in);
     private static IceField iceField = new IceField();
     private static String output;
-
+    public static  boolean det=true;
 
     public static void main(String[] args) throws IOException {
 

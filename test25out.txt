@@ -26,7 +26,7 @@ items:
 icetable: t_3_2
 
 Game
-gameState:RUNNINGl
+gameState:RUNNING
 
 SingalRocket
 foundParts: 0

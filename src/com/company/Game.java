@@ -79,7 +79,7 @@ public class Game {
             while (c == currCharacter) {
                 //Character move, dig, use Item
             }
-            iceField.snowStorm(false);
+            iceField.snowStorm();
         }
     }
 
