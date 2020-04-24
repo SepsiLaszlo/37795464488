@@ -42,7 +42,4 @@ public class Stable extends IceTable {
      * fentebb említett formában. Ez a metódus a tesztelést segíti.
      * @return adattagok string formátumban
      */
-    public String printStat() {
-        return "Stable\n" + super.printStat();
-    }
 }
