@@ -12,6 +12,8 @@ public class Eskimo extends Character {
     public Eskimo(IceTable i) {
         super(i);
         bodyTemperature = 5;
+        workUnit = 4;
+        initialWorkUnit = 4;
     }
 
     /**
@@ -21,13 +23,14 @@ public class Eskimo extends Character {
      */
     @Override
     public int useAbility(IceTable t) {
-        System.out.println(Main.tab + ">Eskimo.useAbility(IceTable)");
-        Main.tab += "\t";
-
-        t.addIglu();
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + 0 + "<Eskimo.useAbility(IceTable)");
+        getIceTable().addIglu();
         return 0;
     }
+
+    /**
+     * Ez a függvény üresen kerül definiálásra az eszkimó
+     * részéről.
+     */
+    @Override
+    public void invadeOtherCharacters() { }
 }
