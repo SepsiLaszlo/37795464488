@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class SignalRocket implements Usable {
     private static SignalRocket instance = new SignalRocket();
     private Game game = Game.getInstance();
-    private ArrayList<SignalRocketPart> parts;
+    private ArrayList<SignalRocketPart> parts= new ArrayList<SignalRocketPart>();
 
     /**
      * Privát konstruktor a Singleton-pattern megvalósításához.
@@ -55,5 +55,12 @@ public class SignalRocket implements Usable {
      */
     public void build(SignalRocketPart s) {
         parts.add(s);
+    }
+
+    public  String toString(){
+        return "-";
+    }
+    public String printStat(){
+        return  "SingalRocket\nfoundParts: "+parts.size();
     }
 }

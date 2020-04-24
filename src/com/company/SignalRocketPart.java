@@ -11,4 +11,7 @@ public class SignalRocketPart implements Pickable {
     public void pickUp(Character c) {
         c.buildSignalRocket(this);
     }
+    public String toString(){
+        return "SignalRocketPart";
+    }
 }

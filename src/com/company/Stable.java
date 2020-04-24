@@ -42,4 +42,8 @@ public class Stable extends IceTable {
      * fentebb említett formában. Ez a metódus a tesztelést segíti.
      * @return adattagok string formátumban
      */
+    @Override
+    public String toString() {
+        return String.format( "Stable\n" + super.toString() );
+    }
 }

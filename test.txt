@@ -1,0 +1,34 @@
+icetable up t_1_1
+icetable se t_1_2
+icetable he t_1_3
+icetable he t_2_1
+icetable sp t_2_2
+icetable ue t_2_3
+icetable he t_2_4
+icetable sp t_3_1
+icetable ss t_3_2
+icetable he t_3_3
+icetable he t_4_1
+icetable ue t_4_2
+icetable se t_4_3
+eskimo e1 t_2_3
+useability e1 t_2_3
+researcher r1 t_4_3
+researcher r2 t_3_2
+polarbear b1 t_1_2
+icefield
+t_1_1:d1 t_1_2,d2 t_2_1,d3 t_3_1
+t_1_2:d4 t_1_1,d3 t_2_1,d2 t_2_2,d1 t_1_3
+t_1_3:d5 t_2_1,d4 t_2_1,d3 t_2_2
+t_2_1:d6 t_1_1,d1 t_1_2,d2 t_2_2,d3 t_3_2,d4 t_3_1
+t_2_2:d6 t_1_2,d1 t_1_3,d2 t_2_3,d3 t_3_3,d4 t_3_2,d5 t_2_1
+t_2_3:d6 t_1_3,d2 t_2_4,d3 t_4_3,d4 t_3_3,d5 t_2_2
+t_2_4:d4 t_4_3,d5 t_2_3
+t_3_1:d6 t_1_1,d1 t_2_1,d2 t_3_2,d3 t_4_1
+t_3_2:d6 t_2_1,d1 t_2_2,d2 t_3_3,d3 t_4_2,d4 t_4_1,d5 t_3_1
+t_3_3:d6 t_2_2,d1 t_2_3,d3 t_4_3,d4 t_4_2,d5 t_3_2
+t_4_1:d6 t_3_1,d1 t_3_2,d2 t_4_2
+t_4_2:d6 t_3_2,d1 t_3_3,d2 t_4_3,d5 t_4_1
+t_4_3:d5 t_3_3,d6 t_2_3,d1 t_2_4,d4 t_4_2;
+stat t_3_2
+stat r2

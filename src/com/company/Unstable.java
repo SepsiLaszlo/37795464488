@@ -50,4 +50,8 @@ public class Unstable extends IceTable {
      * fentebb említett formában. Ez a metódus a tesztelést segíti.
      * @return adattagok string formátumban
      */
+    @Override
+    public String toString() {
+        return String.format( "Unstable\n" + super.toString() );
+    }
 }

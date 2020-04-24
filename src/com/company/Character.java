@@ -46,33 +46,45 @@ public abstract class Character {
 
     /**
      * A karakter osztály konstruktora.
+     *
      * @param i Erre a jégtáblára lépteti a szereplőt.
      */
     public Character(IceTable i) {
         iceTable = i;
+        i.stepOn(this);
         usables.add(signalRocket);
+        game.addCharacter(this);
     }
 
     /**
      * Az eltárolandó tárgyak által hívott függvény, amely
      * felveszi usebles listába az adott Useble-t.
+     *
      * @param u Az eltárolandó tárgy.
      */
-    public void addUsable(Usable u){
+    public void addUsable(Usable u) {
+
         usables.add(u);
     }
 
     /**
      * A usebles listának az adott indexű Useable-jét használja.
+     *
      * @param idx Az index.
      */
     public void useUsable(int idx){
-        usables.get(idx).use(this, Direction.d1);
+        usables.get(idx).use(this, new Direction(1));
+          workUnit--;
+        if (workUnit == 0) {
+            game.nextPlayer();
+            workUnit = initialWorkUnit;
+        }
     }
 
     /**
      * A testhő megváltozására használható metódus. A
      * paraméterben kapott számot adja testhőhöz.
+     *
      * @param diff A hozzáadandó testhő mértéke.
      */
     public void changeHeat(int diff){
@@ -92,6 +104,7 @@ public abstract class Character {
     /**
      * A paraméterként kapott alkatrészt hozzáadja a
      * SignalRocket-hoz.
+     *
      * @param s Az alkatrész.
      */
     public void buildSignalRocket(SignalRocketPart s){
@@ -101,12 +114,14 @@ public abstract class Character {
     /**
      * Absztrakt függvény a karakter speciális képességének
      * használatára a paraméterben kapott táblán.
+     *
      * @param t A jégtábla.
      */
     public abstract int useAbility(IceTable t);
 
     /**
      * A szereplő léptetése ‘d’ irányba.
+     *
      * @param d Az irány.
      */
     public void move(Direction d) {
@@ -154,6 +169,7 @@ public abstract class Character {
 
     /**
      * Visszaadja a táblán, amin tartózkodik.
+     *
      * @return A jégtábla, amelyen áll.
      */
     public IceTable getIceTable() {
@@ -191,5 +207,20 @@ public abstract class Character {
     public void pass() {
         game.nextPlayer();
         workUnit = initialWorkUnit;
+    }
+
+    public String getName() {
+        return Main.getCharacterNameFromObject(this);
+    }
+    public String toString() {
+        String result = "workUnit: "+workUnit+"\nbodyTemperature: " + bodyTemperature + "\n" + "diver: " + diver + "\n" + "inWater: " + inWater + "\n"+"items:\n";
+
+
+        for(Usable u:usables ){
+            result=result.concat("\t"+u.toString()+"\n");
+        }
+        result=result.concat("icetable: "+iceTable.getName());
+
+        return result;
     }
 }

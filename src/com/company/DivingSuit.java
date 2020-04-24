@@ -11,4 +11,9 @@ public class DivingSuit implements Pickable {
     public void pickUp(Character c) {
         c.makeDiver();
     }
+
+    @Override
+    public String toString() {
+        return "Diving Suit";
+    }
 }
