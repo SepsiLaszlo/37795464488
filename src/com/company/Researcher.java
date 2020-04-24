@@ -12,6 +12,8 @@ public class Researcher extends Character {
     public Researcher(IceTable i) {
         super(i);
         bodyTemperature = 4;
+        workUnit = 4;
+        initialWorkUnit = 4;
     }
 
     /**
@@ -23,13 +25,13 @@ public class Researcher extends Character {
      */
     @Override
     public int useAbility(IceTable t) {
-        System.out.println(Main.tab + ">Researcher.useAbility(IceTable)");
-        Main.tab += "\t";
-
-        int c = t.getCapacity();
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + c + "<Researcher.useAbility(IceTable)");
-        return c;
+        return t.getCapacity();
     }
+
+    /**
+     * Ez a függvény üresen kerül definiálásra az sarkkutató
+     * részéről.
+     */
+    @Override
+    public void invadeOtherCharacters() { }
 }
