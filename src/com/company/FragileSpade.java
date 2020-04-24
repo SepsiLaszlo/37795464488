@@ -1,23 +1,34 @@
 package com.company;
 
 /**
- * Az ásó osztálya.
+ * A törött ásó osztálya.
  */
-public class Spade implements Usable, Pickable {
+public class FragileSpade implements Usable,Pickable {
     /**
-     * A paraméterül kapott karaktertől lekéri, hogy melyik mezőn áll,
-     *  majd annak meghívja az extract(amount: int) függvényét, ahol amount = 2.
-     * Amennyiben ez egy felvehető tárggyal tér vissza, akkor meghívja azon a pickUp(c)-t.
+     * Az törött ásó maradék felhasználhatóságainak száma.
+     */
+    private int durability=3;
+
+    /**
+     * Az törött ásó használata. Csak akkor használható, ha a durability tagváltozó nagyobb, mint 0.
      * @param c a karakter, aki meghívja a függvényt
      * @param d a tárgy használatánk iránya
      */
     @Override
     public void use(Character c, Direction d) {
         IceTable i = c.getIceTable();
-        i.extract(2);
+        if (durability !=0) {
+            i.extract(2);
+            durability--;
+        }
+        else{
+           i.extract(0);
+           System.out.println("Az ásó eltörött!");
+        }
+
     }
 
-    /**
+     /**
      * A paraméterül kapott karakternek meghívja az addUsable(u: Usable) függvényét,
      *  amiben paraméterül saját magát adja.
      * @param c a karakter, aki el felveszi.

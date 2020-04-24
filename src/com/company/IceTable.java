@@ -14,6 +14,7 @@ public abstract class IceTable {
     private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
     protected ArrayList<Character> characters=new ArrayList<Character>();
     private Pickable item;
+    private boolean tent = false;
 
     /**
      * IceTable osztály konstruktora
@@ -127,6 +128,10 @@ public abstract class IceTable {
         System.out.println(Main.tab + "Character[] <IceTable.getUnprotectedCharacters()");
 
         return characters;
+    }
+
+    public void setTent(boolean t) {
+        tent = t;
     }
 
 }

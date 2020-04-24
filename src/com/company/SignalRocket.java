@@ -39,29 +39,13 @@ public class SignalRocket implements Usable {
      */
     @Override
     public void use(Character c, Direction d) {
-        System.out.println(Main.tab + ">SignalRocket.use(Character, Direction)");
-        Main.tab += "\t";
-
         IceTable i = c.getIceTable();
-        i.getCharactersNumber();
-        game.getTotalCharactersNumber();
+        int CharacterNumber=i.getCharactersNumber();
+        int TotalCharactersNumber=game.getTotalCharactersNumber();
 
-        System.out.println("Mindenki egy jégtáblán van-e és megtalálták az összes alkatrészt?\n" +
-                "Válasz: Y (Igen), N (Nem).");
-        Scanner in = new Scanner(System.in);
-        char answer = in.next().charAt(0);
-        while (answer != 'N' && answer != 'Y') {
-            System.out.println("Hibás válasz!\n" +
-                    "Mindenki egy jégtáblán van-e és megtalálták az összes alkatrészt?\n" +
-                    "Válasz: Y (Igen), N (Nem).");
-            answer = in.next().charAt(0);
-        }
-        if(answer == 'Y') {
+        if (parts.size()==3 && CharacterNumber==TotalCharactersNumber){
             game.endGame(true);
         }
-
-        Main.tab = Main.tab.substring(0, Main.tab.length() - 1);
-        System.out.println(Main.tab + "<SignalRocket.use(Character, Direction)");
     }
 
     /**
@@ -70,7 +54,6 @@ public class SignalRocket implements Usable {
      * @param s a felvett alkatrész
      */
     public void build(SignalRocketPart s) {
-        System.out.println(Main.tab + ">SignalRocket.build(SignalRocketPart)");
-        System.out.println(Main.tab + "<SignalRocket.build(SignalRocketPart)");
+        parts.add(s);
     }
 }
