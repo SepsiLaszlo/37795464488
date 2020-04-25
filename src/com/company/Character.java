@@ -38,7 +38,7 @@ public abstract class Character {
     /**
      * A játék osztály.
      */
-    private Game game = Game.getInstance();
+    protected Game game = Game.getInstance();
     /**
      * A szereplő által birtokolt tárgyak.
      */
@@ -63,7 +63,6 @@ public abstract class Character {
      * @param u Az eltárolandó tárgy.
      */
     public void addUsable(Usable u) {
-
         usables.add(u);
     }
 
@@ -74,7 +73,7 @@ public abstract class Character {
      */
     public void useUsable(int idx){
         usables.get(idx).use(this, new Direction(1));
-          workUnit--;
+        workUnit--;
         if (workUnit == 0) {
             game.nextPlayer();
             workUnit = initialWorkUnit;
@@ -127,8 +126,8 @@ public abstract class Character {
     public void move(Direction d) {
         IceTable i = iceTable.getNeighbour(d);
         iceTable.stepOff(this);
-        i.stepOn(this);
         iceTable = i;
+        iceTable.stepOn(this);
         workUnit--;
         if (workUnit == 0) {
             game.nextPlayer();
@@ -214,7 +213,6 @@ public abstract class Character {
     }
     public String toString() {
         String result = "workUnit: "+workUnit+"\nbodyTemperature: " + bodyTemperature + "\n" + "diver: " + diver + "\n" + "inWater: " + inWater + "\n"+"items:\n";
-
 
         for(Usable u:usables ){
             result=result.concat("\t"+u.toString()+"\n");

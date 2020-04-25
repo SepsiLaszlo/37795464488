@@ -1,0 +1,23 @@
+Unstable
+capacity: 2
+snowLayer: 0
+iglu: true
+tent: false
+Item: -
+Characters:
+	e1
+Neighbours:
+	d2: t_2_4
+	d3: t_4_3
+	d4: t_3_3
+	d5: t_2_2
+	d6: t_1_3
+
+Eskimo
+workUnit: 3
+bodyTemperature: 5
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+icetable: t_2_3

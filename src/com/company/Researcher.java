@@ -27,7 +27,7 @@ public class Researcher extends Character {
     public int useAbility(IceTable t) {
         workUnit--;
         if (workUnit == 0) {
-            Game.getInstance().nextPlayer();
+            game.nextPlayer();
             workUnit = initialWorkUnit;
         }
         return t.getCapacity();

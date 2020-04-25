@@ -1,0 +1,31 @@
+Stable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: Rope
+Characters:
+e1
+Neighbours:
+-
+
+Stable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: -
+Characters:
+	e1
+Neighbours:
+-
+
+Eskimo
+workUnit: 3
+bodyTemperature: 5
+diver: false
+inWater: false
+items:
+	SignalRocket
+	Rope
+icetable :table_1_1
