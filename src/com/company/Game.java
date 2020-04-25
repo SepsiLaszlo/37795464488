@@ -91,10 +91,13 @@ public class Game {
      * állapotát: (RUNNING, LOSE, WIN). Ez a metódus a tesztelést segíti.
      * @return adattagok string formátumban
      */
-  
+
 
     public String toString() {
         String result = "Game\n";
+        for (Character c : characters) {
+            result = result.concat(c.getName() + "\n");
+        }
         result = result.concat("gameState:" + gameState);
         return  result;
     }
