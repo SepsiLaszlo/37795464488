@@ -15,17 +15,9 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static IceField iceField = new IceField();
     private static String output;
-    public static  boolean det=true;
+    public static  boolean det = true;
 
     public static void main(String[] args) throws IOException {
-
-//        Character c = new Eskimo(new Stable(new Spade()));
-//        System.out.println(c.toString());
-
-        Direction a = new Direction(1);
-        HashMap<Direction, IceTable> neighbours = new HashMap<Direction, IceTable>();
-        IceTable it = neighbours.get(new Direction(1));
-
         Scanner s = new Scanner(System.in);
         while (s.hasNextLine()) {
             String line;
@@ -38,11 +30,6 @@ public class Main {
             String[] arguments = parseInput(line);
             executeCommand(arguments);
         }
-//        System.out.print(output);
-
-
-
-        int asda = 2;
     }
 
     private static void executeCommand(String[] arguments) throws IOException {
@@ -90,12 +77,13 @@ public class Main {
             case "move":
                 moveCharcter(arguments[1], arguments[2]);
                 break;
-            case "useUsable":
+            case "useusable":
                 characterUse(arguments[1], Integer.parseInt(arguments[2]));
                 break;
             case "reset":
                 characters = new HashMap<>();
                 icetables = new HashMap<>();
+                Game.getInstance().reset();
                 break;
             case "stat":
                 stat(arguments[1]);
@@ -106,8 +94,6 @@ public class Main {
             case "snowstorm":
                 iceField.snowStorm();
                 break;
-
-
         }
     }
 
@@ -134,7 +120,7 @@ public class Main {
     private static void executeCommandsInFile(String fileName) throws IOException {
         output = "";
 
-        File f = new File(fileName);
+        File f = new File("tests/" + fileName);
         Scanner scanner = new Scanner(f);
         while (scanner.hasNextLine()) {
             String nextLine = scanner.nextLine();
@@ -198,7 +184,7 @@ public class Main {
         else if (type == 'u')
             iceTable = new Unstable(createPickableFromID(item));
         else if (type == 'h')
-            iceTable = new Stable(createPickableFromID(item));
+            iceTable = new Hole();
         else
             throw new IllegalArgumentException("IceTable type not found");
         icetables.put(name, iceTable);
@@ -245,11 +231,8 @@ public class Main {
     }
 
     private static String[] parseInput(String line) {
-
         String[] arguments = line.split(" ");
         return arguments;
-
-
     }
 
 
@@ -257,7 +240,7 @@ public class Main {
         String result = "";
         switch (argument) {
             case "signalRocket":
-                result = SignalRocket.getInstance().printStat();
+                result = SignalRocket.getInstance().toString();
                 break;
             case "game":
                 result = Game.getInstance().toString();
@@ -310,7 +293,7 @@ public class Main {
     }
 
     public static void compareOutputToInput(String output, String filename) throws FileNotFoundException {
-        File file = new File(filename);
+        File file = new File("tests/" + filename);
         Scanner scanner = new Scanner(file);
         System.out.println("Testing: "+filename);
         for (String actual : output.split("\n")) {

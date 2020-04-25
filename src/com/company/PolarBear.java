@@ -82,6 +82,12 @@ public class PolarBear extends Character {
     public void dig() { }
 
     /**
+     * Jegesmedve nem halhat meg.
+     */
+    @Override
+    public void die() { }
+
+    /**
      * A karakter elkap másik karaktereket a jégtáblán,
      * amin áll. Meghívja a useAbility(IceTable t) függvényt saját magán.
      */

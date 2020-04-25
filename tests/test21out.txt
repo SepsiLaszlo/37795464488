@@ -1,0 +1,21 @@
+Stable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: -
+Characters:
+	e1
+Neighbours:
+	-
+
+Stable
+capacity: 2
+snowLayer: 0
+iglu: true
+tent: false
+Item: -
+Characters:
+	e1
+Neighbours:
+	-

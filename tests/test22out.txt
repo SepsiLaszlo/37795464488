@@ -1,0 +1,19 @@
+Unstable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: -
+Characters:
+	-
+Neighbours:
+	d2: t_1_1
+
+Researcher
+workUnit: 3
+bodyTemperature: 4
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+icetable: t_1_1
