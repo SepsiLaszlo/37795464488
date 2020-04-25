@@ -1,0 +1,13 @@
+icetable sd t_1_1
+icetable he t_1_2
+setcapacity t_1_1 2
+icefield
+t_1_1:d1 t_1_2
+t_1_2:d2 t_1_1;
+eskimo e1 t_1_1
+stat t_1_1
+dig e1
+move e1 d1
+stat e1
+move e1 d2
+stat e1

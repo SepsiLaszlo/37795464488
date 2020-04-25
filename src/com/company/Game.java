@@ -84,6 +84,16 @@ public class Game {
     }
 
     /**
+     * A játék alaphelyzetbe állítása: játékosok törlése, jégmező és a játék állapotának
+     * visszaállítása.
+     */
+    public void reset() {
+        characters.clear();
+        currCharacter = null;
+        gameState = GameState.RUNNING;
+    }
+
+    /**
      * Visszaadja a saját adattagjait string formátumban. Az alábbi
      * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus (pl.
      * Game-ben az IceField). A tárolt karakterek tömbje esetén kiírjuk a tömb nevét, és alá
@@ -91,13 +101,12 @@ public class Game {
      * állapotát: (RUNNING, LOSE, WIN). Ez a metódus a tesztelést segíti.
      * @return adattagok string formátumban
      */
-  
-
     public String toString() {
-        String result = "Game\n";
-        result = result.concat("gameState:" + gameState);
+        String result = "Game\nCharacters:\n";
+        for (Character c : characters) {
+            result = result.concat(c.getName() + "\n");
+        }
+        result = result.concat("gameState: " + gameState);
         return  result;
     }
-
-   
 }

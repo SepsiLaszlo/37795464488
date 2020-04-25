@@ -1,0 +1,30 @@
+Stable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: Food
+Characters:
+	e1
+Neighbours:
+	d1: t_1_2
+
+Stable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: Food
+Characters:
+	-
+Neighbours:
+	d2: t_1_1
+
+Eskimo
+workUnit: 3
+bodyTemperature: 5
+diver: false
+inWater: false
+items:
+	-
+icetable :table_2_2

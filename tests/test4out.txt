@@ -1,0 +1,35 @@
+Stable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: Food
+Characters:
+	-
+Neighbours:
+	d1: t_1_2
+
+Hole
+capacity: 0
+snowLayer: 0
+iglu: false
+tent: false
+Item: -
+Characters:
+	e1
+Neighbours:
+	d2: t_2_1
+
+Eskimo
+workUnit: 3
+bodyTemperature: 5
+diver: false
+inWater: true
+items:
+	SignalRocket foundParts: 0
+icetable: t_1_2
+
+Game
+Characters:
+	e1
+GameState: RUNNING

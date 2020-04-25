@@ -57,10 +57,7 @@ public class SignalRocket implements Usable {
         parts.add(s);
     }
 
-    public String printStat(){
-        return  "SignalRocket\nfoundPartsNumber: "+parts.size();
-    }
-    public  String toString(){
-        return  "SignalRocket foundParts: " + parts.size();
+    public  String toString() {
+        return "SignalRocket foundParts: " + parts.size();
     }
 }

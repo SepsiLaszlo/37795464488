@@ -1,0 +1,47 @@
+Stable
+capacity: 3
+snowLayer: 0
+iglu: false
+tent: false
+Item:Food
+Characters:
+-
+Neigbours:
+d1: t_1_2
+Unstable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: tent
+Characters:
+	e1
+	e2
+NeigHbours:
+d2 t_2_1;
+
+Eskimo
+workUnit:3
+bodyTemperature: 5
+diver: false
+inWater: true
+items:
+	SignalRocket
+icetable :table_1_2
+
+	Eskimo
+workUnit: 4
+bodyTemperature: 5
+diver:false
+inWater:true
+items:
+SignalRocket
+icetable :table_1_2
+
+Game
+iceField: IceField
+characters:
+e1
+e2
+gameState:
+LOSE

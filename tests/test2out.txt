@@ -1,0 +1,30 @@
+Stable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: Food
+Characters:
+	-
+Neighbours:
+	d1: t_1_2
+
+Unstable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: false
+Item: Tent
+Characters:
+	e1
+Neighbours:
+	d2: t_2_1
+
+Eskimo
+workUnit: 3
+bodyTemperature: 5
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+icetable: t_1_2
