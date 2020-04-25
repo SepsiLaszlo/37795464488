@@ -21,11 +21,6 @@ public class FragileSpade implements Usable,Pickable {
             i.extract(2);
             durability--;
         }
-        else{
-           i.extract(0);
-           System.out.println("Az ásó eltörött!");
-        }
-
     }
 
      /**
@@ -40,6 +35,6 @@ public class FragileSpade implements Usable,Pickable {
 
     @Override
     public String toString() {
-        return "FragileSpade durability: " + this.durability;
+        return String.format("FragileSpade durability: "+durability);
     }
 }

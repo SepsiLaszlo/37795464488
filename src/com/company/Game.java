@@ -102,12 +102,11 @@ public class Game {
      * @return adattagok string formátumban
      */
     public String toString() {
-        String result = "Game\n";
-        String characterNames = "Characters:\n";
-        for(Character character : characters) {
-            characterNames = characterNames.concat('\t' + character.getName() + '\n');
+        String result = "Game\nCharacters:\n";
+        for (Character c : characters) {
+            result = result.concat(c.getName() + "\n");
         }
-        result = result.concat(characterNames + "GameState: " + gameState);
+        result = result.concat("gameState: " + gameState);
         return  result;
     }
 }

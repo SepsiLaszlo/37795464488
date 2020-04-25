@@ -27,6 +27,9 @@ public class Unstable extends IceTable {
     public void stepOn(Character c) {
         characters.add(c);
         if(capacity <= characters.size()) {
+            for (Character character: characters) {
+                character.fallInWater();
+            }
             c.die();
             return;
         }
