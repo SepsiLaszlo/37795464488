@@ -29,6 +29,7 @@ public class Main {
 
             String[] arguments = parseInput(line);
             executeCommand(arguments);
+            reset();
         }
     }
 
@@ -81,9 +82,7 @@ public class Main {
                 characterUse(arguments[1], Integer.parseInt(arguments[2]));
                 break;
             case "reset":
-                characters = new HashMap<>();
-                icetables = new HashMap<>();
-                Game.getInstance().reset();
+                reset();
                 break;
             case "stat":
                 stat(arguments[1]);
@@ -95,6 +94,13 @@ public class Main {
                 iceField.snowStorm();
                 break;
         }
+    }
+
+    private static void reset() {
+        characters = new HashMap<>();
+        icetables = new HashMap<>();
+        Game.getInstance().reset();
+        System.out.println("\nReseted\n");
     }
 
     private static void useAbility(String characterName, String tableName) {
