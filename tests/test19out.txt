@@ -23,7 +23,7 @@ icetable: t_1_1
 
 Game
 Characters:
-e1
-e2
-r1
-gameState: WIN
+	e1
+	e2
+	r1
+GameState: WIN

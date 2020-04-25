@@ -23,7 +23,6 @@ public class Main {
         while (s.hasNextLine()) {
             String line;
             line = s.nextLine();
-            //System.out.println("y:" + line);
 
             if (line.equals(""))
                 break;
@@ -64,10 +63,7 @@ public class Main {
                 break;
 
             case "load":
-                executeCommandsInFile(arguments[1]);
-                String[] t= arguments[1].split("\\.");
-                String expected= t[0]+"out.txt";
-                compareOutputToInput(output,expected);
+                load(arguments[1]);
                 break;
 
             case "icefield":
@@ -100,7 +96,32 @@ public class Main {
             case "addsnow":
                 icetables.get(arguments[1]).addSnow(Integer.parseInt(arguments[2]));
                 break;
+            case "testall":
+                int successTests = 0;
+                for ( int i = 1; i <= 27; i++ ) {
+                    if ( load("test" + i + ".txt") ) {
+                        successTests++;
+                    } else {
+                        System.out.println("===================================================");
+                        System.out.println("===================================================");
+                        System.out.println("===================================================");
+                        System.out.println("===================================================");
+                    }
+                    reset();
+                }
+                System.out.println(
+                        "Result: " + successTests + "/27" +
+                        ((successTests == 27) ? " :)" : " :(")
+                );
+                break;
         }
+    }
+
+    private static boolean load(String fileName) throws IOException {
+        executeCommandsInFile(fileName);
+        String[] t= fileName.split("\\.");
+        String expected= t[0]+"out.txt";
+        return compareOutputToInput(output,expected);
     }
 
     private static void reset() {
@@ -108,7 +129,6 @@ public class Main {
         icetables = new HashMap<>();
         iceField = new IceField();
         Game.getInstance().reset();
-        System.out.println("\nReseted\n");
     }
 
     private static void useAbility(String characterName, String tableName) {
@@ -306,7 +326,7 @@ public class Main {
         return "";
     }
 
-    public static void compareOutputToInput(String output, String filename) throws FileNotFoundException {
+    public static boolean compareOutputToInput(String output, String filename) throws FileNotFoundException {
         File file = new File("tests/" + filename);
         Scanner scanner = new Scanner(file);
         System.out.println("Testing: "+filename);
@@ -319,10 +339,11 @@ public class Main {
                 System.out.println("Expected:");
                 System.out.println(expected);
 
-                return;
+                return false;
             }
         }
         System.out.println("MATCH");
+        return true;
     }
 
 }
