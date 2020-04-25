@@ -15,7 +15,6 @@ Neighbours:
 	d6: t_1_3
 
 Game
-iceField: IceField
 Characters:
 	e1
 	r1
