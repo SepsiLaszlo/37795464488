@@ -1,16 +1,12 @@
 package com.company;
 
-<<<<<<< Updated upstream
-public class Main {
-
-    public static void main(String[] args) {
-    }
-=======
 import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
 
+
 public class Main {
+
     private static HashMap<String, Character> characters = new HashMap<>();
     private static HashMap<String, IceTable> icetables = new HashMap<>();
 
@@ -314,5 +310,4 @@ public class Main {
         System.out.println("MATCH");
     }
 
->>>>>>> Stashed changes
 }

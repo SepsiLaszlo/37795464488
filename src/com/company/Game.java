@@ -2,10 +2,15 @@ package com.company;
 
 import java.util.ArrayList;
 
+enum GameState{
+    RUNNING,WIN,LOSE
+}
+
 /**
  * Felelős azért, hogy a játékosok egymás után határozott sorrendben tudják elvégezni a köreiket
  * és a hóvihar ütemezéséért.
  */
+
 public class Game {
     private static Game instance = new Game();
     private IceField iceField = new IceField();
@@ -19,7 +24,8 @@ public class Game {
     private Game() { }
 
     /**
-     *Visszaadja az egyetlen Game példányt, Singleton-pattern megvalósításához szükséges.
+     * Visszaadja az egyetlen Game példányt, Singleton-pattern megvalósításához szükséges.
+     *
      * @return Game példány.
      */
     public static Game getInstance() {
@@ -40,15 +46,7 @@ public class Game {
      * @param win Győzelem állapota
      */
     public void endGame(boolean win) {
-<<<<<<< Updated upstream
-        if(win) {
-            gameState = GameState.WIN;
-        } else {
-            gameState = GameState.LOSE;
-        }
-=======
-       gameState = win ? GameState.WIN : GameState.LOSE;
->>>>>>> Stashed changes
+       gameState = win?GameState.WIN:GameState.LOSE;
     }
 
     /**
@@ -81,7 +79,7 @@ public class Game {
             while (c == currCharacter) {
                 //Character move, dig, use Item
             }
-            iceField.snowStorm(false);
+            iceField.snowStorm();
         }
     }
 
@@ -93,22 +91,15 @@ public class Game {
      * állapotát: (RUNNING, LOSE, WIN). Ez a metódus a tesztelést segíti.
      * @return adattagok string formátumban
      */
-<<<<<<< Updated upstream
-    public String printStat() {
-        String output = String.format("Game\n" +
-                "iceField: IceField\n" +
-                "characters:\n" +
-                "gameState: %s\n", gameState);
-        return output;
-=======
     public String toString() {
         String result = "Game\niceField: IceField\n";
         String characterNames = "Characters:\n";
         for(Character character : characters) {
             characterNames = characterNames.concat('\t' + character.getName() + '\n');
         }
-        result = result.concat(characterNames + "gameState: " + gameState);
+        result = result.concat(characterNames + "GameState: " + gameState);
         return  result;
->>>>>>> Stashed changes
     }
+
+   
 }

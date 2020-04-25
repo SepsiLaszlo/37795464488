@@ -38,7 +38,7 @@ Characters:
 	e1
 	r1
 	b1
-gameState: RUNNING
+GameState: RUNNING
 
 Game
 iceField: IceField
@@ -46,4 +46,4 @@ Characters:
 	e1
 	r1
 	b1
-gameState: LOSE
+GameState: LOSE

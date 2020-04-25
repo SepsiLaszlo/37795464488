@@ -15,7 +15,8 @@ public abstract class IceTable {
     private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
     protected ArrayList<Character> characters = new ArrayList<Character>();
     private Pickable item;
-    private boolean tent = false;
+
+
 
     /**
      * IceTable osztály konstruktora
@@ -148,21 +149,38 @@ public abstract class IceTable {
         return characters;
     }
 
+    @Override
+    public String toString() {
+        String characterNames = "";
+        for(Character character : characters) {
+            characterNames=characterNames.concat('\t' + character.getName() + '\n');
+        }
+        if (characters.size() == 0)
+            characterNames = "\t-\n";
+        String neighbourNames = "";
+        for(HashMap.Entry<Direction, IceTable> entry : neighbours.entrySet()) {
+            neighbourNames = neighbourNames
+                .concat("\n\t" + entry.getKey().toString() + ": " + entry.getValue().getName() );
+        }
+        if (neighbours.size() == 0)
+            neighbourNames = "\n\t-";
 
-    /**
-     * Beállítja a jégtábla kapacitását. A capacity tagváltozót
-     * beállítja a paraméterben megadott értékre.
-     * @param capacity beéllítandó kapacitás érték
-     */
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+        return String.format(
+                "capacity: " + this.capacity + '\n' +
+                "snowLayer: " + this.snowLayer + '\n' +
+                "iglu: " + this.iglu + '\n' +
+                "tent: " + this.tent + '\n' +
+                "Item: " + (this.item != null ? this.item.toString() : '-') + '\n' +
+                "Characters:\n" + characterNames +
+                "Neighbours:" + neighbourNames
+        );
     }
 
-    /**
-     * Visszaadja a saját adattagjait string formátumban. Az alábbi
-     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
-     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
-     * fentebb említett formában. Ez a metódus a tesztelést segíti.
-     * @return adattagok string formátumban
-     */
+    public String getName() {
+        return Main.getIceTableNameFromObject(this);
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity=capacity;
+    }
 }

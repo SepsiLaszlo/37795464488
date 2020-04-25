@@ -10,19 +10,16 @@ import java.util.Random;
  * véletlenszerű irányba és a többi játékos elkapása.
  */
 public class PolarBear extends Character {
-    private boolean deterministic;
 
     /**
      * A PolarBear osztály konstruktora.
      *
      * @param i Erre a jégtáblára lépteti a szereplőt.
-     * @param det A jegesmedve lépése determinisztikus-e.
      */
-    public PolarBear(IceTable i, boolean det) {
+    public PolarBear(IceTable i) {
         super(i);
         workUnit = 1;
         initialWorkUnit = 1;
-        deterministic = det;
         diver = true;
     }
 
@@ -59,13 +56,12 @@ public class PolarBear extends Character {
      */
     @Override
     public int useAbility(IceTable t) {
+
         ArrayList<Character> charactersToInvade = getIceTable().getInvadableCharacters();
-        if (charactersToInvade != null) {
+
+        if (charactersToInvade != null)
             for (Character character : charactersToInvade)
-            {
                 character.die();
-            }
-        }
         return 0;
     }
 
@@ -74,7 +70,7 @@ public class PolarBear extends Character {
      * @param d Az irány.
      */
     public void move(Direction d) {
-        if (!deterministic)
+        if (!Main.det)
             d = new Direction(new Random().nextInt(6));
         super.move(d);
     }
@@ -86,7 +82,7 @@ public class PolarBear extends Character {
     public void dig() { }
 
     /**
-     * A Jegesmedve nem halhat meg.
+     * Jegesmedve nem halhat meg.
      */
     @Override
     public void die() { }
@@ -105,4 +101,7 @@ public class PolarBear extends Character {
      */
     @Override
     public void pass() { }
+     public String  toString(){
+        return  "PolarBear\n"+super.toString();
+    }
 }
