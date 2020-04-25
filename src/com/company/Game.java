@@ -91,6 +91,7 @@ public class Game {
         characters.clear();
         currCharacter = null;
         gameState = GameState.RUNNING;
+        SignalRocket.getInstance().reset();
     }
 
     /**
@@ -104,9 +105,9 @@ public class Game {
     public String toString() {
         String result = "Game\nCharacters:\n";
         for (Character c : characters) {
-            result = result.concat(c.getName() + "\n");
+            result = result.concat('\t' + c.getName() + "\n");
         }
-        result = result.concat("gameState: " + gameState);
+        result = result.concat("GameState: " + gameState);
         return  result;
     }
 }
