@@ -33,7 +33,6 @@ Neighbours:
 	d1: t_1_2
 
 Game
-iceField: IceField
 Characters:
 	e1
 	r1
@@ -41,7 +40,6 @@ Characters:
 GameState: RUNNING
 
 Game
-iceField: IceField
 Characters:
 	e1
 	r1
