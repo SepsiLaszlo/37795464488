@@ -40,11 +40,15 @@ public class Game {
      * @param win Győzelem állapota
      */
     public void endGame(boolean win) {
+<<<<<<< Updated upstream
         if(win) {
             gameState = GameState.WIN;
         } else {
             gameState = GameState.LOSE;
         }
+=======
+       gameState = win ? GameState.WIN : GameState.LOSE;
+>>>>>>> Stashed changes
     }
 
     /**
@@ -89,11 +93,22 @@ public class Game {
      * állapotát: (RUNNING, LOSE, WIN). Ez a metódus a tesztelést segíti.
      * @return adattagok string formátumban
      */
+<<<<<<< Updated upstream
     public String printStat() {
         String output = String.format("Game\n" +
                 "iceField: IceField\n" +
                 "characters:\n" +
                 "gameState: %s\n", gameState);
         return output;
+=======
+    public String toString() {
+        String result = "Game\niceField: IceField\n";
+        String characterNames = "Characters:\n";
+        for(Character character : characters) {
+            characterNames = characterNames.concat('\t' + character.getName() + '\n');
+        }
+        result = result.concat(characterNames + "gameState: " + gameState);
+        return  result;
+>>>>>>> Stashed changes
     }
 }

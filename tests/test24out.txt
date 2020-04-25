@@ -1,0 +1,49 @@
+Stable
+capacity: 4
+snowLayer: 0
+iglu: false
+tent: true
+Item: -
+Characters:
+	r1
+Neighbours:
+	d2: t_1_2
+
+Stable
+capacity: 4
+snowLayer: 0
+iglu: true
+tent: false
+Item: -
+Characters:
+	e1
+Neighbours:
+	d1: t_1_1
+	d2: t_1_3
+
+Stable
+capacity: 4
+snowLayer: 0
+iglu: false
+tent: false
+Item: -
+Characters:
+	b1
+Neighbours:
+	d1: t_1_2
+
+Game
+iceField: IceField
+Characters:
+	e1
+	r1
+	b1
+gameState: RUNNING
+
+Game
+iceField: IceField
+Characters:
+	e1
+	r1
+	b1
+gameState: LOSE

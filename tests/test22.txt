@@ -1,0 +1,11 @@
+icetable se t_1_1
+icetable ue t_1_2
+setcapacity t_1_1 2
+setcapacity t_1_2 2
+icefield
+t_1_1:d1 t_1_2
+t_1_2:d2 t_1_1;
+researcher r1 t_1_1
+useability r1 t_1_2
+stat t_1_2
+stat r1

@@ -59,12 +59,13 @@ public class PolarBear extends Character {
      */
     @Override
     public int useAbility(IceTable t) {
-
         ArrayList<Character> charactersToInvade = getIceTable().getInvadableCharacters();
-
-        if (charactersToInvade != null)
+        if (charactersToInvade != null) {
             for (Character character : charactersToInvade)
+            {
                 character.die();
+            }
+        }
         return 0;
     }
 
@@ -83,6 +84,12 @@ public class PolarBear extends Character {
      */
     @Override
     public void dig() { }
+
+    /**
+     * A Jegesmedve nem halhat meg.
+     */
+    @Override
+    public void die() { }
 
     /**
      * A karakter elkap másik karaktereket a jégtáblán,

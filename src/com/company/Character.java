@@ -38,7 +38,7 @@ public abstract class Character {
     /**
      * A játék osztály.
      */
-    private Game game = Game.getInstance();
+    protected Game game = Game.getInstance();
     /**
      * A szereplő által birtokolt tárgyak.
      */
@@ -67,7 +67,16 @@ public abstract class Character {
      * @param idx Az index.
      */
     public void useUsable(int idx){
+<<<<<<< Updated upstream
         usables.get(idx).use(this, Direction.d1);
+=======
+        usables.get(idx).use(this, new Direction(1));
+        workUnit--;
+        if (workUnit == 0) {
+            game.nextPlayer();
+            workUnit = initialWorkUnit;
+        }
+>>>>>>> Stashed changes
     }
 
     /**
@@ -192,4 +201,22 @@ public abstract class Character {
         game.nextPlayer();
         workUnit = initialWorkUnit;
     }
+<<<<<<< Updated upstream
+=======
+
+    public String getName() {
+        return Main.getCharacterNameFromObject(this);
+    }
+    public String toString() {
+        String result = "workUnit: "+workUnit+"\nbodyTemperature: " + bodyTemperature + "\n" + "diver: " + diver + "\n" + "inWater: " + inWater + "\n"+"items:\n";
+
+
+        for(Usable u:usables){
+            result = result.concat("\t"+u.toString()+"\n");
+        }
+        result = result.concat("icetable: "+iceTable.getName());
+
+        return result;
+    }
+>>>>>>> Stashed changes
 }

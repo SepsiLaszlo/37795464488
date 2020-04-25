@@ -24,4 +24,12 @@ public class Tent implements Usable, Pickable {
     public void pickUp(Character c) {
         c.addUsable(this);
     }
+<<<<<<< Updated upstream
+=======
+
+    @Override
+    public String toString() {
+        return "Tent";
+    }
+>>>>>>> Stashed changes
 }
