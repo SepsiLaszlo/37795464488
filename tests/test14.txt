@@ -1,0 +1,14 @@
+icetable se t_1_1
+icetable st t_1_2
+setcapacity t_1_1 3
+setcapacity t_1_2 3
+icefield
+t_1_1:d1 t_1_2
+t_1_2:d2 t_1_1;
+eskimo e1 t_1_1
+researcher r1 t_1_2
+dig r1
+useUsable r1 1
+stat e1
+stat r2
+

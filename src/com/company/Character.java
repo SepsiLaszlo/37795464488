@@ -72,7 +72,7 @@ public abstract class Character {
      * @param idx Az index.
      */
     public void useUsable(int idx){
-        usables.get(idx).use(this, new Direction(1));
+        usables.get(idx).use(this, Main.usableDir);
         workUnit--;
         if (workUnit == 0) {
             game.nextPlayer();
@@ -180,6 +180,14 @@ public abstract class Character {
      */
     public void comeOutOfWater() {
         inWater = false;
+    }
+    /**
+     * A szereplő táblája frissül.
+     *
+     * @param iceTable az új tábla
+     */
+    public void setIceTable(IceTable iceTable) {
+        this.iceTable = iceTable;
     }
 
     /**
