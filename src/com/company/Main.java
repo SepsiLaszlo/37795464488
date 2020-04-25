@@ -16,13 +16,14 @@ public class Main {
     private static IceField iceField = new IceField();
     private static String output;
     public static  boolean det = true;
+    public static  Direction usableDir = null;
 
     public static void main(String[] args) throws IOException {
         Scanner s = new Scanner(System.in);
         while (s.hasNextLine()) {
             String line;
             line = s.nextLine();
-            System.out.println("y:" + line);
+            //System.out.println("y:" + line);
 
             if (line.equals(""))
                 break;
@@ -79,6 +80,9 @@ public class Main {
                 moveCharcter(arguments[1], arguments[2]);
                 break;
             case "useusable":
+                if ( arguments.length == 4 ) {
+                    usableDir = new Direction( Integer.parseInt(arguments[3].substring(1)) );
+                }
                 characterUse(arguments[1], Integer.parseInt(arguments[2]));
                 break;
             case "reset":
@@ -99,6 +103,7 @@ public class Main {
     private static void reset() {
         characters = new HashMap<>();
         icetables = new HashMap<>();
+        iceField = new IceField();
         Game.getInstance().reset();
         System.out.println("\nReseted\n");
     }
