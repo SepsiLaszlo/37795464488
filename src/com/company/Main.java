@@ -94,6 +94,9 @@ public class Main {
             case "snowstorm":
                 iceField.snowStorm();
                 break;
+            case "addsnow":
+                icetables.get(arguments[1]).addSnow(Integer.parseInt(arguments[2]));
+                break;
         }
     }
 
