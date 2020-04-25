@@ -40,6 +40,6 @@ public class FragileSpade implements Usable,Pickable {
 
     @Override
     public String toString() {
-        return "Fragile Spade";
+        return "FragileSpade durability: " + this.durability;
     }
 }

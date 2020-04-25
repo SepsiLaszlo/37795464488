@@ -1,0 +1,8 @@
+icetable st t_1_1
+setcapacity t_1_1 2
+eskimo e1 t_1_1
+dig e1
+useusable e1 1
+stat t_1_1
+stat e1
+

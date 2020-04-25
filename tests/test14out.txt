@@ -1,0 +1,17 @@
+Eskimo
+workUnit: 4
+bodyTemperature: 5
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+icetable: t_1_1
+
+Researcher
+workUnit: 3
+bodyTemperature: 4
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+icetable: t_1_2

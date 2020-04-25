@@ -181,6 +181,14 @@ public abstract class Character {
     public void comeOutOfWater() {
         inWater = false;
     }
+    /**
+     * A szereplő táblája frissül.
+     *
+     * @param iceTable az új tábla
+     */
+    public void setIceTable(IceTable iceTable) {
+        this.iceTable = iceTable;
+    }
 
     /**
      * A karakter elkap másik karaktereket a jégtáblán,

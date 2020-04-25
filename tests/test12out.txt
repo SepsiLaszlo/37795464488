@@ -1,0 +1,20 @@
+Stable
+capacity: 2
+snowLayer: 0
+iglu: false
+tent: true
+Item: -
+Characters:
+	e1
+Neighbours:
+	-
+
+Eskimo
+workUnit: 2
+bodyTemperature: 5
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+	Tent
+icetable: t_1_1
