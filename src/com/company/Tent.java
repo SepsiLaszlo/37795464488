@@ -1,23 +1,21 @@
 package com.company;
 
 /**
- * Az ásó osztálya.
+ * A sátor osztálya.
  */
-public class Spade implements Usable, Pickable {
+public class Tent implements Usable, Pickable {
     /**
-     * A paraméterül kapott karaktertől lekéri, hogy melyik mezőn áll,
-     *  majd annak meghívja az extract(amount: int) függvényét, ahol amount = 2.
-     * Amennyiben ez egy felvehető tárggyal tér vissza, akkor meghívja azon a pickUp(c)-t.
+     *Az sátor lerakása. Lekérdezi a paraméterben kapott karakter jégtábláját. Ezen meghívja az setTent(true) függvényt, amivel sátrat rak rá.
      * @param c a karakter, aki meghívja a függvényt
      * @param d a tárgy használatánk iránya
      */
     @Override
-    public void use(Character c, Direction d) {
+     public void use(Character c, Direction d) {
         IceTable i = c.getIceTable();
-        i.extract(2);
+        i.setTent(true);
     }
 
-    /**
+     /**
      * A paraméterül kapott karakternek meghívja az addUsable(u: Usable) függvényét,
      *  amiben paraméterül saját magát adja.
      * @param c a karakter, aki el felveszi.
@@ -26,9 +24,8 @@ public class Spade implements Usable, Pickable {
     public void pickUp(Character c) {
         c.addUsable(this);
     }
-
     @Override
     public String toString() {
-        return "Spade";
+        return "Tent";
     }
 }

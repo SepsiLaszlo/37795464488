@@ -33,4 +33,7 @@ public class Eskimo extends Character {
      */
     @Override
     public void invadeOtherCharacters() { }
+    public String  toString(){
+        return  "Eskimo\n"+super.toString();
+    }
 }
