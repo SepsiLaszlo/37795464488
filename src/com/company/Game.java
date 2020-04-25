@@ -108,8 +108,5 @@ public class Game {
             characterNames = characterNames.concat('\t' + character.getName() + '\n');
         }
         result = result.concat(characterNames + "GameState: " + gameState);
-        return  result;
     }
-
-   
 }
