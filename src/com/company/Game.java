@@ -95,9 +95,6 @@ public class Game {
 
     public String toString() {
         String result = "Game\n";
-        for (Character c : characters) {
-            result = result.concat(c.toString() + "\n");
-        }
         result = result.concat("gameState:" + gameState);
         return  result;
     }
