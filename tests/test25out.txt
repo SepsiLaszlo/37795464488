@@ -26,7 +26,6 @@ items:
 icetable: t_3_2
 
 Game
-iceField: IceField
 Characters:
 	e1
 	r1
