@@ -1,5 +1,3 @@
-package com.company;
-
 /**
  * Az ásó osztálya.
  */
@@ -27,6 +25,10 @@ public class Spade implements Usable, Pickable {
         c.addUsable(this);
     }
 
+    /**
+     * Visszaadja az osztály típusát string formátumban.
+     * @return az osztály típusa
+     */
     @Override
     public String toString() {
         return "Spade";

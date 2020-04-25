@@ -1,5 +1,3 @@
-package com.company;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,8 +13,6 @@ public abstract class IceTable {
     private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
     protected ArrayList<Character> characters = new ArrayList<Character>();
     private Pickable item;
-
-
 
     /**
      * IceTable osztály konstruktora
@@ -149,6 +145,22 @@ public abstract class IceTable {
         return characters;
     }
 
+    /**
+     * Beállítja a jégtábla kapacitását. A capacity tagváltozót
+     * beállítja a paraméterben megadott értékre.
+     * @param capacity beállítandó kapacitás érték
+     */
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    /**
+     * Visszaadja a saját adattagjait string formátumban. Az alábbi
+     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
+     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
+     * fentebb említett formában.
+     * @return adattagok string formátumban
+     */
     @Override
     public String toString() {
         String characterNames = "";
@@ -176,11 +188,11 @@ public abstract class IceTable {
         );
     }
 
+    /**
+     * A jégtábla nevének lekérdezése.
+     * @return jégtábla neve
+     */
     public String getName() {
         return Main.getIceTableNameFromObject(this);
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity=capacity;
     }
 }

@@ -1,5 +1,3 @@
-package com.company;
-
 /**
  * A használható tárgyakat reprezentáló interface.
  */

@@ -1,5 +1,3 @@
-package com.company;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,12 +6,6 @@ import java.util.Random;
  */
 public class IceField {
     private ArrayList<IceTable> iceTables = new ArrayList<IceTable>();
-
-    /**
-     * Jégmező létrehozása, abban tárgyak elhelyezése.
-     */
-    public void initialize() {
-    }
 
     /**
      * A hóvihar determinisztikus működését a paraméterben

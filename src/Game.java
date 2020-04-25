@@ -1,7 +1,8 @@
-package com.company;
-
 import java.util.ArrayList;
 
+/**
+ * A játék állapota.
+ */
 enum GameState{
     RUNNING,WIN,LOSE
 }
@@ -99,8 +100,8 @@ public class Game {
      * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus (pl.
      * Game-ben az IceField). A tárolt karakterek tömbje esetén kiírjuk a tömb nevét, és alá
      * a tömbben lévő karaktereket a fentebb említett formában. Emellett kiírja a játék
-     * állapotát: (RUNNING, LOSE, WIN). Ez a metódus a tesztelést segíti.
-     * @return adattagok string formátumban
+     * állapotát: (RUNNING, LOSE, WIN).
+     * @return adattagok string formátumban és a játék állapota
      */
     public String toString() {
         String result = "Game\nCharacters:\n";

@@ -1,5 +1,3 @@
-package com.company;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -101,12 +99,8 @@ public class Main {
                 for ( int i = 1; i <= 27; i++ ) {
                     if ( load("test" + i + ".txt") ) {
                         successTests++;
-                    } else {
-                        System.out.println("===================================================");
-                        System.out.println("===================================================");
-                        System.out.println("===================================================");
-                        System.out.println("===================================================");
                     }
+                    System.out.println("===================================================");
                     reset();
                 }
                 System.out.println(

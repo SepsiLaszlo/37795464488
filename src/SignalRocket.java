@@ -1,5 +1,3 @@
-package com.company;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,10 +55,17 @@ public class SignalRocket implements Usable {
         parts.add(s);
     }
 
+    /**
+     * Visszaadja az osztály típusát és az tagváltozó értékét string formátumban.
+     * @return az osztály típusa és az tagváltozó értéke
+     */
     public  String toString() {
         return "SignalRocket foundParts: " + parts.size();
     }
 
+    /**
+     * A jelzőrakéta alaphelyzetbe állítása: alkatrészek törlése a listából.
+     */
     public void reset() {
         this.parts.clear();
     }
