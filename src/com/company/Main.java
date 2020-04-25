@@ -90,8 +90,9 @@ public class Main {
             case "move":
                 moveCharcter(arguments[1], arguments[2]);
                 break;
-            case "useUsable":
-                characterUse(arguments[1], Integer.parseInt(arguments[2]));
+            case "useusable":
+                int c = (arguments[2].equals("i")) ? 0 : 1;
+                characterUse(arguments[1], c);
                 break;
             case "reset":
                 characters = new HashMap<>();
@@ -106,8 +107,9 @@ public class Main {
             case "snowstorm":
                 iceField.snowStorm();
                 break;
-
-
+            case "addsnow":
+                icetables.get(arguments[1]).addSnow(Integer.parseInt(arguments[2]));
+                break;
         }
     }
 
@@ -257,7 +259,7 @@ public class Main {
         String result = "";
         switch (argument) {
             case "signalRocket":
-                result = SignalRocket.getInstance().printStat();
+                result = SignalRocket.getInstance().toString();
                 break;
             case "game":
                 result = Game.getInstance().toString();

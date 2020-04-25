@@ -24,6 +24,11 @@ public class Eskimo extends Character {
     @Override
     public int useAbility(IceTable t) {
         getIceTable().addIglu();
+        workUnit--;
+        if (workUnit == 0) {
+            Game.getInstance().nextPlayer();
+            workUnit = initialWorkUnit;
+        }
         return 0;
     }
 

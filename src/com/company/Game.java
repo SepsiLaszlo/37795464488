@@ -94,11 +94,11 @@ public class Game {
 
 
     public String toString() {
-        String result = "Game\n";
+        String result = "Game\nCharacters:\n";
         for (Character c : characters) {
             result = result.concat(c.getName() + "\n");
         }
-        result = result.concat("gameState:" + gameState);
+        result = result.concat("gameState: " + gameState);
         return  result;
     }
 

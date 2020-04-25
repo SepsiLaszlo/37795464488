@@ -25,6 +25,11 @@ public class Researcher extends Character {
      */
     @Override
     public int useAbility(IceTable t) {
+        workUnit--;
+        if (workUnit == 0) {
+            Game.getInstance().nextPlayer();
+            workUnit = initialWorkUnit;
+        }
         return t.getCapacity();
     }
 
