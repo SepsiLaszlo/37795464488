@@ -1,0 +1,35 @@
+Eskimo
+workUnit: 3
+bodyTemperature: 5
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+icetable: t_2_2
+
+Researcher
+workUnit: 3
+bodyTemperature: 4
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+icetable: t_2_3
+
+Researcher
+workUnit: 3
+bodyTemperature: 4
+diver: false
+inWater: false
+items:
+	SignalRocket foundParts: 0
+icetable: t_3_2
+
+Game
+iceField: IceField
+Characters:
+	e1
+	r1
+	r2
+	b1
+GameState: RUNNING

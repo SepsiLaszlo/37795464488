@@ -84,6 +84,16 @@ public class Game {
     }
 
     /**
+     * A játék alaphelyzetbe állítása: játékosok törlése, jégmező és a játék állapotának
+     * visszaállítása.
+     */
+    public void reset() {
+        characters.clear();
+        currCharacter = null;
+        gameState = GameState.RUNNING;
+    }
+
+    /**
      * Visszaadja a saját adattagjait string formátumban. Az alábbi
      * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus (pl.
      * Game-ben az IceField). A tárolt karakterek tömbje esetén kiírjuk a tömb nevét, és alá

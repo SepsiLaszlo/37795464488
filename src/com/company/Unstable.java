@@ -25,11 +25,11 @@ public class Unstable extends IceTable {
      */
     @Override
     public void stepOn(Character c) {
-        if(capacity <= characters.size() + 1) {
+        characters.add(c);
+        if(capacity <= characters.size()) {
             c.die();
             return;
         }
-        characters.add(c);
         for (Character character: characters) {
             character.invadeOtherCharacters();
         }

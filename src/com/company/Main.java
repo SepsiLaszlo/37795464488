@@ -83,6 +83,7 @@ public class Main {
             case "reset":
                 characters = new HashMap<>();
                 icetables = new HashMap<>();
+                Game.getInstance().reset();
                 break;
             case "stat":
                 stat(arguments[1]);
