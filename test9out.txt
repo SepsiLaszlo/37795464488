@@ -28,3 +28,6 @@ inWater: false
 items:
 	SignalRocket foundParts: 1
 icetable: t_1_1
+
+SignalRocket
+foundPartsNumber: 1
