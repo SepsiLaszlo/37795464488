@@ -1,5 +1,3 @@
-package com.company;
-
 /**
  * A buvárruhát reprezentáló osztály. Ha a játékoson van búvárruha, akkor vízbe esés esetén ki tud mászni a vízből.
  */
@@ -12,7 +10,10 @@ public class DivingSuit implements Pickable {
         c.makeDiver();
     }
 
-    @Override
+    /**
+     * Visszaadja az osztály típusát string formátumban.
+     * @return az osztály típusa
+     */
     public String toString() {
         return "Diving Suit";
     }

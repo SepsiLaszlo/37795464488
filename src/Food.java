@@ -1,5 +1,3 @@
-package com.company;
-
 /**
  * Az élelmet reprezentáló osztály. Amint felveszi a szereplő, megeszi és a testhője nő eggyel.
  */
@@ -12,7 +10,10 @@ public class Food implements Pickable {
         c.changeHeat(1);
     }
 
-    @Override
+    /**
+     * Visszaadja az osztály típusát string formátumban.
+     * @return az osztály típusa
+     */
     public String toString() {
         return "Food";
     }

@@ -1,5 +1,3 @@
-package com.company;
-
 /**
  * A jelzőrakéta összeszereléséhez kellő alkatrész. A játék megnyeréséhez szükséges a megszerzésük. Összesen 3 ilyen van.
  */
@@ -11,6 +9,11 @@ public class SignalRocketPart implements Pickable {
     public void pickUp(Character c) {
         c.buildSignalRocket(this);
     }
+
+    /**
+     * Visszaadja az osztály típusát string formátumban.
+     * @return az osztály típusa
+     */
     public String toString(){
         return "SignalRocketPart";
     }

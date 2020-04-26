@@ -1,5 +1,3 @@
-package com.company;
-
 import java.util.ArrayList;
 
 /**
@@ -216,9 +214,21 @@ public abstract class Character {
         workUnit = initialWorkUnit;
     }
 
+    /**
+     * A szereplő nevének lekérdezése.
+     * @return szereplő neve
+     */
     public String getName() {
         return Main.getCharacterNameFromObject(this);
     }
+
+    /**
+     * Visszaadja a saját adattagjait string formátumban. Az alábbi
+     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
+     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
+     * fentebb említett formában.
+     * @return adattagok string formátumban
+     */
     public String toString() {
         String result = "workUnit: "+workUnit+"\nbodyTemperature: " + bodyTemperature + "\n" + "diver: " + diver + "\n" + "inWater: " + inWater + "\n"+"items:\n";
 
@@ -226,7 +236,6 @@ public abstract class Character {
             result=result.concat("\t"+u.toString()+"\n");
         }
         result=result.concat("icetable: "+iceTable.getName());
-
         return result;
     }
 }

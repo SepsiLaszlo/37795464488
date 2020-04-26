@@ -1,4 +1,3 @@
-package com.company;
 /**
  * A jégtáblák közti lukakat reprezentáló osztály. Ebben nem lehetnek felvehető tárgyak.
  */
@@ -55,6 +54,13 @@ public class Hole extends IceTable {
         characters.remove(c);
 	}
 
+	/**
+	 * Visszaadja a saját adattagjait string formátumban. Az alábbi
+	 * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
+	 * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
+	 * fentebb említett formában.
+	 * @return adattagok string formátumban
+	 */
 	@Override
 	public String toString() {
 		return String.format( "Hole\n" + super.toString() );
