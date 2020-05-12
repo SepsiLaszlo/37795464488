@@ -39,7 +39,7 @@ public class View extends JPanel {
         int rand = new Random().nextInt(5);
         switch (rand) {
             case 0:
-                return new GHole(new Hole(), gp);
+                return new GHole(new Hole());
             case 1:
                 return new GNormalTable(new Unstable(p), gp);
             default:
@@ -103,25 +103,25 @@ public class View extends JPanel {
     }
 
     public void showDialog(String s) {
-        message = new IDrawable() {
-            public void draw(Graphics g, int x, int y) {
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setColor(Color.black);
-                g2.setFont(new Font("Consolas", Font.BOLD, 26));
-
-                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-
-                FontMetrics fm = g2.getFontMetrics();
-                Rectangle2D r = fm.getStringBounds(s, g2);
-
-                x = (getWidth() - (int) r.getWidth()) / 2;
-                y = ((getHeight() - (int) r.getHeight()) / 3 + fm.getAscent());
-
-                g2.drawString(s, x, y);
-
-                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
-            }
-        };
+//        message = new IDrawable() {
+//            public void draw(Graphics g, int x, int y) {
+//                Graphics2D g2 = (Graphics2D) g;
+//                g2.setColor(Color.black);
+//                g2.setFont(new Font("Consolas", Font.BOLD, 26));
+//
+//                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+//
+//                FontMetrics fm = g2.getFontMetrics();
+//                Rectangle2D r = fm.getStringBounds(s, g2);
+//
+//                x = (getWidth() - (int) r.getWidth()) / 2;
+//                y = ((getHeight() - (int) r.getHeight()) / 3 + fm.getAscent());
+//
+//                g2.drawString(s, x, y);
+//
+//                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+//            }
+//        };
 
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -139,10 +139,10 @@ public class View extends JPanel {
         int posX = 0, posY = 0;
         for(int i = 0;i < matrix.length;i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                matrix[i][j].draw(g, posX, posY);
+                matrix[i][j].draw((Graphics2D)g, posX, posY);
                 for (GCharacter gc : characters) {
                     if(matrix[i][j].getIceTable() == gc.getIceTable()) {
-                        gc.draw(g, posX, posY);
+                        gc.draw((Graphics2D)g, posX, posY);
                     }
                 }
                 posX += 128;
@@ -151,7 +151,7 @@ public class View extends JPanel {
         }
 
         if(message != null) {
-            message.draw(g, 0, 0);
+            message.draw((Graphics2D) g, 0, 0);
         }
     }
 }
