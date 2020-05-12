@@ -3,25 +3,74 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class View extends JPanel {
     GIceTable[][] matrix;
     ArrayList<GCharacter> characters = new ArrayList<GCharacter>();
     IDrawable message;
 
+    private List<Object> getRandomPickable() {
+        int rand = new Random().nextInt(10);
+        switch (rand) {
+            case 0:
+                return Arrays.asList(new DivingSuit(), new GPickable());
+            case 1:
+                return Arrays.asList(new Food(), new GPickable());
+            case 2:
+                return Arrays.asList(new FragileSpade(), new GPickable());
+            case 3:
+                return Arrays.asList(new Rope(), new GPickable());
+            case 4:
+                return Arrays.asList(new Spade(), new GPickable());
+            case 5:
+                return Arrays.asList(new Tent(), new GPickable());
+            default:
+                return Arrays.asList(null, null);
+        }
+    }
+
+    private GIceTable getRandomIceTable(Pickable p, GPickable gp) {
+        int rand = new Random().nextInt(5);
+        switch (rand) {
+            case 0:
+                return new GHole(new Hole(), gp);
+            case 1:
+                return new GNormalTable(new Unstable(p), gp);
+            default:
+                return new GNormalTable(new Stable(p), gp);
+        }
+    }
+
     public IceField init(int row, int column) {
+        Random r = new Random();
+        ArrayList<Integer> signalRocketPartPlace = new ArrayList<>(3);
+        while(signalRocketPartPlace.size() < 3) {
+            int rand = r.nextInt(row * column);
+            if(signalRocketPartPlace.contains(rand))
+                signalRocketPartPlace.add(rand);
+        }
+
         matrix = new GIceTable[row][column];
-        IceField iceField = new IceField();
         for(int i = 0;i < row;i++) {
             for(int j = 0;j < column;j++) {
-                Pickable pickable = new Spade();
-                IceTable iceTable = new Stable(pickable);
-                GPickable gPickable = new GPickable();
-                GIceTable gIceTable = new GIceTable(iceTable, gPickable);
-                matrix[i][j] = gIceTable;
+                List<Object> pickables = getRandomPickable();
+                Pickable pickable = (Pickable)pickables.get(0);
+                GPickable gPickable = (GPickable)pickables.get(1);
+                if(signalRocketPartPlace.contains(i * column + j)) {
+                    pickable = new SignalRocketPart();
+                    gPickable = new GPickable();
+                }
+                matrix[i][j] = getRandomIceTable(pickable, gPickable);
             }
         }
+
+        IceField iceField = new IceField();
         for(int i = 0;i < row;i++) {
             for (int j = 0; j < column; j++) {
                 IceTable it = matrix[i][j].getIceTable();
