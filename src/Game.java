@@ -111,4 +111,9 @@ public class Game {
         result = result.concat("GameState: " + gameState);
         return  result;
     }
+
+    Character getCurrCharacter(){
+        return  currCharacter;
+    }
+
 }
