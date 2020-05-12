@@ -17,6 +17,9 @@ public class Main {
     public static  Direction usableDir = null;
 
     public static void main(String[] args) throws IOException {
+
+        Window window = new Window();
+
         Scanner s = new Scanner(System.in);
         while (s.hasNextLine()) {
             String line;
