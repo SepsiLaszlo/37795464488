@@ -98,15 +98,4 @@ public class PolarBear extends Character {
      */
     @Override
     public void pass() { }
-
-    /**
-     * Visszaadja a saját adattagjait string formátumban. Az alábbi
-     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
-     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
-     * fentebb említett formában.
-     * @return adattagok string formátumban
-     */
-    public String  toString(){
-        return  "PolarBear\n"+super.toString();
-    }
 }

@@ -1,14 +1,16 @@
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+
 public class GHole extends GIceTable{
-    private Hole hole;
 
     public GHole(Hole hole) {
-        super(null);
-       this.hole=hole;
-    }
-
-
-    @Override
-    public IceTable getIceTable() {
-        return hole;
+        super(hole, null);
+        try {
+            File imageFile = new File("images/hole.png");
+            iceTableImg = ImageIO.read(imageFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

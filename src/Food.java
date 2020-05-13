@@ -9,12 +9,4 @@ public class Food implements Pickable {
     public void pickUp(Character c) {
         c.changeHeat(1);
     }
-
-    /**
-     * Visszaadja az osztály típusát string formátumban.
-     * @return az osztály típusa
-     */
-    public String toString() {
-        return "Food";
-    }
 }

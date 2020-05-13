@@ -70,7 +70,7 @@ public abstract class Character {
      * @param idx Az index.
      */
     public void useUsable(int idx){
-        usables.get(idx).use(this, Main.usableDir);
+        usables.get(idx).use(this, new Direction(0));
         workUnit--;
         if (workUnit == 0) {
             game.nextPlayer();
@@ -212,30 +212,5 @@ public abstract class Character {
     public void pass() {
         game.nextPlayer();
         workUnit = initialWorkUnit;
-    }
-
-    /**
-     * A szereplő nevének lekérdezése.
-     * @return szereplő neve
-     */
-    public String getName() {
-        return Main.getCharacterNameFromObject(this);
-    }
-
-    /**
-     * Visszaadja a saját adattagjait string formátumban. Az alábbi
-     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
-     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
-     * fentebb említett formában.
-     * @return adattagok string formátumban
-     */
-    public String toString() {
-        String result = "workUnit: "+workUnit+"\nbodyTemperature: " + bodyTemperature + "\n" + "diver: " + diver + "\n" + "inWater: " + inWater + "\n"+"items:\n";
-
-        for(Usable u:usables ){
-            result=result.concat("\t"+u.toString()+"\n");
-        }
-        result=result.concat("icetable: "+iceTable.getName());
-        return result;
     }
 }

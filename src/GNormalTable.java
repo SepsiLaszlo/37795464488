@@ -1,13 +1,15 @@
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+
 public class GNormalTable extends GIceTable{
-    private IceTable iceTable;
-
-    public GNormalTable(IceTable table, GPickable gp) {
-        super(gp);
-        iceTable=table;
-    }
-
-    @Override
-    public IceTable getIceTable() {
-        return iceTable;
+    public GNormalTable(IceTable iceTable, GPickable item) {
+        super(iceTable, item);
+        try {
+            File imageFile = new File("images/icetable.png");
+            iceTableImg = ImageIO.read(imageFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

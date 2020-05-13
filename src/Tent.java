@@ -22,13 +22,4 @@ public class Tent implements Usable, Pickable {
     public void pickUp(Character c) {
         c.addUsable(this);
     }
-
-    /**
-     * Visszaadja az osztály típusát string formátumban.
-     * @return az osztály típusa
-     */
-    @Override
-    public String toString() {
-        return "Tent";
-    }
 }

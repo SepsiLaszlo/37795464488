@@ -18,6 +18,7 @@ public class Game {
     private ArrayList<Character> characters = new ArrayList<Character>();
     private Character currCharacter;
     private GameState gameState = GameState.RUNNING;
+    private View view;
 
     /**
      * Privát konstruktor a Singleton-pattern megvalósításához.
@@ -95,25 +96,11 @@ public class Game {
         SignalRocket.getInstance().reset();
     }
 
-    /**
-     * Visszaadja a saját adattagjait string formátumban. Az alábbi
-     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus (pl.
-     * Game-ben az IceField). A tárolt karakterek tömbje esetén kiírjuk a tömb nevét, és alá
-     * a tömbben lévő karaktereket a fentebb említett formában. Emellett kiírja a játék
-     * állapotát: (RUNNING, LOSE, WIN).
-     * @return adattagok string formátumban és a játék állapota
-     */
-    public String toString() {
-        String result = "Game\nCharacters:\n";
-        for (Character c : characters) {
-            result = result.concat('\t' + c.getName() + "\n");
-        }
-        result = result.concat("GameState: " + gameState);
-        return  result;
-    }
-
     Character getCurrCharacter(){
         return  currCharacter;
     }
 
+    public void setupGame(int eskimo, int researcher) {
+
+    }
 }

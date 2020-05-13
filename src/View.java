@@ -3,12 +3,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 public class View extends JPanel {
     GIceTable[][] matrix;
@@ -19,17 +15,17 @@ public class View extends JPanel {
         int rand = new Random().nextInt(10);
         switch (rand) {
             case 0:
-                return Arrays.asList(new DivingSuit(), new GPickable());
+                return Arrays.asList(new DivingSuit(), new GPickable("divingsuite.png"));
             case 1:
-                return Arrays.asList(new Food(), new GPickable());
+                return Arrays.asList(new Food(), new GPickable("food.png"));
             case 2:
-                return Arrays.asList(new FragileSpade(), new GPickable());
+                return Arrays.asList(new FragileSpade(), new GPickable("spade.png"));
             case 3:
-                return Arrays.asList(new Rope(), new GPickable());
+                return Arrays.asList(new Rope(), new GPickable("rope.png"));
             case 4:
-                return Arrays.asList(new Spade(), new GPickable());
+                return Arrays.asList(new Spade(), new GPickable("spade.png"));
             case 5:
-                return Arrays.asList(new Tent(), new GPickable());
+                return Arrays.asList(new Tent(), new GPickable("tent.png"));
             default:
                 return Arrays.asList(null, null);
         }
@@ -49,11 +45,10 @@ public class View extends JPanel {
 
     public IceField init(int row, int column) {
         Random r = new Random();
-        ArrayList<Integer> signalRocketPartPlace = new ArrayList<>(3);
+        HashSet<Integer> signalRocketPartPlace = new HashSet<>();
         while(signalRocketPartPlace.size() < 3) {
             int rand = r.nextInt(row * column);
-            if(signalRocketPartPlace.contains(rand))
-                signalRocketPartPlace.add(rand);
+            signalRocketPartPlace.add(rand);
         }
 
         matrix = new GIceTable[row][column];
@@ -62,11 +57,13 @@ public class View extends JPanel {
                 List<Object> pickables = getRandomPickable();
                 Pickable pickable = (Pickable)pickables.get(0);
                 GPickable gPickable = (GPickable)pickables.get(1);
+                GIceTable gIceTable = getRandomIceTable(pickable, gPickable);
                 if(signalRocketPartPlace.contains(i * column + j)) {
                     pickable = new SignalRocketPart();
-                    gPickable = new GPickable();
+                    gPickable = new GPickable("signalrocketpart.png");
+                    gIceTable = new GNormalTable(new Stable(pickable), gPickable);
                 }
-                matrix[i][j] = getRandomIceTable(pickable, gPickable);
+                matrix[i][j] = gIceTable;
             }
         }
 
@@ -78,6 +75,7 @@ public class View extends JPanel {
                 it.setNeighbour(matrix[(i + 1) % row][j].getIceTable(), new Direction(2));
                 it.setNeighbour(matrix[i][(j - 1 + column) % column].getIceTable(), new Direction(3));
                 it.setNeighbour(matrix[i][(j + 1) % column].getIceTable(), new Direction(1));
+                it.addSnow(r.nextInt(3));
                 iceField.addIceTable(it);
             }
         }
@@ -103,25 +101,23 @@ public class View extends JPanel {
     }
 
     public void showDialog(String s) {
-//        message = new IDrawable() {
-//            public void draw(Graphics g, int x, int y) {
-//                Graphics2D g2 = (Graphics2D) g;
-//                g2.setColor(Color.black);
-//                g2.setFont(new Font("Consolas", Font.BOLD, 26));
-//
-//                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-//
-//                FontMetrics fm = g2.getFontMetrics();
-//                Rectangle2D r = fm.getStringBounds(s, g2);
-//
-//                x = (getWidth() - (int) r.getWidth()) / 2;
-//                y = ((getHeight() - (int) r.getHeight()) / 3 + fm.getAscent());
-//
-//                g2.drawString(s, x, y);
-//
-//                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
-//            }
-//        };
+        message = (g, x, y) -> {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setColor(Color.black);
+            g2.setFont(new Font("Consolas", Font.BOLD, 26));
+
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+            FontMetrics fm = g2.getFontMetrics();
+            Rectangle2D r = fm.getStringBounds(s, g2);
+
+            x = (getWidth() - (int) r.getWidth()) / 2;
+            y = ((getHeight() - (int) r.getHeight()) / 3 + fm.getAscent());
+
+            g2.drawString(s, x, y);
+
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+        };
 
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -135,23 +131,19 @@ public class View extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
-        int posX = 0, posY = 0;
         for(int i = 0;i < matrix.length;i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                matrix[i][j].draw((Graphics2D)g, posX, posY);
+                matrix[i][j].draw(g, 128 * j, 128 * i);
                 for (GCharacter gc : characters) {
                     if(matrix[i][j].getIceTable() == gc.getIceTable()) {
-                        gc.draw((Graphics2D)g, posX, posY);
+                        gc.draw(g, 128 * j, 128 * i);
                     }
                 }
-                posX += 128;
             }
-            posY += 128;
         }
 
         if(message != null) {
-            message.draw((Graphics2D) g, 0, 0);
+            message.draw(g, 0, 0);
         }
     }
 }

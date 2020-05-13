@@ -36,15 +36,4 @@ public class Eskimo extends Character {
      */
     @Override
     public void invadeOtherCharacters() { }
-
-    /**
-     * Visszaadja a saját adattagjait string formátumban. Az alábbi
-     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
-     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
-     * fentebb említett formában.
-     * @return adattagok string formátumban
-     */
-    public String  toString(){
-        return  "Eskimo\n"+super.toString();
-    }
 }
