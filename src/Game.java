@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A játék állapota.
@@ -14,7 +15,7 @@ enum GameState{
 
 public class Game {
     private static Game instance = new Game();
-    private IceField iceField = new IceField();
+    private IceField iceField;
     private ArrayList<Character> characters = new ArrayList<Character>();
     private Character currCharacter;
     private GameState gameState = GameState.RUNNING;
@@ -101,6 +102,7 @@ public class Game {
     }
 
     public void setupGame(int eskimo, int researcher) {
-
+        view = new View();
+        iceField = view.init(6, 6, eskimo, researcher);
     }
 }

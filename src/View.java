@@ -31,42 +31,57 @@ public class View extends JPanel {
         }
     }
 
-    private GIceTable getRandomIceTable(Pickable p, GPickable gp) {
-        int rand = new Random().nextInt(5);
-        switch (rand) {
-            case 0:
-                return new GHole(new Hole());
-            case 1:
-                return new GNormalTable(new Unstable(p), gp);
-            default:
-                return new GNormalTable(new Stable(p), gp);
+    private GIceTable getRandomIceTable(int charactersNumber) {
+        Random r = new Random();
+        switch (r.nextInt(5)) {
+            case 0: {
+                return new GHole(new Hole()); }
+            case 1: {
+                List<Object> pickables = getRandomPickable();
+                Unstable unstable = new Unstable((Pickable)pickables.get(0));
+                unstable.setCapacity(r.nextInt(charactersNumber - 2) + 2);
+                return new GNormalTable(unstable, (GPickable)pickables.get(1)); }
+            default: {
+                List<Object> pickables = getRandomPickable();
+                return new GNormalTable(new Stable((Pickable)pickables.get(0)), (GPickable)pickables.get(1)); }
         }
     }
 
-    public IceField init(int row, int column) {
+    public IceField init(int row, int column, int eskimo, int researcher) {
         Random r = new Random();
+        //A jelzőrakéta alkatrészek helyeinek meghatározása.
         HashSet<Integer> signalRocketPartPlace = new HashSet<>();
         while(signalRocketPartPlace.size() < 3) {
-            int rand = r.nextInt(row * column);
+            int rand = r.nextInt(row * column - 1) + 1;
             signalRocketPartPlace.add(rand);
         }
 
+        //A pálya legenerálása.
         matrix = new GIceTable[row][column];
         for(int i = 0;i < row;i++) {
             for(int j = 0;j < column;j++) {
-                List<Object> pickables = getRandomPickable();
-                Pickable pickable = (Pickable)pickables.get(0);
-                GPickable gPickable = (GPickable)pickables.get(1);
-                GIceTable gIceTable = getRandomIceTable(pickable, gPickable);
+                if(i == 0 && j == 0)
+                    continue;
+                GIceTable gIceTable = getRandomIceTable(eskimo + researcher + 1);
                 if(signalRocketPartPlace.contains(i * column + j)) {
-                    pickable = new SignalRocketPart();
-                    gPickable = new GPickable("signalrocketpart.png");
-                    gIceTable = new GNormalTable(new Stable(pickable), gPickable);
+                    gIceTable = new GNormalTable(new Stable(new SignalRocketPart()), new GPickable("signalrocketpart.png"));
                 }
                 matrix[i][j] = gIceTable;
             }
         }
+        //A játékosok legenerálása és ráhelyezése a pálya első mezőjére.
+        List<Object> pickables = getRandomPickable();
+        matrix[0][0] = new GNormalTable(new Stable((Pickable)pickables.get(0)), (GPickable)pickables.get(1));
+        for(int i = 0;i < eskimo;i++) {
+            characters.add(new GEskimo(new Eskimo(matrix[0][0].getIceTable())));
+        }
+        for(int i = 0;i < researcher;i++) {
+            characters.add(new GResearcher(new Researcher(matrix[0][0].getIceTable())));
+        }
+        //A jegesmedve elhelyezése
+        characters.add(new GPolarBear(new PolarBear(matrix[r.nextInt(row - 1) + 1][r.nextInt(column - 1) + 1].getIceTable())));
 
+        //A szomszédsági viszonyok létrehozása a jégtáblák között.
         IceField iceField = new IceField();
         for(int i = 0;i < row;i++) {
             for (int j = 0; j < column; j++) {
