@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * A kirajzolható jégtábla objektumok ősosztálya.
+ */
 public class GIceTable implements IDrawable {
     private IceTable iceTable;
     protected BufferedImage iceTableImg;
@@ -12,6 +15,12 @@ public class GIceTable implements IDrawable {
     private BufferedImage igluImg;
     private BufferedImage tentImg;
 
+    /**
+     * Konstruktor, ami beállítja a jégtáblát, a benne lévő tárgy nézetét, és a jégtábla különböző
+     * állapotaihoz tartozó képeket.
+     * @param iceTable
+     * @param item
+     */
     public GIceTable(IceTable iceTable, GPickable item) {
         this.iceTable = iceTable;
         this.item = item;
@@ -27,6 +36,12 @@ public class GIceTable implements IDrawable {
         }
     }
 
+    /**
+     * Kirajzolja magát a paraméterben megadott helyre, a jégtábla állapotának megfelelően.
+     * @param g Az objektum, amire kirajzolja magát.
+     * @param x x szerinti pozíció.
+     * @param y y szerinti pozíció.
+     */
     @Override
     public void draw(Graphics g, int x, int y) {
         if(item != null && !iceTable.containsItem())
@@ -43,6 +58,10 @@ public class GIceTable implements IDrawable {
             g.drawImage(snowImg, x, y, null);
     }
 
+    /**
+     * A nézethez tartozó jégtábla lekérdezése.
+     * @return A nézethez tartozó jégtábla.
+     */
     public IceTable getIceTable() {
         return iceTable;
     }

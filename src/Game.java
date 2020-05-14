@@ -97,11 +97,21 @@ public class Game {
         SignalRocket.getInstance().reset();
     }
 
+    /**
+     * A jelenlegi, azaz az éppen soron lévő játékos lekérdezése.
+     * @return A soron lévő játékos.
+     */
     Character getCurrCharacter(){
         return  currCharacter;
     }
 
+    /**
+     * A játék kiinduási helyzetbe állítása a paraméterként megadott számú játékossal.
+     * @param eskimo Az eszkimók száma.
+     * @param researcher A sarkkutatók száma.
+     */
     public void setupGame(int eskimo, int researcher) {
+        reset();
         view = new View();
         iceField = view.init(6, 6, eskimo, researcher);
     }

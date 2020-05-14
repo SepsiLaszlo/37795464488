@@ -154,18 +154,34 @@ public abstract class IceTable {
         this.capacity = capacity;
     }
 
+    /**
+     * A jégtábla iglu tagváltozó értékének lekérdezése.
+     * @return Az iglu értéke.
+     */
     public boolean getIgluState() {
         return iglu;
     }
 
+    /**
+     * A jégtábla tent tagváltozó értékének lekérdezése.
+     * @return A tent értéke.
+     */
     public boolean getTentState() {
         return tent;
     }
 
+    /**
+     * Annak lekérdezése, hogy a jégtáblán van-e hó.
+     * @return Van-e hó jégtáblán?
+     */
     public boolean anySnow() {
         return snowLayer > 0;
     }
 
+    /**
+     * Annak lekérdezése, hogy a jégtáblában van-e tárgy.
+     * @return Van-e tárgy a jégtáblában?
+     */
     public boolean containsItem() {
         return item != null;
     }

@@ -6,11 +6,18 @@ import java.awt.geom.Rectangle2D;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Az MVC model megjelenítéséért felelős részét, megvalósító osztály.
+ */
 public class View extends JPanel {
     GIceTable[][] matrix;
     ArrayList<GCharacter> characters = new ArrayList<GCharacter>();
     IDrawable message;
 
+    /**
+     * Egy véletlenszerű tárgyal és a hozzá tartozó nézettel tér vissza.
+     * @return A tárgy és a hozzá tartozó nézet.
+     */
     private List<Object> getRandomPickable() {
         int rand = new Random().nextInt(10);
         switch (rand) {
@@ -31,6 +38,12 @@ public class View extends JPanel {
         }
     }
 
+    /**
+     * Egy véletlenszerű jégtáblát típust generál, amit felparaméterez, hozzárendeli a típusának
+     * megfelelő nézeti osztályához és visszatér vele.
+     * @param charactersNumber A játékban résztvevő karakterek száma.
+     * @return A jégtáblához tartozó nézeti osztály.
+     */
     private GIceTable getRandomIceTable(int charactersNumber) {
         Random r = new Random();
         switch (r.nextInt(5)) {
@@ -47,6 +60,17 @@ public class View extends JPanel {
         }
     }
 
+    /**
+     * A paraméterben átadott mérető véletlenszerű jégmezőt generál, a jégtáblákban véletlenszerű tárgyakkal, a
+     * hozzá tartozó nézeteikkel együtt.
+     * Ezután létrehozza a karaktereket azok nézeteivel és a jegesmedve kivételével elhelyezi őket az első
+     * jégtáblán. A jegesmedvét egy ettől különböző véletlenszerű jégtáblára helyezi.
+     * @param row A jégmező sorainak a száma.
+     * @param column A jégmező oszlopainak a száma.
+     * @param eskimo Az eszkimók száma.
+     * @param researcher A kutatók száma.
+     * @return A létrehozott jégmező.
+     */
     public IceField init(int row, int column, int eskimo, int researcher) {
         Random r = new Random();
         //A jelzőrakéta alkatrészek helyeinek meghatározása.
@@ -97,14 +121,17 @@ public class View extends JPanel {
         return iceField;
     }
 
+    /**
+     * A panel, és az azon lévő összes elem újrarajzolása.
+     */
     public void drawAll() {
         repaint();
     }
 
-    public void addCharacter(GCharacter gc) {
-        characters.add(gc);
-    }
-
+    /**
+     * Kirajzolja a játék végén az eredményt jelző ablakot.
+     * @param win A játék végeredménye.
+     */
     public void endSceneDraw(boolean win) {
         matrix = null;
         characters.clear();
@@ -115,6 +142,10 @@ public class View extends JPanel {
         }
     }
 
+    /**
+     * A paraméterben átadott üzenet kirajzolása/megjelenítése.
+     * @param s üzenet
+     */
     public void showDialog(String s) {
         message = (g, x, y) -> {
             Graphics2D g2 = (Graphics2D) g;
@@ -143,6 +174,11 @@ public class View extends JPanel {
         });
     }
 
+    /**
+     * A jégmező és az azon lévő összes elem, valamint az információt tartalmazó üzeneteket
+     * rajzolja ki a panelre.
+     * @param g
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
