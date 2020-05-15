@@ -18,6 +18,7 @@ public class PolarBear extends Character {
         super(i);
         workUnit = 1;
         initialWorkUnit = 1;
+        bodyTemperature = 0;
         diver = true;
     }
 

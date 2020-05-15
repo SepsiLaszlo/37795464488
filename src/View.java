@@ -22,17 +22,17 @@ public class View extends JPanel {
         int rand = new Random().nextInt(10);
         switch (rand) {
             case 0:
-                return Arrays.asList(new DivingSuit(), new GPickable("divingsuite.png"));
+                return Arrays.asList(new DivingSuit(), new GPickable("divingsuite.png", false));
             case 1:
-                return Arrays.asList(new Food(), new GPickable("food.png"));
+                return Arrays.asList(new Food(), new GPickable("food.png", false));
             case 2:
-                return Arrays.asList(new FragileSpade(), new GPickable("spade.png"));
+                return Arrays.asList(new FragileSpade(), new GPickable("spade.png", true));
             case 3:
-                return Arrays.asList(new Rope(), new GPickable("rope.png"));
+                return Arrays.asList(new Rope(), new GPickable("rope.png", true));
             case 4:
-                return Arrays.asList(new Spade(), new GPickable("spade.png"));
+                return Arrays.asList(new Spade(), new GPickable("spade.png", true));
             case 5:
-                return Arrays.asList(new Tent(), new GPickable("tent.png"));
+                return Arrays.asList(new Tent(), new GPickable("tent.png", true));
             default:
                 return Arrays.asList(null, null);
         }
@@ -88,7 +88,7 @@ public class View extends JPanel {
                     continue;
                 GIceTable gIceTable = getRandomIceTable(eskimo + researcher + 1);
                 if(signalRocketPartPlace.contains(i * column + j)) {
-                    gIceTable = new GNormalTable(new Stable(new SignalRocketPart()), new GPickable("signalrocketpart.png"));
+                    gIceTable = new GNormalTable(new Stable(new SignalRocketPart()), new GPickable("signalrocketpart.png", false));
                 }
                 matrix[i][j] = gIceTable;
             }
@@ -175,19 +175,33 @@ public class View extends JPanel {
     }
 
     /**
-     * A jégmező és az azon lévő összes elem, valamint az információt tartalmazó üzeneteket
+     * A jégmezőt és az azon lévő összes elemet, valamint az információt tartalmazó üzeneteket
      * rajzolja ki a panelre.
      * @param g
      */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        int startX = 0, startY = 0;
+        int id = 1;
+        for (GCharacter gc : characters) {
+            if(gc.getCharacter() == Game.getInstance().getCurrCharacter()) {
+                gc.drawInventory(g, startX, startY, id);
+                startY += 80;
+                break;
+            }
+            id++;
+        }
+
         for(int i = 0;i < matrix.length;i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                matrix[i][j].draw(g, 128 * j, 128 * i);
+                GPickable gp = matrix[i][j].checkItemPickup();
+                matrix[i][j].draw(g, startX + 128 * j, startY + 128 * i);
                 for (GCharacter gc : characters) {
                     if(matrix[i][j].getIceTable() == gc.getIceTable()) {
-                        gc.draw(g, 128 * j, 128 * i);
+                        gc.draw(g, startX + 128 * j, startY + 128 * i);
+                        if(gc.getCharacter() == Game.getInstance().getCurrCharacter())
+                            gc.addItem(gp);
                     }
                 }
             }

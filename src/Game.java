@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -80,7 +81,13 @@ public class Game {
         while (gameState == GameState.RUNNING) {
             Character c = currCharacter;
             while (c == currCharacter) {
-                //Character move, dig, use Item
+                try {
+                    Thread.sleep(4000);
+                    c.dig();
+                    view.drawAll();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             iceField.snowStorm();
         }
@@ -113,6 +120,10 @@ public class Game {
     public void setupGame(int eskimo, int researcher) {
         reset();
         view = new View();
-        iceField = view.init(6, 6, eskimo, researcher);
+        iceField = view.init(5, 5, eskimo, researcher);
+    }
+
+    public JPanel getPanel() {
+        return view;
     }
 }

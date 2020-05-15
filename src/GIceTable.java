@@ -44,9 +44,6 @@ public class GIceTable implements IDrawable {
      */
     @Override
     public void draw(Graphics g, int x, int y) {
-        if(item != null && !iceTable.containsItem())
-            item = null;
-
         g.drawImage(iceTableImg, x, y, null);
         if(iceTable.getIgluState())
             g.drawImage(igluImg, x + 64, y, null);
@@ -64,5 +61,15 @@ public class GIceTable implements IDrawable {
      */
     public IceTable getIceTable() {
         return iceTable;
+    }
+
+    public GPickable checkItemPickup() {
+        if(item != null && !iceTable.containsItem()) {
+            GPickable item = this.item;
+            this.item = null;
+            if (item.isUseableItem())
+                return item;
+        }
+        return null;
     }
 }

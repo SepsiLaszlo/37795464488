@@ -8,18 +8,20 @@ import java.io.IOException;
  */
 public class GPickable implements IDrawable{
     private Image img;
+    private boolean useableItem;
 
     /**
      * Konstruktor, ami a paraméternek megfelelően beállítja az osztályhoz tartozó képet.
      * @param imageName
      */
-    public GPickable(String imageName) {
+    public GPickable(String imageName, boolean useableItem) {
         try {
             File imageFile = new File("images/" + imageName);
             img = ImageIO.read(imageFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.useableItem = useableItem;
     }
 
     /**
@@ -31,5 +33,9 @@ public class GPickable implements IDrawable{
     @Override
     public void draw(Graphics g, int x, int y) {
         g.drawImage(img, x, y, null);
+    }
+
+    public boolean isUseableItem() {
+        return useableItem;
     }
 }

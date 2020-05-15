@@ -213,4 +213,16 @@ public abstract class Character {
         game.nextPlayer();
         workUnit = initialWorkUnit;
     }
+
+    public int getWorkUnit() {
+        return workUnit;
+    }
+
+    public int getBodyTemperature() {
+        return bodyTemperature;
+    }
+
+    public boolean isDiver() {
+        return diver;
+    }
 }

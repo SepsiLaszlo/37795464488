@@ -18,5 +18,6 @@ public class GPolarBear extends GCharacter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        inventory = new Inventory("polarbear.png");
     }
 }

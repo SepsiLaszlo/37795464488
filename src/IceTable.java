@@ -69,14 +69,13 @@ public abstract class IceTable {
      * @return eltárolt felvehető tárgy
      */
     public Pickable extract(int amount) {
-        snowLayer = Math.max(snowLayer - amount, 0);
-        if(snowLayer == 0) {
+        if (snowLayer == 0 && amount > 0) {
             Pickable temp = item;
             item = null;
             return temp;
-        } else {
-            return null;
         }
+        snowLayer = Math.max(snowLayer - amount, 0);
+        return null;
     }
 
     /**

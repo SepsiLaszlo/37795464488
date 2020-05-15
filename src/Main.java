@@ -6,11 +6,12 @@ public class Main {
     public static void main(String[] args) {
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(128 * 4,128 * 4);
-        View v = new View();
-        v.init(4, 4, 2, 2);
-        f.add(v);
+        f.setSize(128 * 5,128 * 6);
+        Game.getInstance().setupGame(2, 2);
+        f.add(Game.getInstance().getPanel());
         f.setVisible(true);
+        Game.getInstance().runGame();
+
         //Window window = new Window();
     }
 }

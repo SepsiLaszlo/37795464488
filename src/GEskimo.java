@@ -18,5 +18,7 @@ public class GEskimo extends GCharacter{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        inventory = new Inventory("eskimo.png");
+        inventory.addItem(new GPickable("signalrocket.png", true));
     }
 }
