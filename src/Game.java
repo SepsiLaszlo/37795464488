@@ -21,6 +21,7 @@ public class Game {
     private Character currCharacter;
     private GameState gameState = GameState.RUNNING;
     private View view;
+    private Controller controller=new Controller();
 
     /**
      * Privát konstruktor a Singleton-pattern megvalósításához.
