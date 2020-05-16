@@ -56,7 +56,9 @@ public class View extends JPanel {
                 return new GNormalTable(unstable, (GPickable)pickables.get(1)); }
             default: {
                 List<Object> pickables = getRandomPickable();
-                return new GNormalTable(new Stable((Pickable)pickables.get(0)), (GPickable)pickables.get(1)); }
+                Stable stable = new Stable((Pickable)pickables.get(0));
+                stable.setCapacity(charactersNumber + 1);
+                return new GNormalTable(stable, (GPickable)pickables.get(1)); }
         }
     }
 

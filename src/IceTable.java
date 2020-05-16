@@ -6,7 +6,7 @@ import java.util.HashMap;
  * rajta szereplő és boríthatja hó.
  */
 public abstract class IceTable {
-    protected int capacity = 1;
+    protected int capacity = 0;
     protected int snowLayer = 0;
     private boolean iglu = false;
     private boolean tent = false;
