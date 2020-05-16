@@ -140,6 +140,7 @@ public abstract class Character {
         inWater = true;
         if (!diver) {
             game.nextPlayer();
+            workUnit = initialWorkUnit;
         }
     }
 

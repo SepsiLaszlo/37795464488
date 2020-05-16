@@ -18,7 +18,7 @@ public class GResearcher extends GCharacter{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        inventory = new Inventory("eskimo.png");
+        inventory = new Inventory("researcher.png");
         inventory.addItem(new GPickable("signalrocket.png", true));
     }
 }

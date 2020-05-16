@@ -69,7 +69,7 @@ public class PolarBear extends Character {
      */
     public void move(Direction d) {
         if (!Main.det)
-            d = new Direction(new Random().nextInt(6));
+            d = new Direction(new Random().nextInt(4));
         super.move(d);
     }
 

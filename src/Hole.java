@@ -19,6 +19,7 @@ public class Hole extends IceTable {
 	 */
     @Override
 	public void stepOn(Character c) {
+    	snowLayer = 0;
 		c.fallInWater();
         characters.add(c);
 		for (Character character: characters) {

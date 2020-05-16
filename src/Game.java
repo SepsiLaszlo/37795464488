@@ -80,10 +80,14 @@ public class Game {
 
         while (gameState == GameState.RUNNING) {
             Character c = currCharacter;
+            if(!c.isDiver() && c.getInWater()) {
+                gameState = GameState.LOSE;
+                break;
+            }
             while (c == currCharacter) {
                 try {
                     Thread.sleep(2000);
-                    c.dig();
+                    c.move(new Direction(1));
                     view.drawAll();
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -7,7 +7,7 @@ import java.util.HashMap;
  */
 public abstract class IceTable {
     protected int capacity = 1;
-    private int snowLayer = 0;
+    protected int snowLayer = 0;
     private boolean iglu = false;
     private boolean tent = false;
     private HashMap<Direction,IceTable> neighbours = new HashMap<Direction,IceTable>();
