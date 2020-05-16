@@ -175,9 +175,9 @@ public class View extends JPanel {
     }
 
     /**
-     * A jégmezőt és az azon lévő összes elemet, valamint az információt tartalmazó üzeneteket
-     * rajzolja ki a panelre.
-     * @param g
+     * A jégmezőt, az azon lévő összes elemet, a karakterekhez tartozó inventorit, valamint
+     * az információt tartalmazó üzeneteket rajzolja ki a panelre.
+     * @param g Az objektum, amire kirajzolja magát.
      */
     @Override
     public void paint(Graphics g) {

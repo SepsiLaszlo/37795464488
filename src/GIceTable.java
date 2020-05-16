@@ -63,6 +63,11 @@ public class GIceTable implements IDrawable {
         return iceTable;
     }
 
+    /**
+     * Ellenőrzi, hogy a jégtáblából kivették-e a tárgyat. Ha igen és Usable típusú,
+     * akkor visszatér a tárgyhoz tartozó nézettel.
+     * @return A tárgyhoz tartozó nézet.
+     */
     public GPickable checkItemPickup() {
         if(item != null && !iceTable.containsItem()) {
             GPickable item = this.item;

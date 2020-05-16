@@ -11,8 +11,10 @@ public class GPickable implements IDrawable{
     private boolean useableItem;
 
     /**
-     * Konstruktor, ami a paraméternek megfelelően beállítja az osztályhoz tartozó képet.
+     * Konstruktor, ami a paraméternek megfelelően beállítja az osztályhoz tartozó képet, és
+     * azt, hogy Usable típusúak, vagyis, hogy el kell-e őket tárolni az inventoriban.
      * @param imageName
+     * @param useableItem
      */
     public GPickable(String imageName, boolean useableItem) {
         try {
@@ -35,6 +37,10 @@ public class GPickable implements IDrawable{
         g.drawImage(img, x, y, null);
     }
 
+    /**
+     * Visszaadja azt, hogy a tárgy inventoriban eltárolandó vagy sem.
+     * @return Inventoriban eltárolandó-e?
+     */
     public boolean isUseableItem() {
         return useableItem;
     }

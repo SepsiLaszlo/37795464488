@@ -214,14 +214,26 @@ public abstract class Character {
         workUnit = initialWorkUnit;
     }
 
+    /**
+     * Az egységnyi munka aktuális értékének lekérdezése.
+     * @return egységnyi munka értéke
+     */
     public int getWorkUnit() {
         return workUnit;
     }
 
+    /**
+     * A testhő értékének lekérdezése.
+     * @return testhő értéke.
+     */
     public int getBodyTemperature() {
         return bodyTemperature;
     }
 
+    /**
+     * A diver változó állapotának lektérdezése.
+     * @return diver értéke
+     */
     public boolean isDiver() {
         return diver;
     }

@@ -5,10 +5,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A karakterekhez tartozó használati tárgyak nézeteit tároló és
+ * kirajzoló osztály.
+ */
 public class Inventory implements IDrawable {
     private ArrayList<GPickable> items = new ArrayList<GPickable>();
     private BufferedImage icon;
 
+    /**
+     * Konstruktor, ami beállítja az inventorihoz tartozó ikont.
+     * @param iconName
+     */
     public Inventory(String iconName) {
         try {
             File imageFile = new File("images/" + iconName);
@@ -39,6 +47,10 @@ public class Inventory implements IDrawable {
         }
     }
 
+    /**
+     * A tárgyhoz tartozó nézet hozzáadása az inventorihoz.
+     * @param item A tárgyhoz tartozó nézet.
+     */
     public void addItem(GPickable item) {
         items.add(item);
     }

@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class GResearcher extends GCharacter{
     /**
-     * Konstruktor, ami beállítja a karaktert és a hozzá tartozó képet.
+     * Konstruktor, ami beállítja a karaktert, a hozzá tartozó képet és az inventorit.
      * @param researcher
      */
     public GResearcher(Researcher researcher) {

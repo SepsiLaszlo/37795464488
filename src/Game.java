@@ -123,6 +123,10 @@ public class Game {
         iceField = view.init(5, 5, eskimo, researcher);
     }
 
+    /**
+     * A játékot megjelenítő panel lekérdezése.
+     * @return játék panel
+     */
     public JPanel getPanel() {
         return view;
     }

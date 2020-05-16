@@ -7,7 +7,8 @@ import java.io.IOException;
  */
 public class GPolarBear extends GCharacter {
     /**
-     * Konstruktor, ami beállítja a karaktert és a hozzá tartozó képet.
+     * Konstruktor, ami beállítja a karaktert, a hozzá tartozó képet és az invetorit, ami
+     * ez esetben üres, csak a karakter iconját jeleníti meg, hogy jelezze a karakter körét.
      * @param polarBear
      */
     public GPolarBear(PolarBear polarBear) {

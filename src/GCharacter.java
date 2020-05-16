@@ -28,6 +28,13 @@ public  class GCharacter implements IDrawable{
         g.drawImage(img, x, y, null);
     }
 
+    /**
+     * Az karakterhez tartozó inventori és a karakter fontos tulajdonságainak kirajzolása.
+     * @param g Az objektum, amire kirajzolja magát.
+     * @param x x szerinti pozíció.
+     * @param y y szerinti pozíció.
+     * @param id A karakter azonosítója.
+     */
     public void drawInventory(Graphics g, int x, int y, int id) {
         inventory.draw(g, x, y);
         g.setColor(Color.WHITE);
@@ -47,10 +54,18 @@ public  class GCharacter implements IDrawable{
         return character.getIceTable();
     }
 
+    /**
+     * A nézethez tartozó karakter lekérdezése.
+     * @return karakter.
+     */
     public Character getCharacter(){
         return character;
     }
 
+    /**
+     * Egy tárgy nézetének hozzáadása a karakter inventorijához.
+     * @param item A tárgy nézete.
+     */
     public void addItem(GPickable item) {
         if(item != null)
             inventory.addItem(item);

@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class GEskimo extends GCharacter{
     /**
-     * Konstruktor, ami beállítja a karaktert és a hozzá tartozó képet.
+     * Konstruktor, ami beállítja a karaktert, hozzá tartozó képet és az inventorit.
      * @param eskimo
      */
     public GEskimo(Eskimo eskimo) {
