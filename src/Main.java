@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(128 * 5,128 * 6);
+        f.setSize(128 * 6 + 10,128 * 4 + 115);
         Game.getInstance().setupGame(2, 2);
         f.add(Game.getInstance().getPanel());
         f.setVisible(true);

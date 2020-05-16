@@ -82,7 +82,7 @@ public class Game {
             Character c = currCharacter;
             while (c == currCharacter) {
                 try {
-                    Thread.sleep(4000);
+                    Thread.sleep(2000);
                     c.dig();
                     view.drawAll();
                 } catch (InterruptedException e) {
@@ -120,7 +120,7 @@ public class Game {
     public void setupGame(int eskimo, int researcher) {
         reset();
         view = new View();
-        iceField = view.init(5, 5, eskimo, researcher);
+        iceField = view.init(4, 6, eskimo, researcher);
     }
 
     /**

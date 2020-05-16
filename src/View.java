@@ -182,17 +182,8 @@ public class View extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        int startX = 0, startY = 0;
-        int id = 1;
-        for (GCharacter gc : characters) {
-            if(gc.getCharacter() == Game.getInstance().getCurrCharacter()) {
-                gc.drawInventory(g, startX, startY, id);
-                startY += 80;
-                break;
-            }
-            id++;
-        }
 
+        int startX = 0, startY = 80;
         for(int i = 0;i < matrix.length;i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 GPickable gp = matrix[i][j].checkItemPickup();
@@ -205,6 +196,15 @@ public class View extends JPanel {
                     }
                 }
             }
+        }
+
+        int id = 1;
+        for (GCharacter gc : characters) {
+            if (gc.getCharacter() == Game.getInstance().getCurrCharacter()) {
+                gc.drawInventory(g, startX, startY - 80, id);
+                break;
+            }
+            id++;
         }
 
         if(message != null) {
