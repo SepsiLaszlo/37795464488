@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 
 public class Main {
@@ -20,6 +21,7 @@ public class Main {
 
         Window window = new Window();
 
+        window.addKeyListener(new KeyEventHeandler(new Controller()));
         Scanner s = new Scanner(System.in);
         while (s.hasNextLine()) {
             String line;

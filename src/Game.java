@@ -18,7 +18,7 @@ public class Game {
     private ArrayList<Character> characters = new ArrayList<Character>();
     private Character currCharacter;
     private GameState gameState = GameState.RUNNING;
-
+    private Controller controller=new Controller();
     /**
      * Privát konstruktor a Singleton-pattern megvalósításához.
      */
