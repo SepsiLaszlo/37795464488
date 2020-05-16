@@ -46,23 +46,27 @@ public class KeyEventHeandler implements KeyListener {
 
 					simpleReference = Controller::moveCharacter;
 					currentState = State.PARAMERTER;
-					break;
+					return;
 
 				case KeyEvent.VK_2:
 
 					simpleReference = Controller::characterUseAbility;
 					currentState = State.PARAMERTER;
-					break;
+					return;
 
 				case KeyEvent.VK_3:
 
 					simpleReference = Controller::useUsable;
 					currentState = State.PARAMERTER;
-					break;
+					return;
 
 				case KeyEvent.VK_4:
+					Controller.digCharacter();
+					return;
+
+				case KeyEvent.VK_5:
 					Controller.passCharacter();
-					break;
+					return;
 
 			}
 		}

@@ -20,6 +20,7 @@ public class IceField {
             if (random.nextBoolean() || Main.det) {
                 t.addSnow(1);
                 ArrayList<Character> characters = t.getUnprotectedCharacters();
+                if (characters==null) return;
                 for (Character c : characters) {
                     c.changeHeat(-1);
                 }

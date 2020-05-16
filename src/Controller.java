@@ -33,6 +33,11 @@ public class Controller {
 		c.useUsable(idx);
 	}
 
+	public static void digCharacter() {
+		Character c=game.getCurrCharacter();
+		c.dig();
+	}
+
 	/**
 	 * Jelzi,hogy a soron lévő játékos átadja a körét.
 	 */

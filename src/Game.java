@@ -86,13 +86,10 @@ public class Game {
                 break;
             }
             while (c == currCharacter) {
-                try {
-                    Thread.sleep(2000);
-                    c.move(new Direction(1));
-                    view.drawAll();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (currCharacter == characters.get(characters.size()-1)) {
+                    currCharacter.move(new Direction(1));
                 }
+                view.drawAll();
             }
             iceField.snowStorm();
         }
@@ -125,7 +122,7 @@ public class Game {
     public void setupGame(int eskimo, int researcher) {
         reset();
         view = new View();
-        iceField = view.init(4, 6, eskimo, researcher);
+        iceField = view.init(2, 2, eskimo, researcher);
     }
 
     /**

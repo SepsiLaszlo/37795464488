@@ -3,7 +3,6 @@ import java.awt.*;
 
 public class Window extends JFrame {
     private Menu menu;
-    private View view;
 
     //Konstruktor
     public Window() {
@@ -19,8 +18,8 @@ public class Window extends JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
 
+        this.addKeyListener(new KeyEventHeandler(new Controller()));
         this.printMenu();
-
     }
 
     /**
@@ -51,18 +50,16 @@ public class Window extends JFrame {
      * Meghívja a játék fő ciklusát tartalmazó függvényt.
      */
     public  void runGame(){
-        if (this.view == null)
-            view = new View();
-
         //Az ablak meretének beállítása
-        this.setSize(new Dimension(500, 500));
+        this.setSize(new Dimension(1920, 1080));
         //Az ablak cimének beállítása
         this.setTitle("IceField");
-        this.setContentPane(view);
-        this.setResizable(false);
+        this.setContentPane(Game.getInstance().getPanel());
+        this.setResizable(true);
         this.revalidate();
         this.repaint();
 
+        Game.getInstance().runGame();
     }
 
 
