@@ -15,12 +15,14 @@ public class IceField {
      * esetben véletlenszerű táblákra futtatja le a fentebb lévő műveleteket.
      */
     public void snowStorm() {
+        Random random = new Random();
+        if(random.nextBoolean() && !Main.det)
+            return;
         for (IceTable t : iceTables) {
-            Random random = new Random();
             if (random.nextBoolean() || Main.det) {
                 t.addSnow(1);
                 ArrayList<Character> characters = t.getUnprotectedCharacters();
-                if (characters==null) return;
+                if (characters == null) return;
                 for (Character c : characters) {
                     c.changeHeat(-1);
                 }

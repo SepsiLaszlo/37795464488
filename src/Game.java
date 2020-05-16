@@ -65,8 +65,8 @@ public class Game {
     /**
      * Visszaadja a játékosok számát.
      */
-    public int getTotalCharactersNumber() {
-        return characters.size();
+    public int getPlayersNumber() {
+        return characters.size() - 1;
     }
 
     /**
@@ -85,13 +85,19 @@ public class Game {
                 gameState = GameState.LOSE;
                 break;
             }
-            while (c == currCharacter) {
-                if (currCharacter == characters.get(characters.size()-1)) {
+            while (c == currCharacter && gameState == GameState.RUNNING) {
+                view.drawAll();
+                if (currCharacter == characters.get(characters.size() - 1)) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     currCharacter.move(new Direction(1));
                 }
-                view.drawAll();
             }
             iceField.snowStorm();
+            iceField.takeTents();
         }
     }
 
