@@ -70,7 +70,7 @@ public abstract class Character {
      * @param idx Az index.
      */
     public void useUsable(int idx){
-        usables.get(idx).use(this, Main.usableDir);
+        usables.get(idx).use(this, new Direction(0));
         workUnit--;
         if (workUnit == 0) {
             game.nextPlayer();
@@ -140,6 +140,7 @@ public abstract class Character {
         inWater = true;
         if (!diver) {
             game.nextPlayer();
+            workUnit = initialWorkUnit;
         }
     }
 
@@ -215,27 +216,26 @@ public abstract class Character {
     }
 
     /**
-     * A szereplő nevének lekérdezése.
-     * @return szereplő neve
+     * Az egységnyi munka aktuális értékének lekérdezése.
+     * @return egységnyi munka értéke
      */
-    public String getName() {
-        return Main.getCharacterNameFromObject(this);
+    public int getWorkUnit() {
+        return workUnit;
     }
 
     /**
-     * Visszaadja a saját adattagjait string formátumban. Az alábbi
-     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
-     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
-     * fentebb említett formában.
-     * @return adattagok string formátumban
+     * A testhő értékének lekérdezése.
+     * @return testhő értéke.
      */
-    public String toString() {
-        String result = "workUnit: "+workUnit+"\nbodyTemperature: " + bodyTemperature + "\n" + "diver: " + diver + "\n" + "inWater: " + inWater + "\n"+"items:\n";
+    public int getBodyTemperature() {
+        return bodyTemperature;
+    }
 
-        for(Usable u:usables ){
-            result=result.concat("\t"+u.toString()+"\n");
-        }
-        result=result.concat("icetable: "+iceTable.getName());
-        return result;
+    /**
+     * A diver változó állapotának lektérdezése.
+     * @return diver értéke
+     */
+    public boolean isDiver() {
+        return diver;
     }
 }

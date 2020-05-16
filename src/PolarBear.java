@@ -18,6 +18,7 @@ public class PolarBear extends Character {
         super(i);
         workUnit = 1;
         initialWorkUnit = 1;
+        bodyTemperature = 0;
         diver = true;
     }
 
@@ -68,7 +69,7 @@ public class PolarBear extends Character {
      */
     public void move(Direction d) {
         if (!Main.det)
-            d = new Direction(new Random().nextInt(6));
+            d = new Direction(new Random().nextInt(4));
         super.move(d);
     }
 
@@ -98,15 +99,4 @@ public class PolarBear extends Character {
      */
     @Override
     public void pass() { }
-
-    /**
-     * Visszaadja a saját adattagjait string formátumban. Az alábbi
-     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus.
-     * Tömb típusú tagváltozó esetén kiírjuk a tömb nevét, és alá a tömbben lévő elemeket a
-     * fentebb említett formában.
-     * @return adattagok string formátumban
-     */
-    public String  toString(){
-        return  "PolarBear\n"+super.toString();
-    }
 }

@@ -30,13 +30,4 @@ public class FragileSpade implements Usable,Pickable {
     public void pickUp(Character c) {
         c.addUsable(this);
     }
-
-    /**
-     * Visszaadja az osztály típusát és az tagváltozó értékét string formátumban.
-     * @return az osztály típusa és az tagváltozó értéke
-     */
-    @Override
-    public String toString() {
-        return String.format("FragileSpade durability: "+durability);
-    }
 }

@@ -1,4 +1,6 @@
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A játék állapota.
@@ -14,11 +16,13 @@ enum GameState{
 
 public class Game {
     private static Game instance = new Game();
-    private IceField iceField = new IceField();
+    private IceField iceField;
     private ArrayList<Character> characters = new ArrayList<Character>();
     private Character currCharacter;
     private GameState gameState = GameState.RUNNING;
+    private View view;
     private Controller controller=new Controller();
+
     /**
      * Privát konstruktor a Singleton-pattern megvalósításához.
      */
@@ -77,8 +81,18 @@ public class Game {
 
         while (gameState == GameState.RUNNING) {
             Character c = currCharacter;
+            if(!c.isDiver() && c.getInWater()) {
+                gameState = GameState.LOSE;
+                break;
+            }
             while (c == currCharacter) {
-                //Character move, dig, use Item
+                try {
+                    Thread.sleep(2000);
+                    c.move(new Direction(1));
+                    view.drawAll();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             iceField.snowStorm();
         }
@@ -96,24 +110,29 @@ public class Game {
     }
 
     /**
-     * Visszaadja a saját adattagjait string formátumban. Az alábbi
-     * formában: primitív esetben tagváltozó név: érték, egyébként tagváltozó név: típus (pl.
-     * Game-ben az IceField). A tárolt karakterek tömbje esetén kiírjuk a tömb nevét, és alá
-     * a tömbben lévő karaktereket a fentebb említett formában. Emellett kiírja a játék
-     * állapotát: (RUNNING, LOSE, WIN).
-     * @return adattagok string formátumban és a játék állapota
+     * A jelenlegi, azaz az éppen soron lévő játékos lekérdezése.
+     * @return A soron lévő játékos.
      */
-    public String toString() {
-        String result = "Game\nCharacters:\n";
-        for (Character c : characters) {
-            result = result.concat('\t' + c.getName() + "\n");
-        }
-        result = result.concat("GameState: " + gameState);
-        return  result;
-    }
-
     Character getCurrCharacter(){
         return  currCharacter;
     }
 
+    /**
+     * A játék kiinduási helyzetbe állítása a paraméterként megadott számú játékossal.
+     * @param eskimo Az eszkimók száma.
+     * @param researcher A sarkkutatók száma.
+     */
+    public void setupGame(int eskimo, int researcher) {
+        reset();
+        view = new View();
+        iceField = view.init(4, 6, eskimo, researcher);
+    }
+
+    /**
+     * A játékot megjelenítő panel lekérdezése.
+     * @return játék panel
+     */
+    public JPanel getPanel() {
+        return view;
+    }
 }

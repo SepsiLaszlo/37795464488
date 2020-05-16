@@ -9,12 +9,4 @@ public class DivingSuit implements Pickable {
     public void pickUp(Character c) {
         c.makeDiver();
     }
-
-    /**
-     * Visszaadja az osztály típusát string formátumban.
-     * @return az osztály típusa
-     */
-    public String toString() {
-        return "Diving Suit";
-    }
 }
