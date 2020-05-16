@@ -5,13 +5,9 @@ import java.awt.*;
  * Menü osztály
  */
 public class Menu {
-
 	final JPanel topPanel;
 	final JPanel centerPanel;
 	final JPanel bottomPanel;
-	//Jatekosszam
-//    private int eskimoNumber = 0;
-//    private int researcherNumber = 0;
 
 	//Konstruktor
 	Menu(Window window) {
@@ -43,7 +39,7 @@ public class Menu {
 			int researcherNum = Integer.parseInt(researcherTextBox.getText());
 			if (eskimoNum > 0 && researcherNum > 0) {
 				Game.getInstance().setupGame(eskimoNum, researcherNum);
-				window.runGame();
+				new Thread(window).start();
 			} else {
 				JOptionPane.showMessageDialog(window, "Add meg az eszkimók és sarkkutatók számát!", "Error", JOptionPane.WARNING_MESSAGE);
 			}
