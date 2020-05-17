@@ -70,11 +70,15 @@ public abstract class Character {
 	 * @param idx Az index.
 	 */
 	public void useUsable(int idx) {
+		useUsable(idx, new Direction(0));
+	}
+
+	public void useUsable(int idx, Direction d) {
 		if (idx > usables.size() - 1) {
 			System.out.println("Nincs ilyen indexű tárgy a Karakternél!");
 			return;
 		}
-		usables.get(idx).use(this, new Direction(0));
+		usables.get(idx).use(this, d);
 		workUnit--;
 		if (workUnit == 0) {
 			game.nextPlayer();
@@ -127,6 +131,8 @@ public abstract class Character {
 	 */
 	public void move(Direction d) {
 		IceTable i = iceTable.getNeighbour(d);
+		if (i == null) return;
+
 		iceTable.stepOff(this);
 		iceTable = i;
 		iceTable.stepOn(this);

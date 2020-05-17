@@ -1,9 +1,12 @@
+import java.lang.reflect.GenericArrayType;
+
 /**
  * A játékosok irányításáért felelős osztály.
  */
 public class Controller {
 
-	static  Game game=Game.getInstance();
+	private static  Game game=Game.getInstance();
+	private static Direction direction=new Direction(0);
 
 	/**
 	 * A soron lévő játékos karakterének jelzi, hogy használja a képességét.
@@ -12,7 +15,10 @@ public class Controller {
 	public static void characterUseAbility(int d) {
 		Character c=game.getCurrCharacter();
 		IceTable it= c.getIceTable().getNeighbour(new Direction(d));
-		c.useAbility(it);
+		int value=c.useAbility(it);
+		if(value!=-1){
+			Game.getInstance().printMessage("Kapacitás: "+value);
+		}
 	}
 
 	/**
@@ -30,8 +36,9 @@ public class Controller {
 	 */
 	public static void useUsable(int idx) {
 		Character c=game.getCurrCharacter();
-		c.useUsable(idx);
+		c.useUsable(idx,direction);
 	}
+
 
 	/**
 	 * Jelzi,hogy a soron lévő játékos ásnást hajt végre.
@@ -47,5 +54,9 @@ public class Controller {
 	public static void passCharacter() {
 		Character c=game.getCurrCharacter();
 		c.pass();
+	}
+
+	public static void setDirection(int d){
+		direction=new Direction(d);
 	}
 }

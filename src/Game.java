@@ -139,4 +139,8 @@ public class Game {
     public JPanel getPanel() {
         return view;
     }
+
+    public void printMessage(String msg){
+        view.showDialog(msg);
+    }
 }

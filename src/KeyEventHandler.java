@@ -5,9 +5,9 @@ import java.util.function.Consumer;
 /**
  * A játékos inputját fogadó osztály.
  */
-public class KeyEventHeandler implements KeyListener {
+public class KeyEventHandler implements KeyListener {
 
-	enum State {COMMAND, DIRECTION_PARAMERTER, NUMBER_PARAMETER}
+	enum State {COMMAND, DIRECTION_PARAMERTER, NUMBER_PARAMETER,SET_DIRECTION}
 
 	Consumer<Integer> simpleReference = null;
 	State currentState = State.COMMAND;
@@ -19,7 +19,7 @@ public class KeyEventHeandler implements KeyListener {
 	 *
 	 * @param c az esemény paramétereit tartalmazza
 	 */
-	KeyEventHeandler(Controller c) {
+	KeyEventHandler(Controller c) {
 		controller = c;
 	}
 
@@ -61,10 +61,14 @@ public class KeyEventHeandler implements KeyListener {
 					return;
 
 				case KeyEvent.VK_4:
-					Controller.digCharacter();
+					currentState=State.SET_DIRECTION;
 					return;
 
 				case KeyEvent.VK_5:
+					Controller.digCharacter();
+					return;
+
+				case KeyEvent.VK_6:
 					Controller.passCharacter();
 					return;
 				default:
@@ -73,8 +77,19 @@ public class KeyEventHeandler implements KeyListener {
 
 			}
 		}
+		int param = -1;
+		if(currentState==State.SET_DIRECTION){
 
-		int param=-1;
+			try {
+				param = Integer.parseInt(String.valueOf(e.getKeyChar()));
+			} catch (Exception exp) {
+				System.out.println("Az inputot nem lehet számmá konvertálni!");
+				return;
+			}
+			Controller.setDirection(param);
+		}
+
+
 		if (currentState == State.DIRECTION_PARAMERTER) {
 			param = convertKeyEventToDirection(e);
 			if (param == -1) {
@@ -96,7 +111,8 @@ public class KeyEventHeandler implements KeyListener {
 	}
 
 	/**
-	 *  A nyíl billenytűket irányokká alakítja, ha lehetésges
+	 * A nyíl billenytűket irányokká alakítja, ha lehetésges
+	 *
 	 * @param e Leütött billenytűt tartalmazó KeyEvent
 	 * @return Ha átlakítható, akkor az irány száma. Ellenkező esetben -1.
 	 */

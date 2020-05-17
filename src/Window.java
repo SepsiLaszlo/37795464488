@@ -18,7 +18,7 @@ public class Window extends JFrame implements Runnable {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
 
-        this.addKeyListener(new KeyEventHeandler(new Controller()));
+        this.addKeyListener(new KeyEventHandler(new Controller()));
         this.printMenu();
     }
 
