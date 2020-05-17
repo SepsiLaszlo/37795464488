@@ -32,7 +32,7 @@ public class PolarBear extends Character {
      * Jegesmedve esetén nem használjuk
      */
     @Override
-    public void useUsable(int idx){ }
+    public void useUsable(int idx, Direction d){ }
 
     /**
      * Jegesmedve esetén nem használjuk
