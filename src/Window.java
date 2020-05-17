@@ -54,7 +54,7 @@ public class Window extends JFrame implements Runnable {
     public void run() {
         this.setFocusable(true);
         //Az ablak meretének beállítása
-        this.setSize(new Dimension(1920, 1080));
+        this.setSize(new Dimension(128 * 6 + 10, 128 * 4 + 110));
         //Az ablak cimének beállítása
         this.setTitle("IceField");
         this.setContentPane(Game.getInstance().getPanel());
