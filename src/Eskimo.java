@@ -17,7 +17,7 @@ public class Eskimo extends Character {
     /**
      * A paraméterben kapott táblára épít egy iglut.
      * @param t A jégtábla.
-     * @return 0, nem használandó.
+     * @return -1, nem használandó.
      */
     @Override
     public int useAbility(IceTable t) {
@@ -27,7 +27,7 @@ public class Eskimo extends Character {
             game.nextPlayer();
             workUnit = initialWorkUnit;
         }
-        return 0;
+        return -1;
     }
 
     /**

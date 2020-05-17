@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements Runnable {
     private Menu menu;
 
     //Konstruktor
@@ -26,7 +26,6 @@ public class Window extends JFrame {
      * A menü kirajzolásért felelős függvény
      */
     public void printMenu() {
-
         //Ha nincs még menü, akkor annak létrehozása
         if (this.menu == null)
             menu = new Menu(this);
@@ -46,12 +45,18 @@ public class Window extends JFrame {
         this.revalidate();
         this.repaint();
     }
+
+
     /**
-     * Meghívja a játék fő ciklusát tartalmazó függvényt.
+     * Beállítja az ablakot és meghívja a játék fő ciklusát tartalmazó függvényt.
      */
-    public  void runGame(){
+    @Override
+    public void run() {
+        this.setFocusable(true);
         //Az ablak meretének beállítása
-        this.setSize(new Dimension(800, 800));
+
+        this.setSize(new Dimension(128 * 6 + 10, 128 * 4 + 110));
+
         //Az ablak cimének beállítása
         this.setTitle("IceField");
         this.setContentPane(Game.getInstance().getPanel());
@@ -60,7 +65,11 @@ public class Window extends JFrame {
         this.repaint();
 
         Game.getInstance().runGame();
+
+        this.setContentPane(new Container());
+        this.revalidate();
+        this.repaint();
+
+        this.printMenu();
     }
-
-
 }

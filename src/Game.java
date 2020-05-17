@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * A játék állapota.
@@ -65,8 +64,8 @@ public class Game {
     /**
      * Visszaadja a játékosok számát.
      */
-    public int getTotalCharactersNumber() {
-        return characters.size();
+    public int getPlayersNumber() {
+        return characters.size() - 1;
     }
 
     /**
@@ -82,17 +81,25 @@ public class Game {
         while (gameState == GameState.RUNNING) {
             Character c = currCharacter;
             if(!c.isDiver() && c.getInWater()) {
-                gameState = GameState.LOSE;
+                endGame(false);
                 break;
             }
-            while (c == currCharacter) {
-                if (currCharacter == characters.get(characters.size()-1)) {
+            while (c == currCharacter && gameState == GameState.RUNNING) {
+                view.drawAll();
+                if (currCharacter == characters.get(characters.size() - 1)) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     currCharacter.move(new Direction(1));
                 }
-                view.drawAll();
             }
             iceField.snowStorm();
+            iceField.takeTents();
         }
+
+        view.drawEndScene(gameState == GameState.WIN);
     }
 
     /**
@@ -122,7 +129,7 @@ public class Game {
     public void setupGame(int eskimo, int researcher) {
         reset();
         view = new View();
-        iceField = view.init(2, 2, eskimo, researcher);
+        iceField = view.init(4, 6, eskimo, researcher);
     }
 
     /**

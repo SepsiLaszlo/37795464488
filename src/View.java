@@ -134,13 +134,32 @@ public class View extends JPanel {
      * Kirajzolja a játék végén az eredményt jelző ablakot.
      * @param win A játék végeredménye.
      */
-    public void endSceneDraw(boolean win) {
-        matrix = null;
+    public void drawEndScene(boolean win) {
+        matrix = new GIceTable[0][0];
         characters.clear();
         if(win) {
             showDialog("You Won The Game!");
         } else {
             showDialog("You Lose The Game!");
+        }
+        repaint();
+
+        Object syncObject = new Object();
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                synchronized(syncObject) {
+                    syncObject.notify();
+                }
+                repaint();
+                removeMouseListener(this);
+            }
+        });
+
+        synchronized(syncObject) {
+            try {
+                syncObject.wait();
+            } catch (InterruptedException e) { }
         }
     }
 
@@ -150,28 +169,43 @@ public class View extends JPanel {
      */
     public void showDialog(String s) {
         message = (g, x, y) -> {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.black);
-            g2.setFont(new Font("Consolas", Font.BOLD, 26));
+            String msg = s;
+            g.setColor(Color.black);
+            g.setFont(new Font("Consolas", Font.BOLD, 26));
 
-            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            FontMetrics fm = g.getFontMetrics();
+            Rectangle2D r = fm.getStringBounds(msg, g);
 
-            FontMetrics fm = g2.getFontMetrics();
-            Rectangle2D r = fm.getStringBounds(s, g2);
-
-            x = (getWidth() - (int) r.getWidth()) / 2;
             y = ((getHeight() - (int) r.getHeight()) / 3 + fm.getAscent());
 
-            g2.drawString(s, x, y);
+            for (String line : msg.split("\n")) {
+                r = fm.getStringBounds(line, g);
 
-            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+                x = (getWidth() - (int) r.getWidth()) / 2;
+                y += fm.getHeight();
+
+                g.drawString(line, x, y);
+            }
+
+            msg = "<Click>";
+            g.setFont(new Font("Consolas", Font.BOLD, 12));
+
+            fm = g.getFontMetrics();
+            r = fm.getStringBounds(msg, g);
+
+            x = (getWidth() - (int) r.getWidth()) / 2;
+            y += r.getHeight() + fm.getAscent();
+
+            g.drawString(msg, x, y);
         };
+
 
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 message = null;
                 repaint();
+                removeMouseListener(this);
             }
         });
     }
