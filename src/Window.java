@@ -51,7 +51,7 @@ public class Window extends JFrame {
      */
     public  void runGame(){
         //Az ablak meretének beállítása
-        this.setSize(new Dimension(1920, 1080));
+        this.setSize(new Dimension(800, 800));
         //Az ablak cimének beállítása
         this.setTitle("IceField");
         this.setContentPane(Game.getInstance().getPanel());

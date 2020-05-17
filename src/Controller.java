@@ -16,7 +16,7 @@ public class Controller {
 	}
 
 	/**
-	 * 	 * A soron lévő játékos karakterének jelzi, hogy mozogjon.
+	 * A soron lévő játékos karakterének jelzi, hogy mozogjon.
 	 * @param d az irány száma
 	 */
 	public static void moveCharacter(int d) {
@@ -33,6 +33,9 @@ public class Controller {
 		c.useUsable(idx);
 	}
 
+	/**
+	 * Jelzi,hogy a soron lévő játékos ásnást hajt végre.
+	 */
 	public static void digCharacter() {
 		Character c=game.getCurrCharacter();
 		c.dig();
@@ -45,5 +48,4 @@ public class Controller {
 		Character c=game.getCurrCharacter();
 		c.pass();
 	}
-
 }
