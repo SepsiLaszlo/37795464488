@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * A jelzőrakéta tárolja az eddig megtalált részeit. Ha a játékosok az összes részét megtalálták,
@@ -39,7 +38,7 @@ public class SignalRocket implements Usable {
     public void use(Character c, Direction d) {
         IceTable i = c.getIceTable();
         int CharacterNumber=i.getCharactersNumber();
-        int TotalCharactersNumber=game.getTotalCharactersNumber();
+        int TotalCharactersNumber=game.getPlayersNumber();
 
         if (parts.size()==3 && CharacterNumber==TotalCharactersNumber){
             game.endGame(true);

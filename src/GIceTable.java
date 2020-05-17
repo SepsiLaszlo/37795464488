@@ -45,14 +45,14 @@ public class GIceTable implements IDrawable {
     @Override
     public void draw(Graphics g, int x, int y) {
         g.drawImage(iceTableImg, x, y, null);
-        if(iceTable.getIgluState())
-            g.drawImage(igluImg, x + 64, y, null);
-        if(iceTable.getTentState())
-            g.drawImage(tentImg, x + 64, y + 64, null);
         if(item != null)
             item.draw(g, x, y + 64);
         if(iceTable.anySnow())
             g.drawImage(snowImg, x, y, null);
+        if(iceTable.getIgluState())
+            g.drawImage(igluImg, x + 64, y, null);
+        if(iceTable.getTentState())
+            g.drawImage(tentImg, x + 64, y + 64, null);
     }
 
     /**
