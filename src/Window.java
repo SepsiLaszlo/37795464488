@@ -4,7 +4,9 @@ import java.awt.*;
 public class Window extends JFrame implements Runnable {
     private Menu menu;
 
-    //Konstruktor
+    /**
+     * Konstruktor az ablak beállításához.
+     */
     public Window() {
         //Ablak paramétereinek beállítása
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -64,6 +66,7 @@ public class Window extends JFrame implements Runnable {
         this.revalidate();
         this.repaint();
 
+        //Játék futattása
         Game.getInstance().runGame();
 
         this.setContentPane(new Container());

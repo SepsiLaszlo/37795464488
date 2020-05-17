@@ -66,13 +66,9 @@ public abstract class Character {
 
 	/**
 	 * A usebles listának az adott indexű Useable-jét használja.
-	 *
-	 * @param idx Az index.
+	 * @param idx index
+	 * @param d irány
 	 */
-	public void useUsable(int idx) {
-		useUsable(idx, new Direction(0));
-	}
-
 	public void useUsable(int idx, Direction d) {
 		if (idx > usables.size() - 1) {
 			System.out.println("Nincs ilyen indexű tárgy a Karakternél!");

@@ -2,14 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Menü osztály
+ * Menü osztály a játék felparaméterezéséhez és elindításához.
  */
 public class Menu {
 	final JPanel topPanel;
 	final JPanel centerPanel;
 	final JPanel bottomPanel;
 
-	//Konstruktor
+	/**
+	 * Konstruktor, ami beállítja a menüt.
+	 * @param window A menühoz tartozó ablak.
+	 */
 	Menu(Window window) {
 		//JPanelok létrehozása
 		topPanel = new JPanel();
@@ -32,6 +35,7 @@ public class Menu {
 		topPanel.add(eskimoTextBox, BorderLayout.WEST);
 		topPanel.add(researcherLabel, BorderLayout.EAST);
 		topPanel.add(researcherTextBox, BorderLayout.EAST);
+
 		//Középső rész beállítása (Új játék indítása)
 		JButton newGameButton = new JButton("New Game");
 		newGameButton.addActionListener(e -> {
@@ -42,7 +46,7 @@ public class Menu {
 				researcherNum = Integer.parseInt(researcherTextBox.getText());
 			} catch(Exception ex) { }
 
-			if (eskimoNum > 0 && researcherNum > 0) {
+			if (eskimoNum + researcherNum > 1) {
 				Game.getInstance().setupGame(eskimoNum, researcherNum);
 				new Thread(window).start();
 			} else {

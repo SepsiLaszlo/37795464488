@@ -56,6 +56,10 @@ public class Controller {
 		c.pass();
 	}
 
+	/**
+	 * A tárgy használati irányának beállítása.
+	 * @param d irány
+	 */
 	public static void setDirection(int d){
 		direction=new Direction(d);
 	}

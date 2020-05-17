@@ -65,7 +65,7 @@ public class Game {
      * Visszaadja a játékosok számát.
      */
     public int getPlayersNumber() {
-        return characters.size() - 1;
+        return characters.size();
     }
 
     /**
@@ -140,6 +140,10 @@ public class Game {
         return view;
     }
 
+    /**
+     * Üzenet kiírása az ablakra.
+     * @param msg Üzenet szövege.
+     */
     public void printMessage(String msg){
         view.showDialog(msg);
     }

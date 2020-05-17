@@ -38,8 +38,8 @@ public class Hole extends IceTable {
 	@Override
 	public void removeCharacters(IceTable t) {
 		for (int i = 0; i < characters.size(); i++) {
-			t.stepOn(characters.get(i));
 			characters.get(i).setIceTable(t);
+			t.stepOn(characters.get(i));
 			this.stepOff(characters.get(i));
 		}
 	}

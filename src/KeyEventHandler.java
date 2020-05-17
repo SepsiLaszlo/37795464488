@@ -61,6 +61,7 @@ public class KeyEventHandler implements KeyListener {
 					return;
 
 				case KeyEvent.VK_4:
+					simpleReference = Controller::setDirection;
 					currentState=State.SET_DIRECTION;
 					return;
 
@@ -78,19 +79,8 @@ public class KeyEventHandler implements KeyListener {
 			}
 		}
 		int param = -1;
-		if(currentState==State.SET_DIRECTION){
 
-			try {
-				param = Integer.parseInt(String.valueOf(e.getKeyChar()));
-			} catch (Exception exp) {
-				System.out.println("Az inputot nem lehet számmá konvertálni!");
-				return;
-			}
-			Controller.setDirection(param);
-		}
-
-
-		if (currentState == State.DIRECTION_PARAMERTER) {
+		if (currentState == State.DIRECTION_PARAMERTER || currentState == State.SET_DIRECTION) {
 			param = convertKeyEventToDirection(e);
 			if (param == -1) {
 				System.out.println("Az inputot nem lehet iránnyá konvertálni!");
