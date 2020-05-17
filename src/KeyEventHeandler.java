@@ -7,7 +7,7 @@ import java.util.function.Consumer;
  */
 public class KeyEventHeandler implements KeyListener {
 
-	enum State {COMMAND, PARAMERTER}
+	enum State {COMMAND, DIRECTION_PARAMERTER, NUMBER_PARAMETER}
 
 	Consumer<Integer> simpleReference = null;
 	State currentState = State.COMMAND;
@@ -45,19 +45,19 @@ public class KeyEventHeandler implements KeyListener {
 				case KeyEvent.VK_1:
 
 					simpleReference = Controller::moveCharacter;
-					currentState = State.PARAMERTER;
+					currentState = State.DIRECTION_PARAMERTER;
 					return;
 
 				case KeyEvent.VK_2:
 
 					simpleReference = Controller::characterUseAbility;
-					currentState = State.PARAMERTER;
+					currentState = State.DIRECTION_PARAMERTER;
 					return;
 
 				case KeyEvent.VK_3:
 
 					simpleReference = Controller::useUsable;
-					currentState = State.PARAMERTER;
+					currentState = State.NUMBER_PARAMETER;
 					return;
 
 				case KeyEvent.VK_4:
@@ -67,14 +67,54 @@ public class KeyEventHeandler implements KeyListener {
 				case KeyEvent.VK_5:
 					Controller.passCharacter();
 					return;
+				default:
+					System.out.println("Érvénytelen menüpotválasztás!");
+					return;
 
 			}
 		}
-		if (currentState == State.PARAMERTER) {
-			simpleReference.accept(Integer.parseInt(String.valueOf(e.getKeyChar())));
-			currentState = State.COMMAND;
-		}
 
+		int param=-1;
+		if (currentState == State.DIRECTION_PARAMERTER) {
+			param = convertKeyEventToDirection(e);
+			if (param == -1) {
+				System.out.println("Az inputot nem lehet iránnyá konvertálni!");
+				return;
+			}
+		}
+		if (currentState == State.NUMBER_PARAMETER) {
+			try {
+				param = Integer.parseInt(String.valueOf(e.getKeyChar()));
+			} catch (Exception exp) {
+				System.out.println("Az inputot nem lehet számmá konvertálni!");
+				return;
+			}
+
+		}
+		simpleReference.accept(param);
+		currentState = State.COMMAND;
+	}
+
+	/**
+	 *  A nyíl billenytűket irányokká alakítja, ha lehetésges
+	 * @param e Leütött billenytűt tartalmazó KeyEvent
+	 * @return Ha átlakítható, akkor az irány száma. Ellenkező esetben -1.
+	 */
+	public int convertKeyEventToDirection(KeyEvent e) {
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_UP:
+				return 0;
+
+			case KeyEvent.VK_RIGHT:
+				return 1;
+
+			case KeyEvent.VK_DOWN:
+				return 2;
+
+			case KeyEvent.VK_LEFT:
+				return 3;
+		}
+		return -1;
 	}
 
 	/**
@@ -86,4 +126,6 @@ public class KeyEventHeandler implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 
 	}
+
+
 }
